@@ -25,10 +25,9 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     FrameMain fMain;
     JFrame jFrame;
-    public LoginPanel(FrameMain fM, JFrame jF) {
+    public LoginPanel(FrameMain fM) {
         initComponents();
         fMain = fM;
-        jFrame = jF;
     }
 
 

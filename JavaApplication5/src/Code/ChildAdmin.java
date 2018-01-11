@@ -20,6 +20,7 @@ public class ChildAdmin extends javax.swing.JPanel {
      * Creates new form ChildAdmin
      */
     FrameMain fMain;
+
     public ChildAdmin(FrameMain fM) {
         initComponents();
         fMain = fM;
@@ -66,11 +67,11 @@ public class ChildAdmin extends javax.swing.JPanel {
 
             },
             new String [] {
-                "First Name", "Last Name", "Middlen Name", "Birth Day", "Current Medications", "Pass Illess", "Doctor", "Emai Parents "
+                "First Name", "Last Name", "Middlen Name", "Birth Day", "Current Medications", "Pass Illess", "Doctor", "Emai Parents ", "Gender"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -314,13 +315,13 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_bntInsertActionPerformed
 
     private void bntSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSelectActionPerformed
-               DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         tbModel.setRowCount(0);
-        
+
         RegionBeanChild rbean = new RegionBeanChild();
         ArrayList<RegionBeanChild> listRegion = rbean.showAllData();
         Vector v;
-        
+
         for (RegionBeanChild rb : listRegion) {
             v = new Vector();
             v.add(rb.getFirstname());
@@ -337,7 +338,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_bntSelectActionPerformed
 
     private void bntInsertChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInsertChildActionPerformed
-       JFrame fReg = new InsertChild();
+        JFrame fReg = new UpdateChild();
         fReg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fReg.setVisible(true);
     }//GEN-LAST:event_bntInsertChildActionPerformed
@@ -346,15 +347,23 @@ public class ChildAdmin extends javax.swing.JPanel {
         // Lay dong hien tai dang chon trong bang
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         int currentRow = tbChild.getSelectedRow();
-        
+
         // Lay du lieu trong dong
         String fName = tbModel.getValueAt(currentRow, 1).toString();
-        
+        String lName = tbModel.getValueAt(currentRow, 2).toString();
+        String mName = tbModel.getValueAt(currentRow, 3).toString();
+        String bDay = tbModel.getValueAt(currentRow, 4).toString();
+        String cMedi = tbModel.getValueAt(currentRow, 5).toString();
+        String pIless = tbModel.getValueAt(currentRow, 6).toString();
+        String dTor = tbModel.getValueAt(currentRow, 7).toString();
+        String eMail = tbModel.getValueAt(currentRow, 8).toString();
+        String gDer = tbModel.getValueAt(currentRow, 9).toString();
+
         // Tao form insert moi
         // Truyen tham so qua form moi
-        RegionBeanChild rbc = new RegionBeanChild(fName, null, null, null, null, null, null, null, true);
-        InsertChild ic = new InsertChild(rbc);
-        
+        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, null, cMedi, pIless, dTor, eMail, true);
+        UpdateChild ic = new UpdateChild(rbc);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

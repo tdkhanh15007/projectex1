@@ -9,13 +9,28 @@ package Code;
  *
  * @author OS10
  */
-public class InsertChild extends javax.swing.JPanel {
+public class UpdateChild extends javax.swing.JFrame {
 
     /**
      * Creates new form InsertChild
      */
-    public InsertChild() {
+    public UpdateChild() {
         initComponents();
+    }
+    
+    public UpdateChild(RegionBeanChild rbc) {
+        this();
+        
+        // Lay du lieu tu rbc gan len form
+        txtFirstName.setText(rbc.getFirstname());
+        txtLastName.setText(rbc.getLastname());
+        txtMid.setText(rbc.getMiddlename());
+        txtBirthDay.setText(rbc.getBirth().toString());
+        txtCurent.setText(rbc.getCurrent_medications());
+        txtPass.setText(rbc.getPass_illess());
+        txtDoctor.setText(rbc.getDoctor());
+        txtEmail.setText(rbc.getCus_email());
+        txtGender.setText(rbc.isGender().toString());
     }
 
     /**
@@ -27,40 +42,42 @@ public class InsertChild extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPass = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtGender = new javax.swing.JTextField();
-        txtFirstName = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtBirthDay = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        bntOk = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtCurent = new javax.swing.JTextField();
-        txtMid = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtFirstName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
+        txtMid = new javax.swing.JTextField();
+        txtBirthDay = new javax.swing.JTextField();
         txtDoctor = new javax.swing.JTextField();
+        bntOk = new javax.swing.JButton();
         bntReset = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtCurent = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtGender = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtPass = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 30)); // NOI18N
-        jLabel1.setText("Insert Children");
+        jLabel1.setText("Update Children");
+
+        jLabel2.setText("First Name:");
+
+        jLabel3.setText("Last Name:");
 
         jLabel4.setText("Middlen Name:");
 
+        jLabel5.setText("Birth Day:");
+
         jLabel6.setText("Doctor:");
-
-        jLabel8.setText("Gender:");
-
-        jLabel7.setText("Curent Medication:");
-
-        jLabel9.setText("Pass Iless:");
 
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,20 +85,20 @@ public class InsertChild extends javax.swing.JPanel {
             }
         });
 
-        jLabel10.setText("Email  Parent:");
-
-        jLabel5.setText("Birth Day:");
-
-        bntOk.setText("Insert");
-
-        jLabel2.setText("First Name:");
-
-        jLabel3.setText("Last Name:");
+        bntOk.setText("Update");
 
         bntReset.setText("Reset");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        jLabel7.setText("Curent Medication:");
+
+        jLabel8.setText("Gender:");
+
+        jLabel9.setText("Pass Iless:");
+
+        jLabel10.setText("Email  Parent:");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -126,9 +143,9 @@ public class InsertChild extends javax.swing.JPanel {
                                     .addComponent(txtPass)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
+                        .addGap(175, 175, 175)
                         .addComponent(jLabel1)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,14 +185,51 @@ public class InsertChild extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntOk)
                             .addComponent(bntReset))))
-                .addGap(22, 42, Short.MAX_VALUE))
+                .addGap(22, 54, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(UpdateChild.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(UpdateChild.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(UpdateChild.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(UpdateChild.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UpdateChild().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntOk;

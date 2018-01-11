@@ -86,7 +86,7 @@ public class SearchChild extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ChildCustomer cc = new ChildCustomer();
+        ChildTable cc = new ChildTable();
         fMain.setPanel(cc);
     }//GEN-LAST:event_jButton1ActionPerformed
 

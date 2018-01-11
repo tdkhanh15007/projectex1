@@ -27,49 +27,88 @@ public class HomePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbHome = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        bntAbout = new javax.swing.JButton();
+        bntOur = new javax.swing.JButton();
+        bntContact = new javax.swing.JButton();
+        pnView = new javax.swing.JPanel();
 
-        tbHome.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
 
-            },
-            new String [] {
-                "First Name", "Last Name", "Middle Name", "Birth Day", "Curent Medication", "Doctor"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
+        jLabel1.setText("Trung Tâm Little Angel");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        bntAbout.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        bntAbout.setForeground(new java.awt.Color(168, 64, 85));
+        bntAbout.setText("About Us");
+        bntAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAboutActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbHome);
+
+        bntOur.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        bntOur.setForeground(new java.awt.Color(0, 153, 153));
+        bntOur.setText("Our Programs");
+
+        bntContact.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        bntContact.setForeground(new java.awt.Color(102, 102, 255));
+        bntContact.setText("Contact");
+
+        javax.swing.GroupLayout pnViewLayout = new javax.swing.GroupLayout(pnView);
+        pnView.setLayout(pnViewLayout);
+        pnViewLayout.setHorizontalGroup(
+            pnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnViewLayout.setVerticalGroup(
+            pnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 261, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(bntAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(bntOur, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(bntContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(147, 147, 147))
+            .addComponent(pnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntOur, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntContact, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bntAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAboutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntAboutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbHome;
+    private javax.swing.JButton bntAbout;
+    private javax.swing.JButton bntContact;
+    private javax.swing.JButton bntOur;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel pnView;
     // End of variables declaration//GEN-END:variables
 }
