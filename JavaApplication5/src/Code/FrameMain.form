@@ -27,15 +27,13 @@
               <Component id="bntHome" min="-2" pref="110" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="bntSearch" min="-2" pref="110" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="bntContact" min="-2" pref="110" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="bntExit" min="-2" pref="110" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="152" max="32767" attributes="0"/>
               <Component id="bntLogin" min="-2" pref="110" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnMain" max="32767" attributes="0"/>
+          <Component id="pnMain" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -44,7 +42,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="bntHome" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="bntSearch" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="bntContact" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="bntLogin" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="bntExit" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
@@ -60,7 +57,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="610" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -102,20 +99,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntSearchActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bntContact">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="13" style="1"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Image/icon-contact-red-30.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Contact"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntContactActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntLogin">

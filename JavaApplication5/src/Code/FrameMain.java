@@ -5,6 +5,7 @@
  */
 package Code;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -41,7 +42,6 @@ public class FrameMain extends javax.swing.JFrame {
         pnMain = new javax.swing.JPanel();
         bntHome = new javax.swing.JButton();
         bntSearch = new javax.swing.JButton();
-        bntContact = new javax.swing.JButton();
         bntLogin = new javax.swing.JButton();
         bntExit = new javax.swing.JButton();
 
@@ -51,7 +51,7 @@ public class FrameMain extends javax.swing.JFrame {
         pnMain.setLayout(pnMainLayout);
         pnMainLayout.setHorizontalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,15 +78,6 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        bntContact.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        bntContact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-contact-red-30.png"))); // NOI18N
-        bntContact.setText("Contact");
-        bntContact.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntContactActionPerformed(evt);
-            }
-        });
-
         bntLogin.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
         bntLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-customer-red-30.png"))); // NOI18N
         bntLogin.setText("Login");
@@ -108,11 +99,9 @@ public class FrameMain extends javax.swing.JFrame {
                 .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bntContact, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntExit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2))
             .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,7 +112,6 @@ public class FrameMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntContact, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -135,14 +123,12 @@ public class FrameMain extends javax.swing.JFrame {
 
     private void bntSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSearchActionPerformed
 
-        if (isShowSearch == false) {
-            SearchChild sc = new SearchChild(this);
-            JFrame jF = new JFrame();
-            jF.add(sc);
-            jF.setSize(363, 219);
-            jF.setVisible(true);
-            isShowSearch = true;
-        }
+        SearchChild sc = new SearchChild(this);
+        JDialog frame = new JDialog(this, "Search", true);
+        frame.getContentPane().add(sc);
+        frame.pack();
+        frame.setVisible(true);
+        
     }//GEN-LAST:event_bntSearchActionPerformed
 
     private void bntLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLoginActionPerformed
@@ -165,16 +151,6 @@ public class FrameMain extends javax.swing.JFrame {
         pnMain.add(hp);
         pnMain.updateUI();
     }//GEN-LAST:event_bntHomeActionPerformed
-
-    private void bntContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntContactActionPerformed
-        
-        pnMain.removeAll();
-        ContactCustomer Cont = new ContactCustomer();
-        Cont.setSize(pnMain.getWidth(), pnMain.getHeight());
-        pnMain.add(Cont);
-        pnMain.updateUI();
-        
-    }//GEN-LAST:event_bntContactActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,7 +196,6 @@ public class FrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntContact;
     private javax.swing.JButton bntExit;
     private javax.swing.JButton bntHome;
     private javax.swing.JButton bntLogin;

@@ -18,14 +18,17 @@ import java.util.logging.Logger;
  */
 public class ConnectionData {
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection conn = null;
-        String host = "jdbc:sqlserver://localhost:1433;databaseName=Little";
+        String host = "jdbc:sqlserver://localhost:1433;databaseName=LittleAngels";
         String User = "sa";
         String Pass = "sa";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(host, User, Pass);
         } catch (SQLException ex) {
+            Logger.getLogger(ConnectionData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conn;

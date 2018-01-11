@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -146,15 +147,17 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
-        ChildAdmin ca = new ChildAdmin(fMain);
-        fMain.setPanel(ca);
+        
         LoginService lg = new LoginService();
         String username = txtUser.getText();
         String password = txtPass.getText();
+        
         if (lg.loginCheck(username, password)) {
-            System.out.println("Login success");
+            ChildAdmin ca = new ChildAdmin(fMain);
+            fMain.setPanel(ca);
+            jFrame.dispose();
         }
-        jFrame.dispose();
+        
     }//GEN-LAST:event_bntOkActionPerformed
     public class LoginService {
 
@@ -165,29 +168,21 @@ public class LoginPanel extends javax.swing.JPanel {
             boolean login = false;
 
             try {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                ConnectionData connData = new ConnectionData();
-                Connection conn = connData.getConnection();
+                Connection conn = ConnectionData.getConnection();
 
-                query = "SELECT username, password FROM Customer;";
+                query = "SELECT * FROM [User] where user_email = ? and password = ?";
                 PreparedStatement pstm = conn.prepareStatement(query);
+                pstm.setString(1, username);
+                pstm.setString(2, password);
+                
                 ResultSet rs = pstm.executeQuery();
 
-                while (rs.next()) {
-                    dbUsername = rs.getString("username");
-                    dbPassword = rs.getString("password");
-
-                    if (dbUsername == username && dbPassword == password) {
-                        System.out.println("OK");
-                        login = true;
-                    }
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Login success");
+                    login = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid username or password");
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

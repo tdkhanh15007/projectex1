@@ -5,7 +5,10 @@
  */
 package Code;
 
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,40 +37,56 @@ public class ChildAdmin extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbChild = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbCus = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbNanny = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tbEmployee = new javax.swing.JTable();
         bntInsert = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbChild.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "First Name", "Last Name", "Middlen Name", "Birth Day", "Current Medications", "Pass Illess", "Doctor", "Emai Parents "
             }
-        ));
-        jScrollPane4.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tbChild);
+        if (tbChild.getColumnModel().getColumnCount() > 0) {
+            tbChild.getColumnModel().getColumn(4).setMinWidth(120);
+        }
 
         jButton1.setText("Insert");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update");
 
@@ -101,18 +120,23 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Children", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbCus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Email", "Full Name", "Address", "Phone", "Contact 2nd", "Contact 3rd", "Work Phone", "Status"
             }
-        ));
-        jScrollPane5.setViewportView(jTable2);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tbCus);
 
         jButton4.setText("Insert");
 
@@ -148,18 +172,23 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Customer", jPanel2);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbNanny.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Address", "Phone", "Activity", "Status"
             }
-        ));
-        jScrollPane6.setViewportView(jTable3);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tbNanny);
 
         jButton7.setText("Insert");
 
@@ -195,18 +224,23 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Nanny", jPanel3);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tbEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Username", "Password", "Phone", "Role", "Name"
             }
-        ));
-        jScrollPane7.setViewportView(jTable4);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(tbEmployee);
 
         bntInsert.setText("Insert");
         bntInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -265,6 +299,29 @@ public class ChildAdmin extends javax.swing.JPanel {
         fReg.setVisible(true);
     }//GEN-LAST:event_bntInsertActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+               DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        tbModel.setRowCount(0);
+        
+        RegionBeanChild rbean = new RegionBeanChild();
+        ArrayList<RegionBeanChild> listRegion = rbean.showAllData();
+        Vector v;
+        
+        for (RegionBeanChild rb : listRegion) {
+            v = new Vector();
+            v.add(rb.getFirstname());
+            v.add(rb.getLastname());
+            v.add(rb.getMiddlename());
+            v.add(rb.getBirth());
+            v.add(rb.getCurrent_medications());
+            v.add(rb.getPass_illess());
+            v.add(rb.getDoctor());
+            v.add(rb.getCus_email());
+            v.add(rb.isGender());
+            tbModel.addRow(v);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntInsert;
@@ -288,9 +345,9 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JTable tbChild;
+    private javax.swing.JTable tbCus;
+    private javax.swing.JTable tbEmployee;
+    private javax.swing.JTable tbNanny;
     // End of variables declaration//GEN-END:variables
 }
