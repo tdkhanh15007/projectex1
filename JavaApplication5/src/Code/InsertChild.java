@@ -17,6 +17,13 @@ public class InsertChild extends javax.swing.JFrame {
     public InsertChild() {
         initComponents();
     }
+    
+    public InsertChild(RegionBeanChild rbc) {
+        this();
+        
+        // Lay du lieu tu rbc gan len form
+        txtFirstName.setText(rbc.getFirstname());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

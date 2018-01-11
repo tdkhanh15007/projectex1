@@ -38,9 +38,10 @@ public class ChildAdmin extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbChild = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        bntSelect = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        bntInsertChild = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbCus = new javax.swing.JTable();
@@ -81,16 +82,28 @@ public class ChildAdmin extends javax.swing.JPanel {
             tbChild.getColumnModel().getColumn(4).setMinWidth(120);
         }
 
-        jButton1.setText("Insert");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bntSelect.setText("Select");
+        bntSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bntSelectActionPerformed(evt);
             }
         });
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Delete");
+
+        bntInsertChild.setText("Insert");
+        bntInsertChild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntInsertChildActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,11 +111,13 @@ public class ChildAdmin extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(86, 86, 86)
+                .addComponent(bntSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(bntInsertChild, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(27, 27, 27)
+                .addGap(15, 15, 15)
                 .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -112,9 +127,10 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(bntSelect)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(bntInsertChild))
                 .addGap(0, 23, Short.MAX_VALUE))
         );
 
@@ -294,12 +310,10 @@ public class ChildAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInsertActionPerformed
-        JFrame fReg = new InsertChild();
-        fReg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        fReg.setVisible(true);
+
     }//GEN-LAST:event_bntInsertActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bntSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSelectActionPerformed
                DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         tbModel.setRowCount(0);
         
@@ -320,12 +334,34 @@ public class ChildAdmin extends javax.swing.JPanel {
             v.add(rb.isGender());
             tbModel.addRow(v);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bntSelectActionPerformed
+
+    private void bntInsertChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInsertChildActionPerformed
+       JFrame fReg = new InsertChild();
+        fReg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fReg.setVisible(true);
+    }//GEN-LAST:event_bntInsertChildActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Lay dong hien tai dang chon trong bang
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbChild.getSelectedRow();
+        
+        // Lay du lieu trong dong
+        String fName = tbModel.getValueAt(currentRow, 1).toString();
+        
+        // Tao form insert moi
+        // Truyen tham so qua form moi
+        RegionBeanChild rbc = new RegionBeanChild(fName, null, null, null, null, null, null, null, true);
+        InsertChild ic = new InsertChild(rbc);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntInsert;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bntInsertChild;
+    private javax.swing.JButton bntSelect;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;

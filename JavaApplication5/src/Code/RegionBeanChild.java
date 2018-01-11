@@ -39,15 +39,13 @@ public class RegionBeanChild {
         
         ConnectionData connData = new ConnectionData();
         Connection conn = connData.getConnection();
-        String sql = "select * from Account";
+        String sql = "select * from Chirldren";
 
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-//                RegionBean rb = new RegionBean();
-//                rb.setUsername(rs.getString(1));
-//                rb.setPassword(rs.getString(2));
+//                
                 RegionBeanChild rb = new RegionBeanChild(rs.getString("firstname"), rs.getString("lastname"),
                                                  rs.getString("middlename"), rs.getDate("birth"), rs.getString("current_medications")
                                                 , rs.getString("pass_illess"), rs.getString("doctor")
