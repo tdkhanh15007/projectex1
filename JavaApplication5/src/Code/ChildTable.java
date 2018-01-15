@@ -5,8 +5,13 @@
  */
 package Code;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +29,7 @@ public class ChildTable extends javax.swing.JPanel {
 
     public ChildTable(ArrayList<Vector> arylstRBC) {
         this();
-        
+
         // Xoa  trong bang
         DefaultTableModel tbModel = (DefaultTableModel) tbChildCus.getModel();
         tbModel.setRowCount(0);
@@ -35,7 +40,8 @@ public class ChildTable extends javax.swing.JPanel {
             tbModel.addRow(vRow);
         }
     }
-    
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +53,7 @@ public class ChildTable extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbChildCus = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        bntDetal = new javax.swing.JButton();
 
         tbChildCus.setAutoCreateRowSorter(true);
         tbChildCus.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
@@ -69,10 +75,10 @@ public class ChildTable extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbChildCus);
 
-        jButton1.setText("Detal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bntDetal.setText("Detal");
+        bntDetal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bntDetalActionPerformed(evt);
             }
         });
 
@@ -83,7 +89,7 @@ public class ChildTable extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bntDetal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(236, 236, 236))
         );
         layout.setVerticalGroup(
@@ -91,36 +97,49 @@ public class ChildTable extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(bntDetal)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                DefaultTableModel tbModel = (DefaultTableModel) tbChildCus.getModel();
+    private void bntDetalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDetalActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbChildCus.getModel();
         int currentRow = tbChildCus.getSelectedRow();
 
         // Lay du lieu trong dong
-        String fName = tbModel.getValueAt(currentRow, 1).toString();
-        String lName = tbModel.getValueAt(currentRow, 2).toString();
-        String mName = tbModel.getValueAt(currentRow, 3).toString();
-        String bDay = tbModel.getValueAt(currentRow, 4).toString();
-        String cMedi = tbModel.getValueAt(currentRow, 5).toString();
-        String pIless = tbModel.getValueAt(currentRow, 6).toString();
-        String dTor = tbModel.getValueAt(currentRow, 7).toString();
-        String eMail = tbModel.getValueAt(currentRow, 8).toString();
-        String gDer = tbModel.getValueAt(currentRow, 9).toString();
+        String fName = tbModel.getValueAt(currentRow, 0).toString();
+        String lName = tbModel.getValueAt(currentRow, 1).toString();
+        String mName = tbModel.getValueAt(currentRow, 2).toString();
+        Date bDay = null;
+        String strDate = tbModel.getValueAt(currentRow, 3).toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            bDay = sdf.parse(strDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String cMedi = tbModel.getValueAt(currentRow, 4).toString();
+        String pIless = tbModel.getValueAt(currentRow, 5).toString();
+        String dTor = tbModel.getValueAt(currentRow, 6).toString();
+        String eMail = tbModel.getValueAt(currentRow, 7).toString();
+        String gDer = tbModel.getValueAt(currentRow, 8).toString();
 
         // Tao form insert moi
         // Truyen tham so qua form moi
-        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, null, cMedi, pIless, dTor, eMail, true);
+        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, new java.sql.Date(bDay.getTime()), cMedi, pIless, dTor, eMail, true);
         ChildCustomer ic = new ChildCustomer(rbc);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ic.setVisible(true);
+
+
+    }//GEN-LAST:event_bntDetalActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bntDetal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbChildCus;
     // End of variables declaration//GEN-END:variables
+
+
 }

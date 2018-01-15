@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -121,7 +122,7 @@ public class SearchChild extends javax.swing.JPanel {
                 vRow = new Vector();
                 vRow.add(rs.getString("firstname"));
                 vRow.add(rs.getString("lastname"));
-                vRow.add(rs.getString("middlenname"));
+                vRow.add(rs.getString("middlename"));
                 vRow.add(rs.getString("birth"));
                 vRow.add(rs.getString("current_medications"));
                 vRow.add(rs.getString("pass_illess"));
@@ -139,7 +140,7 @@ public class SearchChild extends javax.swing.JPanel {
 
         } catch (Exception e) {
             // THong bao loi
-            System.out.println("Loi");
+           JOptionPane.showMessageDialog(null, "Khong tim thay");
             return;
         }
         

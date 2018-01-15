@@ -8,7 +8,10 @@ package Code;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -235,18 +238,21 @@ public class UpdateChild extends javax.swing.JFrame {
         String fName = txtFirstName.getText();
         String lName = txtLastName.getText();
         String mName = txtMid.getText();
-        txtBirthDay.getText();
-        txtCurent.getText();
-        txtPass.getText();
-        txtDoctor.getText();
-        
-        String genderStr = "";
-        boolean gender = false;
-        if (genderStr.toLowerCase().equals("true")) {
-            gender = true;
+        Date bDay = null;
+        String strDate = txtBirthDay.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            bDay = sdf.parse(strDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        // Goi qua ham update ben RBC
+        String cRent = txtCurent.getText();
+        String pAss = txtPass.getText();
+        String dTor =  txtDoctor.getText();
+        String eMail = txtEmail.getText();
+        String genderStr = txtGender.getText();
+        boolean gender = false;
+
         
     }//GEN-LAST:event_bntOkActionPerformed
 

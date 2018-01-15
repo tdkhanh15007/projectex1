@@ -154,7 +154,6 @@ public class LoginPanel extends javax.swing.JPanel {
         if (lg.loginCheck(username, password)) {
             ChildAdmin ca = new ChildAdmin(fMain);
             fMain.setPanel(ca);
-            jFrame.dispose();
         }
         
     }//GEN-LAST:event_bntOkActionPerformed

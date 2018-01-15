@@ -16,6 +16,7 @@ public class ChildCustomer extends javax.swing.JPanel {
      */
     public ChildCustomer() {
         initComponents();
+        setSize(600, 400);
     }
         public ChildCustomer(RegionBeanChild rbc) {
         this();
