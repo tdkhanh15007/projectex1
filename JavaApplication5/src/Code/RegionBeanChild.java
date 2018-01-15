@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Code;
 
 import java.sql.Connection;
@@ -20,6 +19,7 @@ import java.util.logging.Logger;
  * @author student
  */
 public class RegionBeanChild {
+
     private String firstname;
     private String lastname;
     private String middlename;
@@ -33,10 +33,9 @@ public class RegionBeanChild {
     public RegionBeanChild() {
     }
 
-    
     public ArrayList<RegionBeanChild> showAllData() {
         ArrayList<RegionBeanChild> listRegion = new ArrayList<RegionBeanChild>();
-        
+
         ConnectionData connData = new ConnectionData();
         Connection conn = connData.getConnection();
         String sql = "select * from Chirldren";
@@ -47,9 +46,7 @@ public class RegionBeanChild {
             while (rs.next()) {
 //                
                 RegionBeanChild rb = new RegionBeanChild(rs.getString("firstname"), rs.getString("lastname"),
-                                                 rs.getString("middlename"), rs.getDate("birth"), rs.getString("current_medications")
-                                                , rs.getString("pass_illess"), rs.getString("doctor")
-                                                , rs.getString("cus_email"), rs.getBoolean("gender"));
+                        rs.getString("middlename"), rs.getDate("birth"), rs.getString("current_medications"), rs.getString("pass_illess"), rs.getString("doctor"), rs.getString("cus_email"), rs.getBoolean("gender"));
                 listRegion.add(rb);
             }
         } catch (SQLException ex) {
@@ -58,7 +55,29 @@ public class RegionBeanChild {
 
         return listRegion;
     }
-    
+
+    public void updateRegion(String firstname, String lastname, String middlename, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) throws SQLException {
+        ConnectionData connData = new ConnectionData();
+        Connection conn = connData.getConnection();
+
+        String sql = "update Children set firstname = ?, lastname = ?, "
+                + "middlename = ?, birth = ?, current_medications = ?, pass_illess = ?, doctor = ?,"
+                + "gender = ? where cus_email=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        ps.setString(1,firstname);
+        ps.setString(2, lastname);
+        ps.setString(3, middlename);
+        ps.setDate(4, birth);
+        ps.setString(5, current_medications);
+        ps.setString(6, pass_illess);
+        ps.setString(7, doctor);
+        ps.setBoolean(8, gender);
+        ps.setString(9, cus_email);
+        ps.executeUpdate();
+
+    }
+
     public RegionBeanChild(String firstname, String lastname, String middlename, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -70,8 +89,6 @@ public class RegionBeanChild {
         this.cus_email = cus_email;
         this.gender = gender;
     }
-    
-    
 
     public String getFirstname() {
         return firstname;

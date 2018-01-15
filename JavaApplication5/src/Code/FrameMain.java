@@ -17,7 +17,7 @@ public class FrameMain extends javax.swing.JFrame {
 
     boolean isShowLogin = false;
     boolean isShowSearch = false;
-
+    
 
     public FrameMain() {
         initComponents();
@@ -138,6 +138,7 @@ public class FrameMain extends javax.swing.JFrame {
         frame.getContentPane().add(sc);
         frame.pack();
         frame.setVisible(true);
+        sc.setDebugGraphicsOptions(JFrame.DISPOSE_ON_CLOSE);
 
     }//GEN-LAST:event_bntLoginActionPerformed
 

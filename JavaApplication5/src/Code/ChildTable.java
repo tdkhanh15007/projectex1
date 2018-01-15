@@ -5,6 +5,10 @@
  */
 package Code;
 
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author OS10
@@ -18,6 +22,20 @@ public class ChildTable extends javax.swing.JPanel {
         initComponents();
     }
 
+    public ChildTable(ArrayList<Vector> arylstRBC) {
+        this();
+        
+        // Xoa  trong bang
+        DefaultTableModel tbModel = (DefaultTableModel) tbChildCus.getModel();
+        tbModel.setRowCount(0);
+
+        // Lap qua tat ca RBC trong danh sach
+        // Add vao bang
+        for (Vector vRow : arylstRBC) {
+            tbModel.addRow(vRow);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,11 +46,12 @@ public class ChildTable extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbChildCus = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbChildCus.setAutoCreateRowSorter(true);
+        tbChildCus.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        tbChildCus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -48,23 +67,60 @@ public class ChildTable extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbChildCus);
+
+        jButton1.setText("Detal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(236, 236, 236))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                DefaultTableModel tbModel = (DefaultTableModel) tbChildCus.getModel();
+        int currentRow = tbChildCus.getSelectedRow();
+
+        // Lay du lieu trong dong
+        String fName = tbModel.getValueAt(currentRow, 1).toString();
+        String lName = tbModel.getValueAt(currentRow, 2).toString();
+        String mName = tbModel.getValueAt(currentRow, 3).toString();
+        String bDay = tbModel.getValueAt(currentRow, 4).toString();
+        String cMedi = tbModel.getValueAt(currentRow, 5).toString();
+        String pIless = tbModel.getValueAt(currentRow, 6).toString();
+        String dTor = tbModel.getValueAt(currentRow, 7).toString();
+        String eMail = tbModel.getValueAt(currentRow, 8).toString();
+        String gDer = tbModel.getValueAt(currentRow, 9).toString();
+
+        // Tao form insert moi
+        // Truyen tham so qua form moi
+        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, null, cMedi, pIless, dTor, eMail, true);
+        ChildCustomer ic = new ChildCustomer(rbc);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbChildCus;
     // End of variables declaration//GEN-END:variables
 }

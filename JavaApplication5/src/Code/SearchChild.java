@@ -5,6 +5,11 @@
  */
 package Code;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Vector;
+
 /**
  *
  * @author OS10
@@ -31,22 +36,22 @@ public class SearchChild extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtKeyword = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-search-20.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-search-20.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 30)); // NOI18N
         jLabel1.setText("Search");
 
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        txtKeyword.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
 
         jLabel2.setText("(Nhập đầy đủ tên họ người cần tìm)");
 
@@ -58,9 +63,9 @@ public class SearchChild extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnSearch))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jLabel1))
@@ -76,25 +81,78 @@ public class SearchChild extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(75, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        ChildTable cc = new ChildTable();
-        fMain.setPanel(cc);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        // Lay thogn tin người dung nhap vao
+        String keyword = txtKeyword.getText();
+        
+        // VIet SQL truy van vao CSDL
+        String sqlQuery = "select *\n" +
+                        "from Chirldren\n" +
+                        "where firstname like ?\n" +
+                        "or lastname like ?\n" +
+                        "or middlename like ?\n" +
+                        "or cus_email like ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = ConnectionData.getConnection().prepareStatement(sqlQuery);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, "%" + keyword + "%");
+            ps.setString(4, "%" + keyword + "%");
+            rs = ps.executeQuery();
+            
+            // Lay ket qua tu sql
+            Vector vRow;
+            ArrayList<Vector> arylstRow = new ArrayList<>();
+            
+            while (rs.next()) {
+                vRow = new Vector();
+                vRow.add(rs.getString("firstname"));
+                vRow.add(rs.getString("lastname"));
+                vRow.add(rs.getString("middlenname"));
+                vRow.add(rs.getString("birth"));
+                vRow.add(rs.getString("current_medications"));
+                vRow.add(rs.getString("pass_illess"));
+                vRow.add(rs.getString("doctor"));
+                vRow.add(rs.getString("cus_email"));
+                vRow.add(rs.getString("gender"));
+                
+                // Dua dong nay vao danh sach
+                arylstRow.add(vRow);
+            }
+
+            // Hien form
+            ChildTable cc = new ChildTable(arylstRow);
+            fMain.setPanel(cc);
+
+        } catch (Exception e) {
+            // THong bao loi
+            System.out.println("Loi");
+            return;
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtKeyword;
     // End of variables declaration//GEN-END:variables
 }

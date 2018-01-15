@@ -5,8 +5,13 @@
  */
 package Code;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -98,6 +103,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         });
 
         jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         bntInsertChild.setText("Insert");
         bntInsertChild.addActionListener(new java.awt.event.ActionListener() {
@@ -315,6 +325,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_bntInsertActionPerformed
 
     private void bntSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSelectActionPerformed
+        
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         tbModel.setRowCount(0);
 
@@ -349,22 +360,48 @@ public class ChildAdmin extends javax.swing.JPanel {
         int currentRow = tbChild.getSelectedRow();
 
         // Lay du lieu trong dong
-        String fName = tbModel.getValueAt(currentRow, 1).toString();
-        String lName = tbModel.getValueAt(currentRow, 2).toString();
-        String mName = tbModel.getValueAt(currentRow, 3).toString();
-        String bDay = tbModel.getValueAt(currentRow, 4).toString();
-        String cMedi = tbModel.getValueAt(currentRow, 5).toString();
-        String pIless = tbModel.getValueAt(currentRow, 6).toString();
-        String dTor = tbModel.getValueAt(currentRow, 7).toString();
-        String eMail = tbModel.getValueAt(currentRow, 8).toString();
-        String gDer = tbModel.getValueAt(currentRow, 9).toString();
+        String fName = tbModel.getValueAt(currentRow, 0).toString();
+        String lName = tbModel.getValueAt(currentRow, 1).toString();
+        String mName = tbModel.getValueAt(currentRow, 2).toString();
+        Date bDay = null;
+        String strDate = tbModel.getValueAt(currentRow, 3).toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            bDay = sdf.parse(strDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String cMedi = tbModel.getValueAt(currentRow, 4).toString();
+        String pIless = tbModel.getValueAt(currentRow, 5).toString();
+        String dTor = tbModel.getValueAt(currentRow, 6).toString();
+        String eMail = tbModel.getValueAt(currentRow, 7).toString();
+        String gDer = tbModel.getValueAt(currentRow, 8).toString();
 
         // Tao form insert moi
         // Truyen tham so qua form moi
-        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, null, cMedi, pIless, dTor, eMail, true);
+        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, new java.sql.Date(bDay.getTime()), cMedi, pIless, dTor, eMail, true);
         UpdateChild ic = new UpdateChild(rbc);
+        ic.setVisible(true);
 
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        // Lay dong hien tai dang chon
+        int selectedRow = tbChild.getSelectedRow();
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        
+        // Lay email
+        String cusMail = tbModel.getValueAt(selectedRow, 7).toString();
+        
+        String sqlQuery = "update Chirldren set status = 0 where cus_email = ?";
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

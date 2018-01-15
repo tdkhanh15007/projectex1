@@ -5,6 +5,13 @@
  */
 package Code;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author OS10
@@ -16,11 +23,13 @@ public class UpdateChild extends javax.swing.JFrame {
      */
     public UpdateChild() {
         initComponents();
+        setSize(600, 400);
+        setLocationRelativeTo(null);
     }
-    
+
     public UpdateChild(RegionBeanChild rbc) {
         this();
-        
+
         // Lay du lieu tu rbc gan len form
         txtFirstName.setText(rbc.getFirstname());
         txtLastName.setText(rbc.getLastname());
@@ -58,11 +67,12 @@ public class UpdateChild extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtCurent = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtGender = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtPass = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        txtGender = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +96,11 @@ public class UpdateChild extends javax.swing.JFrame {
         });
 
         bntOk.setText("Update");
+        bntOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntOkActionPerformed(evt);
+            }
+        });
 
         bntReset.setText("Reset");
 
@@ -96,6 +111,13 @@ public class UpdateChild extends javax.swing.JFrame {
         jLabel9.setText("Pass Iless:");
 
         jLabel10.setText("Email  Parent:");
+
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,20 +154,26 @@ public class UpdateChild extends javax.swing.JFrame {
                                         .addComponent(bntOk)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(bntReset)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtGender)
-                                    .addComponent(txtPass)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtPass)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                            .addComponent(txtGender)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addComponent(jLabel1)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +212,8 @@ public class UpdateChild extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntOk)
-                            .addComponent(bntReset))))
+                            .addComponent(bntReset)
+                            .addComponent(jButton1))))
                 .addGap(22, 54, Short.MAX_VALUE))
         );
 
@@ -194,6 +223,32 @@ public class UpdateChild extends javax.swing.JFrame {
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
+        
+        RegionBeanChild rbean = new RegionBeanChild();
+        
+        String fName = txtFirstName.getText();
+        String lName = txtLastName.getText();
+        String mName = txtMid.getText();
+        txtBirthDay.getText();
+        txtCurent.getText();
+        txtPass.getText();
+        txtDoctor.getText();
+        
+        String genderStr = "";
+        boolean gender = false;
+        if (genderStr.toLowerCase().equals("true")) {
+            gender = true;
+        }
+        
+        // Goi qua ham update ben RBC
+        
+    }//GEN-LAST:event_bntOkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,6 +289,7 @@ public class UpdateChild extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntOk;
     private javax.swing.JButton bntReset;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
