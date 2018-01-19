@@ -22,9 +22,7 @@ public class ChildCustomer extends javax.swing.JPanel {
         this();
 
         // Lay du lieu tu rbc gan len form
-        txtFirstName.setText(rbc.getFirstname());
-        txtLastName.setText(rbc.getLastname());
-        txtMid.setText(rbc.getMiddlename());
+        txtFirstName.setText(rbc.getFullName());
         txtBirthDay.setText(rbc.getBirth().toString());
         txtCurent.setText(rbc.getCurrent_medications());
         txtPass.setText(rbc.getPass_illess());

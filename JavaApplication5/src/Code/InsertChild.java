@@ -5,6 +5,15 @@
  */
 package Code;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.ComboBox;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author OS10
@@ -16,6 +25,20 @@ public class InsertChild extends javax.swing.JPanel {
      */
     public InsertChild() {
         initComponents();
+        
+        try {
+            ArrayList<String> dsCusEmail = MyDatabase.MyDatabase.getListCusEmail();
+            
+            cboCusEmail.removeAllItems();
+            for (String cusEmail : dsCusEmail) {
+                cboCusEmail.addItem(cusEmail);
+            }
+            
+        } catch (Exception e) {
+            // Thong bao loi
+            JOptionPane.showMessageDialog(null, "Co loi xay ra trong qua trinh lay du lieu");
+        }
+        
     }
 
     /**
@@ -32,7 +55,6 @@ public class InsertChild extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtGender = new javax.swing.JTextField();
@@ -49,6 +71,7 @@ public class InsertChild extends javax.swing.JPanel {
         txtDoctor = new javax.swing.JTextField();
         bntReset = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        cboCusEmail = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 30)); // NOI18N
         jLabel1.setText("Insert Children");
@@ -74,6 +97,11 @@ public class InsertChild extends javax.swing.JPanel {
         jLabel5.setText("Birth Day:");
 
         bntOk.setText("Insert");
+        bntOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntOkActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("First Name:");
 
@@ -128,9 +156,9 @@ public class InsertChild extends javax.swing.JPanel {
                                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtGender)
+                                            .addComponent(txtGender, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                                             .addComponent(txtPass)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
+                                            .addComponent(cboCusEmail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))))))
@@ -172,7 +200,7 @@ public class InsertChild extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCurent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboCusEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntOk)
@@ -186,10 +214,50 @@ public class InsertChild extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
+    private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
+        
+        // Lay du lieu
+        
+        RegionBeanChild rbean = new RegionBeanChild();
+        
+        String fName = txtFirstName.getText();
+        Date bDay = null;
+        String strDate = txtBirthDay.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            bDay = sdf.parse(strDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String cRent = txtCurent.getText();
+        String pAss = txtPass.getText();
+        String dTor =  txtDoctor.getText();
+        String eMail = cboCusEmail.getSelectedItem().toString();
+        boolean gender = false;
+        
+        if (cboCusEmail.getSelectedItem().toString().equals("Male")) {
+            gender = true;
+        } else {
+            gender = false;
+        }
+        
+        // Goi ham insert
+        try {
+            rbean.insertRegion(fName, new java.sql.Date(bDay.getTime()), cRent, pAss, dTor, eMail, gender);
+            JOptionPane.showMessageDialog(null, "Xong");
+        } catch (Exception e) {
+            // Bao loi insert
+            JOptionPane.showMessageDialog(null, "Cai gi do");
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_bntOkActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntOk;
     private javax.swing.JButton bntReset;
+    private javax.swing.JComboBox<String> cboCusEmail;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -204,7 +272,6 @@ public class InsertChild extends javax.swing.JPanel {
     private javax.swing.JTextField txtBirthDay;
     private javax.swing.JTextField txtCurent;
     private javax.swing.JTextField txtDoctor;
-    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtGender;
     private javax.swing.JTextField txtLastName;

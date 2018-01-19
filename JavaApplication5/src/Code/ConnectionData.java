@@ -22,7 +22,7 @@ public class ConnectionData {
         Connection conn = null;
         String host = "jdbc:sqlserver://localhost:1433;databaseName=LittleAngels";
         String User = "sa";
-        String Pass = "sa";
+        String Pass = "Anh12345";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(host, User, Pass);

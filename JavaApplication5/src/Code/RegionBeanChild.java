@@ -20,9 +20,7 @@ import java.util.logging.Logger;
  */
 public class RegionBeanChild {
 
-    private String firstname;
-    private String lastname;
-    private String middlename;
+    private String fullName;
     private Date birth;
     private String current_medications;
     private String pass_illess;
@@ -45,8 +43,7 @@ public class RegionBeanChild {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
 //                
-                RegionBeanChild rb = new RegionBeanChild(rs.getString("firstname"), rs.getString("lastname"),
-                        rs.getString("middlename"), rs.getDate("birth"), rs.getString("current_medications"), rs.getString("pass_illess"), rs.getString("doctor"), rs.getString("cus_email"), rs.getBoolean("gender"));
+                RegionBeanChild rb = new RegionBeanChild(rs.getString("fullname"), rs.getDate("birth"), rs.getString("current_medications"), rs.getString("pass_illess"), rs.getString("doctor"), rs.getString("cus_email"), rs.getBoolean("gender"));
                 listRegion.add(rb);
             }
         } catch (SQLException ex) {
@@ -56,32 +53,45 @@ public class RegionBeanChild {
         return listRegion;
     }
 
-    public void updateRegion(String firstname, String lastname, String middlename, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) throws SQLException {
+    public void updateRegion(String fullName, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) throws SQLException {
         ConnectionData connData = new ConnectionData();
         Connection conn = connData.getConnection();
 
-        String sql = "update Children set firstname = ?, lastname = ?, "
-                + "middlename = ?, birth = ?, current_medications = ?, pass_illess = ?, doctor = ?,"
+        String sql = "update Children set fullname = ?, birth = ?, current_medications = ?, pass_illess = ?, doctor = ?,"
                 + "gender = ? where cus_email=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
-        ps.setString(1,firstname);
-        ps.setString(2, lastname);
-        ps.setString(3, middlename);
-        ps.setDate(4, birth);
-        ps.setString(5, current_medications);
-        ps.setString(6, pass_illess);
-        ps.setString(7, doctor);
-        ps.setBoolean(8, gender);
-        ps.setString(9, cus_email);
+        ps.setString(1,fullName);
+        ps.setDate(2, birth);
+        ps.setString(3, current_medications);
+        ps.setString(4, pass_illess);
+        ps.setString(5, doctor);
+        ps.setBoolean(6, gender);
+        ps.setString(7, cus_email);
         ps.executeUpdate();
 
     }
 
-    public RegionBeanChild(String firstname, String lastname, String middlename, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.middlename = middlename;
+    public void insertRegion(String fullName, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) throws SQLException {
+        ConnectionData connData = new ConnectionData();
+        Connection conn = connData.getConnection();
+
+        String sql = "insert into Chirldren (fullname, birth, current_medications, pass_illess, doctor, cus_email, gender) values (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        ps.setString(1,fullName);
+        ps.setDate(2, birth);
+        ps.setString(3, current_medications);
+        ps.setString(4, pass_illess);
+        ps.setString(5, doctor);
+        ps.setString(6, cus_email);
+        ps.setBoolean(7, gender);
+        ps.executeUpdate();
+
+    }
+
+    public RegionBeanChild(String fullName, Date birth, String current_medications, String pass_illess, String doctor, String cus_email, Boolean gender) {
+        this.fullName = fullName;
         this.birth = birth;
         this.current_medications = current_medications;
         this.pass_illess = pass_illess;
@@ -90,28 +100,12 @@ public class RegionBeanChild {
         this.gender = gender;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getMiddlename() {
-        return middlename;
-    }
-
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+    public void setFullName(String firstname) {
+        this.fullName = firstname;
     }
 
     public Date getBirth() {

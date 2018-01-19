@@ -5,6 +5,8 @@
  */
 package Code;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,6 +51,8 @@ public class ChildAdmin extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         bntInsertChild = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbCus = new javax.swing.JTable();
@@ -72,20 +77,27 @@ public class ChildAdmin extends javax.swing.JPanel {
 
             },
             new String [] {
-                "First Name", "Last Name", "Middlen Name", "Birth Day", "Current Medications", "Pass Illess", "Doctor", "Emai Parents ", "Gender"
+                "Full Name", "Birth Day", "Current Medications", "Pass Illess", "Doctor", "Emai Parents ", "Gender"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane4.setViewportView(tbChild);
         if (tbChild.getColumnModel().getColumnCount() > 0) {
-            tbChild.getColumnModel().getColumn(4).setMinWidth(120);
+            tbChild.getColumnModel().getColumn(2).setMinWidth(120);
         }
 
         bntSelect.setText("Select");
@@ -116,13 +128,24 @@ public class ChildAdmin extends javax.swing.JPanel {
             }
         });
 
+        btnSearch.setText("jButton1");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch)
+                .addGap(18, 18, 18)
                 .addComponent(bntSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(bntInsertChild, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,7 +153,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addGap(15, 15, 15)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +164,9 @@ public class ChildAdmin extends javax.swing.JPanel {
                     .addComponent(bntSelect)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(bntInsertChild))
+                    .addComponent(bntInsertChild)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
                 .addGap(0, 23, Short.MAX_VALUE))
         );
 
@@ -335,9 +360,7 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         for (RegionBeanChild rb : listRegion) {
             v = new Vector();
-            v.add(rb.getFirstname());
-            v.add(rb.getLastname());
-            v.add(rb.getMiddlename());
+            v.add(rb.getFullName());
             v.add(rb.getBirth());
             v.add(rb.getCurrent_medications());
             v.add(rb.getPass_illess());
@@ -349,9 +372,12 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_bntSelectActionPerformed
 
     private void bntInsertChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInsertChildActionPerformed
-        JFrame fReg = new UpdateChild();
-        fReg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        fReg.setVisible(true);
+        JFrame fInsertChild = new JFrame();
+        fInsertChild.add(new InsertChild());
+        
+        fInsertChild.pack();
+        fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fInsertChild.setVisible(true);
     }//GEN-LAST:event_bntInsertChildActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -380,7 +406,7 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         // Tao form insert moi
         // Truyen tham so qua form moi
-        RegionBeanChild rbc = new RegionBeanChild(fName, lName, mName, new java.sql.Date(bDay.getTime()), cMedi, pIless, dTor, eMail, true);
+        RegionBeanChild rbc = new RegionBeanChild(fName, new java.sql.Date(bDay.getTime()), cMedi, pIless, dTor, eMail, true);
         UpdateChild ic = new UpdateChild(rbc);
         ic.setVisible(true);
 
@@ -403,11 +429,61 @@ public class ChildAdmin extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        
+// Lay thogn tin người dung nhap vao
+        String keyword = txtSearch.getText();
+        
+        // VIet SQL truy van vao CSDL
+        String sqlQuery = "select *\n" +
+                        "from Chirldren\n" +
+                        "where fullname like ?\n" +
+                        "or cus_email like ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = ConnectionData.getConnection().prepareStatement(sqlQuery);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            rs = ps.executeQuery();
+            
+            // Lay ket qua tu sql
+            Vector vRow;
+            ArrayList<Vector> arylstRow = new ArrayList<>();
+            
+            DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+            tbModel.setRowCount(0);
+            
+            while (rs.next()) {
+                vRow = new Vector();
+                vRow.add(rs.getString("fullname"));
+                vRow.add(rs.getString("birth"));
+                vRow.add(rs.getString("current_medications"));
+                vRow.add(rs.getString("pass_illess"));
+                vRow.add(rs.getString("doctor"));
+                vRow.add(rs.getString("cus_email"));
+                vRow.add(rs.getString("gender"));
+                
+                // Dua dong nay vao bang
+                tbModel.addRow(vRow);
+            }
+
+        } catch (Exception e) {
+            // THong bao loi
+           JOptionPane.showMessageDialog(null, "Khong tim thay");
+            return;
+        }
+        
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntInsert;
     private javax.swing.JButton bntInsertChild;
     private javax.swing.JButton bntSelect;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
@@ -431,5 +507,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JTable tbCus;
     private javax.swing.JTable tbEmployee;
     private javax.swing.JTable tbNanny;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

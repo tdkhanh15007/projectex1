@@ -23,6 +23,7 @@ public class FrameMain extends javax.swing.JFrame {
         ca.setSize(pnMain.getWidth(), pnMain.getHeight());
         pnMain.add(ca);
         pnMain.updateUI();
+        setLocationRelativeTo(null);
 //        LoginPanel lg =  new LoginPanel();
 //        JPanel jPanel1 = new JPanel();
 //        jPanel1.add(lg);
@@ -70,7 +71,7 @@ public class FrameMain extends javax.swing.JFrame {
 
         bntLogin.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
         bntLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-customer-red-30.png"))); // NOI18N
-        bntLogin.setText("Login");
+        bntLogin.setText("Logout");
         bntLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntLoginActionPerformed(evt);
@@ -146,7 +147,13 @@ public class FrameMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLoginActionPerformed
+        // Tat form hien tai
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dispose();
 
+        // Hien form login
+        FormLogin fLogin = new FormLogin();
+        fLogin.setVisible(true);
     }//GEN-LAST:event_bntLoginActionPerformed
 
     private void bntHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHomeActionPerformed
