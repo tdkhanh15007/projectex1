@@ -176,14 +176,14 @@ public class FormLogin extends javax.swing.JFrame {
         } catch (Exception e) {
             // Thong bao loi
             JOptionPane.showMessageDialog(null, "Co loi xay ra trong qua trinh dang nhap");
+
             return;
         }
         
         if (isLogin) {
             // Tat form login
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            dispose();
-            
+            dispose(); 
             // Hien form main
             FrameMain fMain = new FrameMain();
             ChildAdmin ca = new ChildAdmin(fMain);

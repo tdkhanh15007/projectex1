@@ -23,7 +23,7 @@ public class MyDatabase {
     private static void connect() throws ClassNotFoundException, SQLException {
         
         String username = "sa";
-        String password = "Anh12345";
+        String password = "sa";
         String sqlURL = "jdbc:sqlserver://localhost:1433;databaseName=LittleAngels";
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         _connection = DriverManager.getConnection(sqlURL, username, password);
@@ -42,13 +42,11 @@ public class MyDatabase {
         // Lam viec voi CSDL
         String sqlQuery = "SELECT * FROM [User] where user_email = ? and password = ?";
         PreparedStatement ps;
-        ResultSet rs;
-        
+        ResultSet rs;        
         ps = _connection.prepareStatement(sqlQuery);
         ps.setString(1, userMail);
         ps.setString(2, password);
-        rs = ps.executeQuery();
-        
+        rs = ps.executeQuery();        
         return rs.next();
     }
     
@@ -69,7 +67,6 @@ public class MyDatabase {
         while (rs.next()) {
             dsCusEmail.add(rs.getString("cus_email"));
         }
-        
         return dsCusEmail;
         
     }

@@ -70,7 +70,7 @@ public class FrameMain extends javax.swing.JFrame {
         });
 
         bntLogin.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        bntLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-customer-red-30.png"))); // NOI18N
+        bntLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-exit-30.png"))); // NOI18N
         bntLogin.setText("Logout");
         bntLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +79,7 @@ public class FrameMain extends javax.swing.JFrame {
         });
 
         bntInfo.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        bntInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
+        bntInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-profile-30.png"))); // NOI18N
         bntInfo.setText("info");
         bntInfo.setMinimumSize(new java.awt.Dimension(150, 39));
         bntInfo.setPreferredSize(new java.awt.Dimension(120, 39));
@@ -90,7 +90,7 @@ public class FrameMain extends javax.swing.JFrame {
         });
 
         txtOrder.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        txtOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
+        txtOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-shopping-cart-50_1.png"))); // NOI18N
         txtOrder.setText("Order");
         txtOrder.setMinimumSize(new java.awt.Dimension(150, 39));
         txtOrder.setPreferredSize(new java.awt.Dimension(120, 39));
@@ -101,7 +101,7 @@ public class FrameMain extends javax.swing.JFrame {
         });
 
         bntReport.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        bntReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
+        bntReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-bar-chart-30.png"))); // NOI18N
         bntReport.setText("Report");
         bntReport.setMinimumSize(new java.awt.Dimension(150, 39));
         bntReport.setPreferredSize(new java.awt.Dimension(120, 39));
