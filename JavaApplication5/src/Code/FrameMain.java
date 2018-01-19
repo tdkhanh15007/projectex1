@@ -15,15 +15,13 @@ import javax.swing.JPanel;
  */
 public class FrameMain extends javax.swing.JFrame {
 
-    boolean isShowLogin = false;
-    boolean isShowSearch = false;
     
 
     public FrameMain() {
         initComponents();
-        HomePanel hp = new HomePanel();
-        hp.setSize(pnMain.getWidth(), pnMain.getHeight());
-        pnMain.add(hp);
+        ChildAdmin ca = new ChildAdmin(this);
+        ca.setSize(pnMain.getWidth(), pnMain.getHeight());
+        pnMain.add(ca);
         pnMain.updateUI();
 //        LoginPanel lg =  new LoginPanel();
 //        JPanel jPanel1 = new JPanel();
@@ -41,9 +39,10 @@ public class FrameMain extends javax.swing.JFrame {
 
         pnMain = new javax.swing.JPanel();
         bntHome = new javax.swing.JButton();
-        bntSearch = new javax.swing.JButton();
         bntLogin = new javax.swing.JButton();
-        bntExit = new javax.swing.JButton();
+        bntInfo = new javax.swing.JButton();
+        txtOrder = new javax.swing.JButton();
+        bntReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,15 +68,6 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        bntSearch.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        bntSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-search-red-30.png"))); // NOI18N
-        bntSearch.setText("Search");
-        bntSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSearchActionPerformed(evt);
-            }
-        });
-
         bntLogin.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
         bntLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-customer-red-30.png"))); // NOI18N
         bntLogin.setText("Login");
@@ -87,9 +77,38 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        bntExit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bntExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-exit-red-30.png"))); // NOI18N
-        bntExit.setText("Exit");
+        bntInfo.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        bntInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
+        bntInfo.setText("info");
+        bntInfo.setMinimumSize(new java.awt.Dimension(150, 39));
+        bntInfo.setPreferredSize(new java.awt.Dimension(120, 39));
+        bntInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntInfoActionPerformed(evt);
+            }
+        });
+
+        txtOrder.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        txtOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
+        txtOrder.setText("Order");
+        txtOrder.setMinimumSize(new java.awt.Dimension(150, 39));
+        txtOrder.setPreferredSize(new java.awt.Dimension(120, 39));
+        txtOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrderActionPerformed(evt);
+            }
+        });
+
+        bntReport.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        bntReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
+        bntReport.setText("Report");
+        bntReport.setMinimumSize(new java.awt.Dimension(150, 39));
+        bntReport.setPreferredSize(new java.awt.Dimension(120, 39));
+        bntReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntReportActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,22 +117,27 @@ public class FrameMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bntSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntExit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2))
-            .addComponent(pnMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -121,34 +145,29 @@ public class FrameMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSearchActionPerformed
-
-        SearchChild sc = new SearchChild(this);
-        JDialog frame = new JDialog(this, "Search", true);
-        frame.getContentPane().add(sc);
-        frame.pack();
-        frame.setVisible(true);
-        
-    }//GEN-LAST:event_bntSearchActionPerformed
-
     private void bntLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLoginActionPerformed
-
-        LoginPanel sc = new LoginPanel(this);
-        JDialog frame = new JDialog(this, "Login", true);
-        frame.getContentPane().add(sc);
-        frame.pack();
-        frame.setVisible(true);
-        sc.setDebugGraphicsOptions(JFrame.DISPOSE_ON_CLOSE);
 
     }//GEN-LAST:event_bntLoginActionPerformed
 
     private void bntHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHomeActionPerformed
         pnMain.removeAll();
-        HomePanel hp = new HomePanel();
-        hp.setSize(pnMain.getWidth(), pnMain.getHeight());
-        pnMain.add(hp);
+        ChildAdmin ca = new ChildAdmin(this);
+        ca.setSize(pnMain.getWidth(), pnMain.getHeight());
+        pnMain.add(ca);
         pnMain.updateUI();
     }//GEN-LAST:event_bntHomeActionPerformed
+
+    private void bntInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntInfoActionPerformed
+
+    private void txtOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrderActionPerformed
+
+    private void bntReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,10 +213,11 @@ public class FrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntExit;
     private javax.swing.JButton bntHome;
+    private javax.swing.JButton bntInfo;
     private javax.swing.JButton bntLogin;
-    private javax.swing.JButton bntSearch;
+    private javax.swing.JButton bntReport;
     private javax.swing.JPanel pnMain;
+    private javax.swing.JButton txtOrder;
     // End of variables declaration//GEN-END:variables
 }
