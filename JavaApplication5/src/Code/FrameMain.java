@@ -173,7 +173,11 @@ public class FrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOrderActionPerformed
 
     private void bntReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReportActionPerformed
-        // TODO add your handling code here:
+        pnMain.removeAll();
+        ReportsPn rp = new ReportsPn();
+        rp.setSize(pnMain.getWidth(), pnMain.getHeight());
+        pnMain.add(rp);
+        pnMain.updateUI();
     }//GEN-LAST:event_bntReportActionPerformed
 
     /**
