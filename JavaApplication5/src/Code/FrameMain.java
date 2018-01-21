@@ -290,7 +290,11 @@ public class FrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_bntInfoActionPerformed
 
     private void txtOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderActionPerformed
-        // TODO add your handling code here:
+        pnMain.removeAll();
+        OrderPn rp = new OrderPn();
+        rp.setSize(pnMain.getWidth(), pnMain.getHeight());
+        pnMain.add(rp);
+        pnMain.updateUI();
     }//GEN-LAST:event_txtOrderActionPerformed
 
     private void bntReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReportActionPerformed

@@ -135,7 +135,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         tbChild = new javax.swing.JTable();
         bntUpdate = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        bntInsertChild = new javax.swing.JButton();
+        btnCreateOrder = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -146,6 +146,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         txtSearch1 = new javax.swing.JTextField();
         btnSearch1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel8.setText("Gender:");
@@ -351,13 +352,13 @@ public class ChildAdmin extends javax.swing.JPanel {
             }
         });
 
-        bntInsertChild.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        bntInsertChild.setForeground(new java.awt.Color(255, 0, 204));
-        bntInsertChild.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30.png"))); // NOI18N
-        bntInsertChild.setText("Add");
-        bntInsertChild.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateOrder.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        btnCreateOrder.setForeground(new java.awt.Color(255, 0, 204));
+        btnCreateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-pacifier-30.png"))); // NOI18N
+        btnCreateOrder.setText("Looking for Nanny");
+        btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntInsertChildActionPerformed(evt);
+                btnCreateOrderActionPerformed(evt);
             }
         });
 
@@ -379,7 +380,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bntInsertChild, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCreateOrder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bntUpdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -396,14 +397,14 @@ public class ChildAdmin extends javax.swing.JPanel {
                             .addComponent(txtSearch)
                             .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(bntInsertChild, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(bntUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 539, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -437,7 +438,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 153, 51));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-gr.png"))); // NOI18N
-        jButton4.setText("Add");
+        jButton4.setText("Add Customer");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -463,6 +464,11 @@ public class ChildAdmin extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 153, 51));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-baby-30.png"))); // NOI18N
+        jButton2.setText("Add Baby");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -476,7 +482,8 @@ public class ChildAdmin extends javax.swing.JPanel {
                         .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
@@ -487,7 +494,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -498,8 +505,10 @@ public class ChildAdmin extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 538, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Customer", jPanel2);
@@ -508,11 +517,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -600,14 +609,14 @@ public class ChildAdmin extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void bntInsertChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInsertChildActionPerformed
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
         JFrame fInsertChild = new JFrame();
         fInsertChild.add(new InsertChild());
 
         fInsertChild.pack();
         fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fInsertChild.setVisible(true);
-    }//GEN-LAST:event_bntInsertChildActionPerformed
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -676,14 +685,15 @@ public class ChildAdmin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntInsertChild;
     private javax.swing.JButton bntOk;
     private javax.swing.JButton bntReset;
     private javax.swing.JButton bntUpdate;
+    private javax.swing.JButton btnCreateOrder;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearch1;
     private javax.swing.JDialog dlAddChild;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
