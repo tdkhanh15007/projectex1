@@ -6,6 +6,7 @@
 package Code;
 
 import MyDatabase.MyDatabase;
+import controlpack.UserBean;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.scripts.JO;
@@ -15,6 +16,7 @@ import jdk.nashorn.internal.scripts.JO;
  * @author A
  */
 public class FormLogin extends javax.swing.JFrame {
+    UserBean us = new UserBean();
 
     /**
      * Creates new form FormLogin
@@ -175,20 +177,27 @@ public class FormLogin extends javax.swing.JFrame {
             isLogin = MyDatabase.checkLogin(username, password);
         } catch (Exception e) {
             // Thong bao loi
-            JOptionPane.showMessageDialog(null, "Co loi xay ra trong qua trinh dang nhap");
+            JOptionPane.showMessageDialog(null, "Login Failed");
 
             return;
         }
         
         if (isLogin) {
+            String[] data = new String[2];
+            data[0] = username;
+            data[1] = String.valueOf(us.getUserRole(username));
+            FrameMain.main(data);
+            this.setVisible(false);
             // Tat form login
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            dispose(); 
+//            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//            dispose(); 
             // Hien form main
-            FrameMain fMain = new FrameMain();
-            ChildAdmin ca = new ChildAdmin(fMain);
-            fMain.setPanel(ca);
-            fMain.setVisible(true);
+//            FrameMain fMain = new FrameMain();
+//            ChildAdmin ca = new ChildAdmin(fMain);            
+//            fMain.setPanel(ca);
+//            fMain.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Login Failed");
         }
 
     }//GEN-LAST:event_bntOkActionPerformed

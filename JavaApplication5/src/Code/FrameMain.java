@@ -6,7 +6,12 @@
 package Code;
 
 import controlpack.CustomerBean;
+import controlpack.UserBean;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,10 +22,24 @@ import javax.swing.table.DefaultTableModel;
  * @author OS10
  */
 public class FrameMain extends javax.swing.JFrame {
+    public static String name,role;
 
     public FrameMain() {
         initComponents();
         ChildAdmin ca = new ChildAdmin(this);
+        if(role=="false"){
+            bntCash.setVisible(false);
+            bntReport.setVisible(false);
+            bntHumans.setVisible(false);
+        }
+        labelImage.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        labelImage.setVerticalAlignment((int) BOTTOM_ALIGNMENT);
+        //ngày hiện tại
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date today = Calendar.getInstance().getTime();
+        String reportDate = df.format(today);
+        txtTimenow.setText(reportDate);
+        //fullscreen
         this.setResizable(false);
         this.setSize(getMaxWidth(), getMaxHeight());
         pnMain.setSize(getMaxWidth(), getMaxHeight());
@@ -48,23 +67,55 @@ public class FrameMain extends javax.swing.JFrame {
     private void initComponents() {
 
         pnMain = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        labelImage = new javax.swing.JLabel();
         bntHome = new javax.swing.JButton();
         bntLogin = new javax.swing.JButton();
         bntInfo = new javax.swing.JButton();
         txtOrder = new javax.swing.JButton();
         bntReport = new javax.swing.JButton();
+        bntHumans = new javax.swing.JButton();
+        bntCash = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtTimenow = new javax.swing.JLabel();
+        txtUser = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Trebuchet MS", 2, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 255));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("The Product was developed by Group 3 of Aptech CUSC\nCopyright 2018\nContact: group3@gmail.com\nPhone: 01234567890");
+        jScrollPane2.setViewportView(jTextArea1);
+
+        labelImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/logo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
         pnMain.setLayout(pnMainLayout);
         pnMainLayout.setHorizontalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addContainerGap(123, Short.MAX_VALUE)
+                .addComponent(labelImage)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelImage)
+                .addContainerGap(485, Short.MAX_VALUE))
         );
 
         bntHome.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -88,8 +139,8 @@ public class FrameMain extends javax.swing.JFrame {
         });
 
         bntInfo.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        bntInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-profile-30.png"))); // NOI18N
-        bntInfo.setText("info");
+        bntInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-about-30.png"))); // NOI18N
+        bntInfo.setText("About");
         bntInfo.setMinimumSize(new java.awt.Dimension(150, 39));
         bntInfo.setPreferredSize(new java.awt.Dimension(120, 39));
         bntInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +171,40 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
+        bntHumans.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        bntHumans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-profile-30.png"))); // NOI18N
+        bntHumans.setText("Humans");
+        bntHumans.setMinimumSize(new java.awt.Dimension(150, 39));
+        bntHumans.setPreferredSize(new java.awt.Dimension(120, 39));
+        bntHumans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntHumansActionPerformed(evt);
+            }
+        });
+
+        bntCash.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        bntCash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-get-cash-30.png"))); // NOI18N
+        bntCash.setText("Cash");
+        bntCash.setMinimumSize(new java.awt.Dimension(150, 39));
+        bntCash.setPreferredSize(new java.awt.Dimension(120, 39));
+        bntCash.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCashActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setText("Client Time:");
+
+        txtTimenow.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtTimenow.setText("jLabel3");
+
+        txtUser.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtUser.setText(""+name);
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setText("User:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,10 +219,22 @@ public class FrameMain extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntHumans, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntCash, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTimenow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUser)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,9 +246,17 @@ public class FrameMain extends javax.swing.JFrame {
                     .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntHumans, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntCash, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTimenow)
+                    .addComponent(txtUser)
+                    .addComponent(jLabel6))
+                .addGap(4, 4, 4)
+                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -196,6 +301,14 @@ public class FrameMain extends javax.swing.JFrame {
         pnMain.updateUI();
     }//GEN-LAST:event_bntReportActionPerformed
 
+    private void bntHumansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHumansActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntHumansActionPerformed
+
+    private void bntCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCashActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntCashActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,7 +335,9 @@ public class FrameMain extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrameMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        //lấy username,role
+        name = args[0];
+        role = args[1];        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -240,11 +355,20 @@ public class FrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntCash;
     private javax.swing.JButton bntHome;
+    private javax.swing.JButton bntHumans;
     private javax.swing.JButton bntInfo;
     private javax.swing.JButton bntLogin;
     private javax.swing.JButton bntReport;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelImage;
     private javax.swing.JPanel pnMain;
     private javax.swing.JButton txtOrder;
+    private javax.swing.JLabel txtTimenow;
+    private javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package MyDatabase;
 
+import controlpack.UserBean;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -55,13 +56,19 @@ public class MyDatabase {
         if (!isConnected()) connect();
         
         // Lam viec voi CSDL
-        String sqlQuery = "SELECT * FROM [User] where user_email = ? and password = ?";
+        String sqlQuery = "SELECT * FROM [Users] where user_email = ? and password = ?";
         PreparedStatement ps;
         ResultSet rs;        
         ps = _connection.prepareStatement(sqlQuery);
         ps.setString(1, userMail);
         ps.setString(2, password);
-        rs = ps.executeQuery();        
+        rs = ps.executeQuery();  
+//        while(rs.next()){
+//            UserBean us = new UserBean();
+//            us.setUser(rs.getString("user_email"));
+//            us.setRole(rs.getBoolean("role"));
+//        }
+
         return rs.next();
     }
     
