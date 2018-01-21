@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Code;
+
+import controlpack.ReportsBean;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +17,80 @@ package Code;
  */
 public class ReportsPn extends javax.swing.JPanel {
 
+    DefaultTableModel model;
+    ReportsBean rpB = new ReportsBean();
+
     /**
      * Creates new form ReportsPn
      */
     public ReportsPn() {
         initComponents();
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        loadAll();
+    }
+
+    public void loadAll() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Vector<ReportsBean> item = rpB.displayAll();
+        Vector v;
+        int totalicome = 0;
+        int totalpay = 0;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            ReportsBean temp = item.get(i);
+            int orderid = temp.order_id;
+            String nannyName = temp.nanny_name;
+            Date orderDate = temp.orderDate;
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = formatter.format(orderDate);
+            String orderBy = temp.orderBy;
+            int price = temp.price;
+            int payment = temp.payment;
+            totalicome = totalicome+price;
+            totalpay = totalpay+payment;
+            v.add(orderid);
+            v.add(strDate);
+            v.add(orderBy);
+            v.add(nannyName);
+            v.add(price);
+            v.add(payment);
+            model.addRow(v);
+        }
+        txtIncome.setText(String.valueOf(totalicome));
+        txtOutcome.setText(String.valueOf(totalpay));
+    }
+    public void loadLess(Date fromDate,Date toDate) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Vector<ReportsBean> item = rpB.displayCondition(fromDate, toDate);
+        Vector v;
+        int totalicome = 0;
+        int totalpay = 0;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            ReportsBean temp = item.get(i);
+            int orderid = temp.order_id;
+            String nannyName = temp.nanny_name;
+            Date orderDate = temp.orderDate;
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = formatter.format(orderDate);
+            String orderBy = temp.orderBy;
+            int price = temp.price;
+            int payment = temp.payment;
+            totalicome = totalicome+price;
+            totalpay = totalpay+payment;
+            v.add(orderid);
+            v.add(strDate);
+            v.add(orderBy);
+            v.add(nannyName);
+            v.add(price);
+            v.add(payment);
+            model.addRow(v);
+        }
+        txtIncome.setText(String.valueOf(totalicome));
+        txtOutcome.setText(String.valueOf(totalpay));
     }
 
     /**
@@ -38,7 +112,7 @@ public class ReportsPn extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtIncome = new javax.swing.JLabel();
         txtOutcome = new javax.swing.JLabel();
-        txtOutcome1 = new javax.swing.JLabel();
+        jlabel4 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
@@ -50,21 +124,26 @@ public class ReportsPn extends javax.swing.JPanel {
 
         jButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "OrderID", "NannyID", "Price", "Payment"
+                "OrderID", "OrderDate", "Order by", "Nanny", "Price", "Payment"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -72,6 +151,20 @@ public class ReportsPn extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+        }
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 51));
@@ -83,9 +176,9 @@ public class ReportsPn extends javax.swing.JPanel {
         txtOutcome.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtOutcome.setForeground(new java.awt.Color(255, 153, 51));
 
-        txtOutcome1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtOutcome1.setForeground(new java.awt.Color(255, 153, 51));
-        txtOutcome1.setText("Outcome:");
+        jlabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jlabel4.setForeground(new java.awt.Color(255, 153, 51));
+        jlabel4.setText("Outcome:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,7 +204,7 @@ public class ReportsPn extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtIncome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtOutcome1)
+                        .addComponent(jlabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtOutcome)))
                 .addContainerGap())
@@ -133,10 +226,14 @@ public class ReportsPn extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(txtIncome)
                     .addComponent(txtOutcome)
-                    .addComponent(txtOutcome1))
+                    .addComponent(jlabel4))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        loadLess(jDateChooser1.getDate(), jDateChooser2.getDate());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -148,8 +245,8 @@ public class ReportsPn extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlabel4;
     private javax.swing.JLabel txtIncome;
     private javax.swing.JLabel txtOutcome;
-    private javax.swing.JLabel txtOutcome1;
     // End of variables declaration//GEN-END:variables
 }
