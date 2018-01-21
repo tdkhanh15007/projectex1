@@ -6,6 +6,7 @@
 package Code;
 
 import controlpack.CustomerBean;
+import java.awt.GraphicsEnvironment;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +21,9 @@ public class FrameMain extends javax.swing.JFrame {
     public FrameMain() {
         initComponents();
         ChildAdmin ca = new ChildAdmin(this);
-        ca.setSize(pnMain.getWidth(), pnMain.getHeight());
+        this.setResizable(false);
+        this.setSize(getMaxWidth(), getMaxHeight());
+        pnMain.setSize(getMaxWidth(), getMaxHeight());
         pnMain.add(ca);
         pnMain.updateUI();
         setLocationRelativeTo(null);
@@ -28,6 +31,12 @@ public class FrameMain extends javax.swing.JFrame {
 //        JPanel jPanel1 = new JPanel();
 //        jPanel1.add(lg);
     }
+    public int getMaxWidth() {
+          return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
+     }
+     public int getMaxHeight() {
+         return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,14 +60,14 @@ public class FrameMain extends javax.swing.JFrame {
         pnMain.setLayout(pnMainLayout);
         pnMainLayout.setHorizontalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
 
-        bntHome.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        bntHome.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         bntHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-home-red-30.png"))); // NOI18N
         bntHome.setText("Home");
         bntHome.setMinimumSize(new java.awt.Dimension(150, 39));
@@ -69,7 +78,7 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        bntLogin.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        bntLogin.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         bntLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-exit-30.png"))); // NOI18N
         bntLogin.setText("Logout");
         bntLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +87,7 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        bntInfo.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        bntInfo.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         bntInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-profile-30.png"))); // NOI18N
         bntInfo.setText("info");
         bntInfo.setMinimumSize(new java.awt.Dimension(150, 39));
@@ -89,7 +98,7 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        txtOrder.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        txtOrder.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         txtOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-shopping-cart-50_1.png"))); // NOI18N
         txtOrder.setText("Order");
         txtOrder.setMinimumSize(new java.awt.Dimension(150, 39));
@@ -100,7 +109,7 @@ public class FrameMain extends javax.swing.JFrame {
             }
         });
 
-        bntReport.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        bntReport.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         bntReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-bar-chart-30.png"))); // NOI18N
         bntReport.setText("Report");
         bntReport.setMinimumSize(new java.awt.Dimension(150, 39));
@@ -116,31 +125,34 @@ public class FrameMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 5, Short.MAX_VALUE)
-                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+                        .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntHome, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
