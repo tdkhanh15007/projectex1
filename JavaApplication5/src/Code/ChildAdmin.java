@@ -10,6 +10,7 @@ import controlpack.CustomerBean;
 import controlpack.MainMethod;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -86,17 +87,16 @@ public class ChildAdmin extends javax.swing.JPanel {
             String strDate = formatter.format(birth);
             boolean gender = temp.gender;
             String strGen = "";
-            if(gender){
+            if (gender) {
                 strGen = "Male";
-            }
-            else{
+            } else {
                 strGen = "Female";
             }
             v.add(child_id);
             v.add(fullname);
             v.add(strDate);
             v.add(strGen);
-            v.add(cusemail);            
+            v.add(cusemail);
             model.addRow(v);
         }
     }
@@ -656,13 +656,24 @@ public class ChildAdmin extends javax.swing.JPanel {
         // Lay du lieu trong dong
         int child_id = (int) tbModel.getValueAt(currentRow, 0);
         MMt.displaydialog(dlAddChild);
-        System.out.println(child_id);
         txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
         String strBirth = tbModel.getValueAt(currentRow, 2).toString();
+        String strGen = tbModel.getValueAt(currentRow, 3).toString();
+        if(strGen=="Male"){
+            jComboBox1.setSelectedIndex(0);
+        }else{
+            jComboBox1.setSelectedIndex(1);
+        }
         txtCurent.setText(chBean.getcurrent_medications(child_id));
         txtPass.setText(chBean.getpass_illess(child_id));
         txtDoctor.setText(chBean.getdoctor(child_id));
         txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            Date birthdate = df.parse(strBirth);
+            jDateChooser1.setDate(birthdate);
+            
+            
 //        String lName = tbModel.getValueAt(currentRow, 1).toString();
 //        String mName = tbModel.getValueAt(currentRow, 2).toString();
 //        Date bDay = null;
@@ -685,7 +696,9 @@ public class ChildAdmin extends javax.swing.JPanel {
 //        RegionBeanChild rbc = new RegionBeanChild(fName, null, cMedi, pIless, dTor, eMail, true);
 //        UpdateChild ic = new UpdateChild(rbc);
 //        ic.setVisible(true);
-
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_bntUpdateActionPerformed
 
