@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +21,19 @@ import java.util.ArrayList;
 public class MyDatabase {
     
     private static Connection _connection;
+    
+    public Connection getConnection(){
+        Connection conn =  null;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=LittleAngels", "sa", "sa");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MyDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
     
     private static void connect() throws ClassNotFoundException, SQLException {
         
