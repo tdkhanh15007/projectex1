@@ -5,6 +5,9 @@
  */
 package Code;
 
+import controlpack.ChildrenBean;
+import controlpack.CustomerBean;
+import controlpack.MainMethod;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
@@ -28,10 +31,74 @@ public class ChildAdmin extends javax.swing.JPanel {
      * Creates new form ChildAdmin
      */
     FrameMain fMain;
+    CustomerBean cb = new CustomerBean();
+    ChildrenBean chBean = new ChildrenBean();
+    MainMethod MMt = new MainMethod();
 
     public ChildAdmin(FrameMain fM) {
         initComponents();
         fMain = fM;
+        loadCus();
+        loadChild();
+    }
+
+    public void loadCus() {
+        DefaultTableModel model = (DefaultTableModel) tbCus.getModel();
+        model.setRowCount(0);
+        Vector<CustomerBean> item = cb.displayAll();
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            CustomerBean temp = item.get(i);
+            String cus_email = temp.cus_email;
+            String cus_name = temp.cus_name;
+            String phone = temp.phone_number;
+            String workphone = temp.work_phone;
+            boolean status = temp.status;
+            String statusText = "";
+            if (status) {
+                statusText = "Active";
+            } else {
+                statusText = "InActivce";
+            }
+            v.add(cus_email);
+            v.add(cus_name);
+            v.add(phone);
+            v.add(workphone);
+            v.add(statusText);
+            model.addRow(v);
+        }
+    }
+
+    public void loadChild() {
+        DefaultTableModel model = (DefaultTableModel) tbChild.getModel();
+        model.setRowCount(0);
+        Vector<ChildrenBean> item = chBean.displayAll();
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            ChildrenBean temp = item.get(i);
+            int child_id = temp.child_id;
+            String fullname = temp.fullName;
+            String cusemail = temp.cus_email;
+            Date birth = temp.birth;
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = formatter.format(birth);
+            boolean gender = temp.gender;
+            String strGen = "";
+            if(gender){
+                strGen = "Male";
+            }
+            else{
+                strGen = "Female";
+            }
+            v.add(child_id);
+            v.add(fullname);
+            v.add(strDate);
+            v.add(strGen);
+            v.add(cusemail);            
+            model.addRow(v);
+        }
     }
 
     /**
@@ -43,11 +110,29 @@ public class ChildAdmin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlAddChild = new javax.swing.JDialog();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtfullname = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        txtDoctor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        bntOk = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        bntReset = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        txtCurent = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbChild = new javax.swing.JTable();
-        bntSelect = new javax.swing.JButton();
         bntUpdate = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         bntInsertChild = new javax.swing.JButton();
@@ -78,24 +163,169 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtSearch3 = new javax.swing.JTextField();
         btnSearch3 = new javax.swing.JButton();
 
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel8.setText("Gender:");
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setText("Doctor:");
+
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel9.setText("Pass Iless:");
+
+        txtfullname.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtfullname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfullnameActionPerformed(evt);
+            }
+        });
+
+        txtPass.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel10.setText("Email  Parent:");
+
+        txtEmail.setEditable(false);
+        txtEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        txtDoctor.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel1.setText("Update Children");
+
+        bntOk.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        bntOk.setText("Update");
+        bntOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntOkActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setText("Fullname:");
+
+        bntReset.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        bntReset.setText("Reset");
+
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel7.setText("Curent Medication:");
+
+        jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+
+        txtCurent.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setText("Birth Day:");
+
+        javax.swing.GroupLayout dlAddChildLayout = new javax.swing.GroupLayout(dlAddChild.getContentPane());
+        dlAddChild.getContentPane().setLayout(dlAddChildLayout);
+        dlAddChildLayout.setHorizontalGroup(
+            dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlAddChildLayout.createSequentialGroup()
+                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlAddChildLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(bntOk)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bntReset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156))
+                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                            .addGap(175, 175, 175)
+                            .addComponent(jLabel1))
+                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel10))
+                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(dlAddChildLayout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtPass)
+                                        .addComponent(txtDoctor)
+                                        .addComponent(txtEmail)))
+                                .addGroup(dlAddChildLayout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtCurent, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtfullname, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel8)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jComboBox1, 0, 139, Short.MAX_VALUE))))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlAddChildLayout.setVerticalGroup(
+            dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlAddChildLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlAddChildLayout.createSequentialGroup()
+                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dlAddChildLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(36, 36, 36)
+                                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtfullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(txtCurent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6))
+                    .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntOk)
+                    .addComponent(bntReset)
+                    .addComponent(jButton1))
+                .addGap(72, 72, 72))
+        );
+
         tbChild.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Full Name", "Birth Day", "Current Medications", "Pass Illess", "Doctor", "Emai Parents ", "Gender"
+                "Child ID", "Fullname", "Birthday", "Gender", "Emai Parents "
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -103,15 +333,17 @@ public class ChildAdmin extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tbChild);
         if (tbChild.getColumnModel().getColumnCount() > 0) {
-            tbChild.getColumnModel().getColumn(2).setMinWidth(120);
+            tbChild.getColumnModel().getColumn(0).setResizable(false);
+            tbChild.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tbChild.getColumnModel().getColumn(1).setResizable(false);
+            tbChild.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tbChild.getColumnModel().getColumn(2).setResizable(false);
+            tbChild.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tbChild.getColumnModel().getColumn(3).setResizable(false);
+            tbChild.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tbChild.getColumnModel().getColumn(4).setResizable(false);
+            tbChild.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
-
-        bntSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/recovery.png"))); // NOI18N
-        bntSelect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSelectActionPerformed(evt);
-            }
-        });
 
         bntUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Edit.png"))); // NOI18N
         bntUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -145,35 +377,33 @@ public class ChildAdmin extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bntSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
                 .addComponent(bntInsertChild, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bntUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntInsertChild, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bntUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bntInsertChild, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Children", jPanel1);
@@ -183,20 +413,32 @@ public class ChildAdmin extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Email", "Full Name", "Address", "Phone", "Contact 2nd", "Contact 3rd", "Work Phone", "Status"
+                "Email", "Full Name", "Phone", "Work Phone", "Status"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane5.setViewportView(tbCus);
+        if (tbCus.getColumnModel().getColumnCount() > 0) {
+            tbCus.getColumnModel().getColumn(0).setResizable(false);
+            tbCus.getColumnModel().getColumn(1).setResizable(false);
+            tbCus.getColumnModel().getColumn(2).setResizable(false);
+            tbCus.getColumnModel().getColumn(3).setResizable(false);
+            tbCus.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Create.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Edit.png"))); // NOI18N
 
@@ -217,7 +459,7 @@ public class ChildAdmin extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +525,7 @@ public class ChildAdmin extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,7 +596,7 @@ public class ChildAdmin extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bntInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,32 +639,10 @@ public class ChildAdmin extends javax.swing.JPanel {
 
     }//GEN-LAST:event_bntInsertActionPerformed
 
-    private void bntSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSelectActionPerformed
-        
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        tbModel.setRowCount(0);
-
-        RegionBeanChild rbean = new RegionBeanChild();
-        ArrayList<RegionBeanChild> listRegion = rbean.showAllData();
-        Vector v;
-
-        for (RegionBeanChild rb : listRegion) {
-            v = new Vector();
-            v.add(rb.getFullName());
-            v.add(rb.getBirth());
-            v.add(rb.getCurrent_medications());
-            v.add(rb.getPass_illess());
-            v.add(rb.getDoctor());
-            v.add(rb.getCus_email());
-            v.add(rb.isGender());
-            tbModel.addRow(v);
-        }
-    }//GEN-LAST:event_bntSelectActionPerformed
-
     private void bntInsertChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntInsertChildActionPerformed
         JFrame fInsertChild = new JFrame();
         fInsertChild.add(new InsertChild());
-        
+
         fInsertChild.pack();
         fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fInsertChild.setVisible(true);
@@ -434,96 +654,100 @@ public class ChildAdmin extends javax.swing.JPanel {
         int currentRow = tbChild.getSelectedRow();
 
         // Lay du lieu trong dong
-        String fName = tbModel.getValueAt(currentRow, 0).toString();
-        String lName = tbModel.getValueAt(currentRow, 1).toString();
-        String mName = tbModel.getValueAt(currentRow, 2).toString();
-        Date bDay = null;
-        String strDate = tbModel.getValueAt(currentRow, 3).toString();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            bDay = sdf.parse(strDate);
-        } catch (ParseException ex) {
-            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        String cMedi = tbModel.getValueAt(currentRow, 4).toString();
-        String pIless = tbModel.getValueAt(currentRow, 5).toString();
-        String dTor = tbModel.getValueAt(currentRow, 6).toString();
-        String eMail = tbModel.getValueAt(currentRow, 7).toString();
-        String gDer = tbModel.getValueAt(currentRow, 8).toString();
+        int child_id = (int) tbModel.getValueAt(currentRow, 0);
+        MMt.displaydialog(dlAddChild);
+        System.out.println(child_id);
+        txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
+        String strBirth = tbModel.getValueAt(currentRow, 2).toString();
+        txtCurent.setText(chBean.getcurrent_medications(child_id));
+        txtPass.setText(chBean.getpass_illess(child_id));
+        txtDoctor.setText(chBean.getdoctor(child_id));
+        txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
+//        String lName = tbModel.getValueAt(currentRow, 1).toString();
+//        String mName = tbModel.getValueAt(currentRow, 2).toString();
+//        Date bDay = null;
+//        String strDate = tbModel.getValueAt(currentRow, 3).toString();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            bDay = sdf.parse(strDate);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        String cMedi = tbModel.getValueAt(currentRow, 4).toString();
+//        String pIless = tbModel.getValueAt(currentRow, 5).toString();
+//        String dTor = tbModel.getValueAt(currentRow, 6).toString();
+//        String eMail = tbModel.getValueAt(currentRow, 7).toString();
+//        String gDer = tbModel.getValueAt(currentRow, 8).toString();
+//
+//        // Tao form insert moi
+//        // Truyen tham so qua form moi
+//        RegionBeanChild rbc = new RegionBeanChild(fName, null, cMedi, pIless, dTor, eMail, true);
+//        UpdateChild ic = new UpdateChild(rbc);
+//        ic.setVisible(true);
 
-        // Tao form insert moi
-        // Truyen tham so qua form moi
-        RegionBeanChild rbc = new RegionBeanChild(fName, null, cMedi, pIless, dTor, eMail, true);
-        UpdateChild ic = new UpdateChild(rbc);
-        ic.setVisible(true);
 
-        
     }//GEN-LAST:event_bntUpdateActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         // Lay dong hien tai dang chon
         int selectedRow = tbChild.getSelectedRow();
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        
+
         // Lay email
         String cusMail = tbModel.getValueAt(selectedRow, 7).toString();
-        
+
         String sqlQuery = "update Chirldren set status = 0 where cus_email = ?";
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        
+
 // Lay thogn tin người dung nhap vao
         String keyword = txtSearch.getText();
-        
+
         // VIet SQL truy van vao CSDL
-        String sqlQuery = "select *\n" +
-                        "from Chirldren\n" +
-                        "where fullname like ?\n" +
-                        "or cus_email like ?";
+        String sqlQuery = "select *\n"
+                + "from Chirldren\n"
+                + "where fullname like ?\n"
+                + "or cus_email like ?";
         PreparedStatement ps;
         ResultSet rs;
-        
+
         try {
             ps = ConnectionData.getConnection().prepareStatement(sqlQuery);
             ps.setString(1, "%" + keyword + "%");
             ps.setString(2, "%" + keyword + "%");
             rs = ps.executeQuery();
-            
+
             // Lay ket qua tu sql
             Vector vRow;
             ArrayList<Vector> arylstRow = new ArrayList<>();
-            
+
             DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
             tbModel.setRowCount(0);
-            
+
             while (rs.next()) {
                 vRow = new Vector();
+                vRow.add(rs.getString("child_id"));
                 vRow.add(rs.getString("fullname"));
-                vRow.add(rs.getString("birth"));
-                vRow.add(rs.getString("current_medications"));
-                vRow.add(rs.getString("pass_illess"));
-                vRow.add(rs.getString("doctor"));
+                vRow.add(rs.getDate("birth"));
                 vRow.add(rs.getString("cus_email"));
                 vRow.add(rs.getString("gender"));
-                
                 // Dua dong nay vao bang
                 tbModel.addRow(vRow);
             }
 
         } catch (Exception e) {
             // THong bao loi
-           JOptionPane.showMessageDialog(null, "Khong tim thay");
+            JOptionPane.showMessageDialog(null, "Khong tim thay");
             return;
         }
-        
-        
+
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
@@ -538,16 +762,55 @@ public class ChildAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearch3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtfullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfullnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfullnameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
+
+//        RegionBeanChild rbean = new RegionBeanChild();
+//
+//        String fName = txtfullname.getText();
+//        String lName = txtLastName.getText();
+//        String mName = txtMid.getText();
+//        Date bDay = null;
+//        String strDate = txtBirthDay.getText();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            bDay = sdf.parse(strDate);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        String cRent = txtCurent.getText();
+//        String pAss = txtPass.getText();
+//        String dTor =  txtDoctor.getText();
+//        String eMail = txtEmail.getText();
+//        String genderStr = txtGender.getText();
+//        boolean gender = false;
+
+    }//GEN-LAST:event_bntOkActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntInsert;
     private javax.swing.JButton bntInsertChild;
-    private javax.swing.JButton bntSelect;
+    private javax.swing.JButton bntOk;
+    private javax.swing.JButton bntReset;
     private javax.swing.JButton bntUpdate;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearch1;
     private javax.swing.JButton btnSearch2;
     private javax.swing.JButton btnSearch3;
+    private javax.swing.JDialog dlAddChild;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
@@ -557,6 +820,16 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -570,9 +843,14 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JTable tbCus;
     private javax.swing.JTable tbEmployee;
     private javax.swing.JTable tbNanny;
+    private javax.swing.JTextField txtCurent;
+    private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearch1;
     private javax.swing.JTextField txtSearch2;
     private javax.swing.JTextField txtSearch3;
+    private javax.swing.JTextField txtfullname;
     // End of variables declaration//GEN-END:variables
 }
