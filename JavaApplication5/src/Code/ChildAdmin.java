@@ -39,7 +39,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     CustomerBean cb = new CustomerBean();
     ChildrenBean chBean = new ChildrenBean();
     MainMethod MMt = new MainMethod();
-    
+
     public ChildAdmin(FrameMain fM) {
         initComponents();
         fMain = fM;
@@ -50,9 +50,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         tbCus.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
         tbChild.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
     }
-    
-    
+
     public void hiddenBtn() {
+        btnUpdateChild.setVisible(false);
+        btnCreateOrder.setVisible(false);
+        btnStatusChild.setVisible(false);
         btnUpdateCus.setVisible(false);
         btnNewChild.setVisible(false);
         jCheckBox1.setVisible(false);
@@ -121,11 +123,41 @@ public class ChildAdmin extends javax.swing.JPanel {
             model.addRow(v);
         }
     }
-    
+
     public void loadChild() {
         DefaultTableModel model = (DefaultTableModel) tbChild.getModel();
         model.setRowCount(0);
         Vector<ChildrenBean> item = chBean.displayAll();
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            ChildrenBean temp = item.get(i);
+            int child_id = temp.child_id;
+            String fullname = temp.fullName;
+            String cusemail = temp.cus_email;
+            Date birth = temp.birth;
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = formatter.format(birth);
+            boolean gender = temp.gender;
+            String strGen = "";
+            if (gender) {
+                strGen = "Male";
+            } else {
+                strGen = "Female";
+            }
+            v.add(child_id);
+            v.add(fullname);
+            v.add(strDate);
+            v.add(strGen);
+            v.add(cusemail);
+            model.addRow(v);
+        }
+    }
+
+    public void searchChild(String character) {
+        DefaultTableModel model = (DefaultTableModel) tbChild.getModel();
+        model.setRowCount(0);
+        Vector<ChildrenBean> item = chBean.searchChild(character);
         Vector v;
         for (int i = 0; i < item.size(); i++) {
             v = new Vector();
@@ -274,6 +306,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel54 = new javax.swing.JLabel();
         btnCfDelete = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        dlCfChild = new javax.swing.JDialog();
+        jLabel55 = new javax.swing.JLabel();
+        btnCfDelete1 = new javax.swing.JButton();
+        jLabel56 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -305,11 +342,6 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel9.setText("Pass Iless:");
 
         txtfullname.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtfullname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfullnameActionPerformed(evt);
-            }
-        });
 
         txtPass.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
@@ -348,6 +380,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         bntReset.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         bntReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30 -p.png"))); // NOI18N
         bntReset.setText("Reset");
+        bntReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntResetActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setText("Curent Medication:");
@@ -896,6 +933,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         bntReset1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         bntReset1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-eraser-30.png"))); // NOI18N
         bntReset1.setText("Reset");
+        bntReset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntReset1ActionPerformed(evt);
+            }
+        });
 
         jButton18.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
@@ -1178,6 +1220,62 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jLabel55.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel55.setText("Do you realy want to delete ");
+
+        btnCfDelete1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        btnCfDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-approval-30.png"))); // NOI18N
+        btnCfDelete1.setText("Comfirm");
+        btnCfDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCfDelete1ActionPerformed(evt);
+            }
+        });
+
+        jLabel56.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel56.setText("jLabel54");
+
+        jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
+        jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlCfChildLayout = new javax.swing.GroupLayout(dlCfChild.getContentPane());
+        dlCfChild.getContentPane().setLayout(dlCfChildLayout);
+        dlCfChildLayout.setHorizontalGroup(
+            dlCfChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlCfChildLayout.createSequentialGroup()
+                .addGroup(dlCfChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlCfChildLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel56))
+                    .addGroup(dlCfChildLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnCfDelete1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)))
+                .addGap(18, 18, 18))
+        );
+        dlCfChildLayout.setVerticalGroup(
+            dlCfChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlCfChildLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(dlCfChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel56))
+                .addGap(18, 18, 18)
+                .addGroup(dlCfChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCfDelete1)
+                    .addComponent(jButton4))
+                .addGap(25, 25, 25))
+        );
+
         jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         tbChild.setModel(new javax.swing.table.DefaultTableModel(
@@ -1194,6 +1292,11 @@ public class ChildAdmin extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbChild.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbChildMouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(tbChild);
@@ -1448,36 +1551,21 @@ public class ChildAdmin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfullnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfullnameActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
-
-//        RegionBeanChild rbean = new RegionBeanChild();
-//
-//        String fName = txtfullname.getText();
-//        String lName = txtLastName.getText();
-//        String mName = txtMid.getText();
-//        Date bDay = null;
-//        String strDate = txtBirthDay.getText();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            bDay = sdf.parse(strDate);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        String cRent = txtCurent.getText();
-//        String pAss = txtPass.getText();
-//        String dTor =  txtDoctor.getText();
-//        String eMail = txtEmail.getText();
-//        String genderStr = txtGender.getText();
-//        boolean gender = false;
-
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbChild.getSelectedRow();
+        int child_id = (int) tbModel.getValueAt(currentRow, 0);
+        boolean gender = false;
+        if (jComboBox1.getSelectedIndex() == 0) {
+            gender = true;
+        }
+        chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender);
+        dlUpdateChild.dispose();
+        loadChild();
     }//GEN-LAST:event_bntOkActionPerformed
 
     private void btnSearchCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCusActionPerformed
@@ -1493,46 +1581,8 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewCusActionPerformed
 
     private void btnSearchChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchChildActionPerformed
-
-        // Lay thogn tin người dung nhap vao
-        String keyword = txtSearch.getText();
-
-        // VIet SQL truy van vao CSDL
-        String sqlQuery = "select *\n"
-                + "from Chirldren\n"
-                + "where fullname like ?\n"
-                + "or cus_email like ?";
-        PreparedStatement ps;
-        ResultSet rs;
-        
-        try {
-            ps = ConnectionData.getConnection().prepareStatement(sqlQuery);
-            ps.setString(1, "%" + keyword + "%");
-            ps.setString(2, "%" + keyword + "%");
-            rs = ps.executeQuery();
-
-            // Lay ket qua tu sql
-            Vector vRow;
-            ArrayList<Vector> arylstRow = new ArrayList<>();
-            
-            DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-            tbModel.setRowCount(0);
-            
-            while (rs.next()) {
-                vRow = new Vector();
-                vRow.add(rs.getString("child_id"));
-                vRow.add(rs.getString("fullname"));
-                vRow.add(rs.getDate("birth"));
-                vRow.add(rs.getString("cus_email"));
-                vRow.add(rs.getString("gender"));
-                // Dua dong nay vao bang
-                tbModel.addRow(vRow);
-            }
-            
-        } catch (Exception e) {
-            // THong bao loi
-            JOptionPane.showMessageDialog(null, "Khong tim thay");
-            return;
+        if (!txtSearch.getText().equals("") || !txtSearch.getText().equals(null)) {
+            searchChild(txtSearch.getText());
         }
     }//GEN-LAST:event_btnSearchChildActionPerformed
 
@@ -1556,9 +1606,9 @@ public class ChildAdmin extends javax.swing.JPanel {
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
 
         // Lay email
-        String cusMail = tbModel.getValueAt(selectedRow, 7).toString();
-        
-        String sqlQuery = "update Chirldren set status = 0 where cus_email = ?";
+        String childname = tbModel.getValueAt(selectedRow, 1).toString();
+        jLabel56.setText(childname);
+        MMt.displaydialog(dlCfChild);
     }//GEN-LAST:event_btnStatusChildActionPerformed
 
     private void btnUpdateChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateChildActionPerformed
@@ -1595,7 +1645,16 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNewChildActionPerformed
 
     private void bntOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOk1ActionPerformed
-        // TODO add your handling code here:
+        boolean gender = false;
+        if (txtNewChildGender.getSelectedIndex() == 0) {
+            gender = true;
+        }
+        if (!chBean.isExist(txtNewEmailParents.getText(), txtNewChild.getText())) {
+            chBean.addChild(txtNewChild.getText(), txtNewChildBirth.getDate(), txtNewChildMedication.getText(), txtNewChilIlle.getText(), txtNewChildDoctor.getText(), gender, txtNewEmailParents.getText());
+            loadChild();
+        } else {
+            JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_bntOk1ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -1626,9 +1685,13 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
-        cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
-        dlAddCus.dispose();
-        loadCus(jCheckBox1.isSelected());
+        if (!cb.isExist(txtNewCusEmail.getText())) {
+            cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
+            dlAddCus.dispose();
+            loadCus(jCheckBox1.isSelected());
+        }else{
+            JOptionPane.showMessageDialog(this, "Customer Email is Exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddCusActionPerformed
 
     private void btnClearAddCussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAddCussActionPerformed
@@ -1644,6 +1707,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
         int currentRow = tbCus.getSelectedRow();
         jLabel54.setText(tbModel.getValueAt(currentRow, 1).toString());
+        loadChild();
     }//GEN-LAST:event_btnStatusCusActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1678,7 +1742,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private void tbCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCusMouseClicked
         DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
         int currentRow = tbCus.getSelectedRow();
-        String status = tbModel.getValueAt(currentRow, 4).toString();        
+        String status = tbModel.getValueAt(currentRow, 4).toString();
         displayBtn();
         if (status.equals("InActivce")) {
             btnStatusCus.setVisible(false);
@@ -1698,7 +1762,61 @@ public class ChildAdmin extends javax.swing.JPanel {
         loadCus(jCheckBox1.isSelected());
         btnActive.setVisible(false);
         hiddenBtn();
+        loadChild();
     }//GEN-LAST:event_btnActiveActionPerformed
+
+    private void tbChildMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChildMouseClicked
+        btnUpdateChild.setVisible(true);
+        btnCreateOrder.setVisible(true);
+        btnStatusChild.setVisible(true);
+    }//GEN-LAST:event_tbChildMouseClicked
+
+    private void btnCfDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCfDelete1ActionPerformed
+        int selectedRow = tbChild.getSelectedRow();
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+
+        // Lay email
+        int childid = (int) tbModel.getValueAt(selectedRow, 0);
+        chBean.deleteChild(childid);
+        dlCfChild.dispose();
+        loadChild();
+    }//GEN-LAST:event_btnCfDelete1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dlCfChild.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void bntResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntResetActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbChild.getSelectedRow();
+        int child_id = (int) tbModel.getValueAt(currentRow, 0);
+        txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
+        String strBirth = tbModel.getValueAt(currentRow, 2).toString();
+        String strGen = tbModel.getValueAt(currentRow, 3).toString();
+        if (strGen == "Male") {
+            jComboBox1.setSelectedIndex(0);
+        } else {
+            jComboBox1.setSelectedIndex(1);
+        }
+        txtCurent.setText(chBean.getcurrent_medications(child_id));
+        txtPass.setText(chBean.getpass_illess(child_id));
+        txtDoctor.setText(chBean.getdoctor(child_id));
+        txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            Date birthdate = df.parse(strBirth);
+            jDateChooser1.setDate(birthdate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bntResetActionPerformed
+
+    private void bntReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReset1ActionPerformed
+        txtNewChild.setText("");
+        txtNewChildMedication.setText("");
+        txtNewChilIlle.setText("");
+        txtNewChildDoctor.setText("");
+    }//GEN-LAST:event_bntReset1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1709,6 +1827,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JButton btnActive;
     private javax.swing.JButton btnAddCus;
     private javax.swing.JButton btnCfDelete;
+    private javax.swing.JButton btnCfDelete1;
     private javax.swing.JButton btnClearAddCuss;
     private javax.swing.JButton btnCreateOrder;
     private javax.swing.JButton btnNewChild;
@@ -1722,6 +1841,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JDialog dlAddChild;
     private javax.swing.JDialog dlAddCus;
     private javax.swing.JDialog dlAddOrder;
+    private javax.swing.JDialog dlCfChild;
     private javax.swing.JDialog dlCfCus;
     private javax.swing.JDialog dlComfirmOrder;
     private javax.swing.JDialog dlUpdateChild;
@@ -1735,6 +1855,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -1796,6 +1917,8 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
