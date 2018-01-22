@@ -213,6 +213,7 @@ public class FormLogin extends javax.swing.JFrame {
 
     private void bntExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExitActionPerformed
         System.exit(0);
+        
     }//GEN-LAST:event_bntExitActionPerformed
 
     private void bntResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntResetActionPerformed
