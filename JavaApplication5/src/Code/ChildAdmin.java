@@ -558,10 +558,8 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel39.setText("Work phone:");
 
         jTextField3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextField3.setText("jTextField3");
 
         jTextField4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextField4.setText("jTextField4");
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -572,10 +570,8 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel40.setText("Mobile phone:");
 
         jTextField5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextField5.setText("jTextField5");
 
         jTextField6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextField6.setText("jTextField6");
 
         jButton13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-gr.png"))); // NOI18N
@@ -1191,6 +1187,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         jButton5.setForeground(new java.awt.Color(0, 153, 51));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-edit-30-gr.png"))); // NOI18N
         jButton5.setText("Update");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 153, 51));
@@ -1210,6 +1211,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         jButton2.setForeground(new java.awt.Color(0, 153, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-baby-30.png"))); // NOI18N
         jButton2.setText("Add Baby");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1304,6 +1310,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        MMt.displaydialog(dlAddCus);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1352,12 +1359,15 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
-        JFrame fInsertChild = new JFrame();
-        fInsertChild.add(new InsertChild());
-
-        fInsertChild.pack();
-        fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        fInsertChild.setVisible(true);
+//        JFrame fInsertChild = new JFrame();
+//        fInsertChild.add(new InsertChild());
+//
+//        fInsertChild.pack();
+//        fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        fInsertChild.setVisible(true);
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbChild.getSelectedRow();
+        MMt.displaydialog(dlAddOrder);
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1436,6 +1446,18 @@ public class ChildAdmin extends javax.swing.JPanel {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        MMt.displaydialog(dlUpdateCus);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        MMt.displaydialog(dlAddChild);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

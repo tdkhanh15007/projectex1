@@ -86,7 +86,6 @@ public class OrderPn extends javax.swing.JPanel {
         txtPrice.setEditable(false);
         txtPrice.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtPrice.setForeground(new java.awt.Color(0, 51, 255));
-        txtPrice.setText("jTextField1");
 
         txtComments.setColumns(20);
         txtComments.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N

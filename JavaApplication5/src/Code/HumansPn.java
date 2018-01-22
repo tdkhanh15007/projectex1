@@ -6,12 +6,15 @@
 
 package Code;
 
+import controlpack.MainMethod;
+
 /**
  *
  * @author Khanh
  */
 public class HumansPn extends javax.swing.JPanel {
 
+    MainMethod Mmt = new MainMethod();
     /**
      * Creates new form HumansPn
      */
@@ -380,6 +383,11 @@ public class HumansPn extends javax.swing.JPanel {
         jButton4.setForeground(new java.awt.Color(102, 0, 102));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-pi.png"))); // NOI18N
         jButton4.setText("Add Employee");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -539,6 +547,11 @@ public class HumansPn extends javax.swing.JPanel {
         jButton9.setForeground(new java.awt.Color(204, 102, 0));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-or.png"))); // NOI18N
         jButton9.setText("Add Nanny");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -635,6 +648,14 @@ public class HumansPn extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Mmt.displaydialog(dlAddEmp);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        Mmt.displaydialog(dlAddNanny);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
