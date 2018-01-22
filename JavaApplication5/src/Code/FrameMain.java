@@ -83,6 +83,7 @@ public class FrameMain extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Little Angels");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -101,12 +102,13 @@ public class FrameMain extends javax.swing.JFrame {
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addGap(0, 113, Short.MAX_VALUE)
+                        .addComponent(labelImage)
+                        .addGap(0, 113, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(pnMainLayout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(labelImage)
-                .addContainerGap(123, Short.MAX_VALUE))
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +201,7 @@ public class FrameMain extends javax.swing.JFrame {
         txtTimenow.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtTimenow.setText("jLabel3");
 
-        txtUser.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         txtUser.setText(""+name);
 
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -314,7 +316,11 @@ public class FrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_bntHumansActionPerformed
 
     private void bntCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCashActionPerformed
-        // TODO add your handling code here:
+        pnMain.removeAll();
+        CashPn rp = new CashPn();
+        rp.setSize(pnMain.getWidth(), pnMain.getHeight());
+        pnMain.add(rp);
+        pnMain.updateUI();
     }//GEN-LAST:event_bntCashActionPerformed
 
     /**

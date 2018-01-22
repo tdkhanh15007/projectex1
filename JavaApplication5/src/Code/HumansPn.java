@@ -104,11 +104,9 @@ public class HumansPn extends javax.swing.JPanel {
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 0, 102));
-        jTextField1.setText("jTextField1");
 
         jTextField2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(102, 0, 102));
-        jTextField2.setText("jTextField2");
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 102));
@@ -116,7 +114,6 @@ public class HumansPn extends javax.swing.JPanel {
 
         jTextField3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(102, 0, 102));
-        jTextField3.setText("jTextField3");
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 102));
@@ -132,7 +129,6 @@ public class HumansPn extends javax.swing.JPanel {
 
         jPasswordField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(102, 0, 102));
-        jPasswordField1.setText("jPasswordField1");
 
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 0, 102));
@@ -140,7 +136,6 @@ public class HumansPn extends javax.swing.JPanel {
 
         jPasswordField2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jPasswordField2.setForeground(new java.awt.Color(102, 0, 102));
-        jPasswordField2.setText("jPasswordField2");
 
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 0, 102));
@@ -264,7 +259,6 @@ public class HumansPn extends javax.swing.JPanel {
 
         jTextField4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(204, 102, 0));
-        jTextField4.setText("jTextField4");
 
         jButton5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(204, 102, 0));
@@ -288,11 +282,9 @@ public class HumansPn extends javax.swing.JPanel {
 
         jTextField5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField5.setForeground(new java.awt.Color(204, 102, 0));
-        jTextField5.setText("jTextField5");
 
         jTextField6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(204, 102, 0));
-        jTextField6.setText("jTextField6");
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N

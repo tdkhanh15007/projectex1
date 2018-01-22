@@ -48,24 +48,32 @@ public class FormLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        lbLogin.setFont(new java.awt.Font("Times New Roman", 0, 30)); // NOI18N
+        lbLogin.setFont(new java.awt.Font("Trebuchet MS", 1, 30)); // NOI18N
+        lbLogin.setForeground(new java.awt.Color(51, 204, 0));
+        lbLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-key-48.png"))); // NOI18N
         lbLogin.setText("Login");
 
-        lbUser.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lbUser.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        lbUser.setForeground(new java.awt.Color(51, 204, 0));
         lbUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/iconuser20.png"))); // NOI18N
         lbUser.setText("Username:");
 
-        lbPass.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lbPass.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        lbPass.setForeground(new java.awt.Color(51, 204, 0));
         lbPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon-password-20.png"))); // NOI18N
         lbPass.setText("Password:");
 
+        txtUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        txtPass.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
             }
         });
 
-        bntOk.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        bntOk.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        bntOk.setForeground(new java.awt.Color(51, 204, 0));
         bntOk.setText("Ok");
         bntOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +81,8 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
-        bntExit.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        bntExit.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        bntExit.setForeground(new java.awt.Color(51, 204, 0));
         bntExit.setText("Exit");
         bntExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +90,8 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
-        bntReset.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        bntReset.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        bntReset.setForeground(new java.awt.Color(51, 204, 0));
         bntReset.setText("Reset");
         bntReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,35 +104,34 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lbUser)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bntOk, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbPass)))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGap(81, 81, 81)
-                            .addComponent(bntReset, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bntExit, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbLogin)
-                        .addGap(75, 75, 75)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(lbLogin))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbUser)
+                            .addComponent(lbPass))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(txtPass)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(bntOk, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntReset)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntExit)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(21, 21, 21)
                 .addComponent(lbLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbUser)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,19 +139,19 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPass)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntOk)
                     .addComponent(bntReset)
                     .addComponent(bntExit))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
+            .addGap(0, 387, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, 0)
@@ -151,7 +160,7 @@ public class FormLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 229, Short.MAX_VALUE)
+            .addGap(0, 346, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, 0)

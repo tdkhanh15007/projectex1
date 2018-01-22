@@ -110,7 +110,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dlAddChild = new javax.swing.JDialog();
+        dlUpdateChild = new javax.swing.JDialog();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -129,6 +129,95 @@ public class ChildAdmin extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox();
         txtCurent = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        dlAddOrder = new javax.swing.JDialog();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox3 = new javax.swing.JComboBox();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jComboBox4 = new javax.swing.JComboBox();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        dlAddCus = new javax.swing.JDialog();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel40 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        dlUpdateCus = new javax.swing.JDialog();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        dlAddChild = new javax.swing.JDialog();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        txtfullname1 = new javax.swing.JTextField();
+        jDateChooser4 = new com.toedter.calendar.JDateChooser();
+        jLabel48 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox();
+        txtCurent1 = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        txtPass1 = new javax.swing.JTextField();
+        txtDoctor1 = new javax.swing.JTextField();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        txtEmail1 = new javax.swing.JTextField();
+        bntOk1 = new javax.swing.JButton();
+        bntReset1 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        dlComfirmOrder = new javax.swing.JDialog();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -151,10 +240,10 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel8.setText("Gender:");
 
-        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel6.setText("Doctor:");
 
-        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel9.setText("Pass Iless:");
 
         txtfullname.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -166,13 +255,14 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         txtPass.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel10.setText("Email  Parent:");
 
         txtEmail.setEditable(false);
         txtEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-exit-sign-filled-30.png"))); // NOI18N
         jButton1.setText("Exit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +276,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel1.setText("Update Children");
 
         bntOk.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        bntOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-save-30.png"))); // NOI18N
         bntOk.setText("Update");
         bntOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,13 +284,14 @@ public class ChildAdmin extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setText("Fullname:");
 
         bntReset.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        bntReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30 -p.png"))); // NOI18N
         bntReset.setText("Reset");
 
-        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setText("Curent Medication:");
 
         jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -207,49 +299,49 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         txtCurent.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setText("Birth Day:");
 
-        javax.swing.GroupLayout dlAddChildLayout = new javax.swing.GroupLayout(dlAddChild.getContentPane());
-        dlAddChild.getContentPane().setLayout(dlAddChildLayout);
-        dlAddChildLayout.setHorizontalGroup(
-            dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlAddChildLayout.createSequentialGroup()
-                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dlAddChildLayout.createSequentialGroup()
+        javax.swing.GroupLayout dlUpdateChildLayout = new javax.swing.GroupLayout(dlUpdateChild.getContentPane());
+        dlUpdateChild.getContentPane().setLayout(dlUpdateChildLayout);
+        dlUpdateChildLayout.setHorizontalGroup(
+            dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlUpdateChildLayout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(bntOk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bntReset)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156))
-                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(129, 129, 129))
+                    .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dlUpdateChildLayout.createSequentialGroup()
                             .addGap(175, 175, 175)
                             .addComponent(jLabel1))
-                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                        .addGroup(dlUpdateChildLayout.createSequentialGroup()
                             .addGap(50, 50, 50)
-                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel7)
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel10))
-                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(dlAddChildLayout.createSequentialGroup()
+                            .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(dlUpdateChildLayout.createSequentialGroup()
                                     .addGap(18, 18, 18)
-                                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtPass)
                                         .addComponent(txtDoctor)
                                         .addComponent(txtEmail)))
-                                .addGroup(dlAddChildLayout.createSequentialGroup()
+                                .addGroup(dlUpdateChildLayout.createSequentialGroup()
                                     .addGap(20, 20, 20)
-                                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtCurent, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txtfullname, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                                        .addGroup(dlUpdateChildLayout.createSequentialGroup()
                                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(jLabel8)
@@ -257,47 +349,697 @@ public class ChildAdmin extends javax.swing.JPanel {
                                             .addComponent(jComboBox1, 0, 139, Short.MAX_VALUE))))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        dlAddChildLayout.setVerticalGroup(
-            dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlAddChildLayout.createSequentialGroup()
+        dlUpdateChildLayout.setVerticalGroup(
+            dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlUpdateChildLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dlAddChildLayout.createSequentialGroup()
-                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(dlAddChildLayout.createSequentialGroup()
+                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                        .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dlUpdateChildLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(36, 36, 36)
-                                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
                                     .addComponent(txtfullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel8)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
                             .addComponent(txtCurent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9)
                             .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6))
                     .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntOk)
                     .addComponent(bntReset)
                     .addComponent(jButton1))
                 .addGap(72, 72, 72))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel3.setText("Looking for Nanny");
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel4.setText("Child ID:");
+
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel11.setText("Child Name:");
+
+        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel12.setText("Group:");
+
+        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel13.setText("Activity:");
+
+        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel14.setText("Time:");
+
+        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel15.setText("From:");
+
+        jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel16.setText("To:");
+
+        jLabel17.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel17.setText("Nanny:");
+
+        jButton7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-money-30.png"))); // NOI18N
+        jButton7.setText("Cashout");
+
+        jTextField2.setEditable(false);
+        jTextField2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel18.setText("jLabel18");
+
+        jComboBox2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30.png"))); // NOI18N
+        jButton8.setText("Clear");
+
+        jButton9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-exit-sign-filled-30.png"))); // NOI18N
+        jButton9.setText("Back");
+
+        jButton10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-search-20.png"))); // NOI18N
+        jButton10.setText("Check");
+
+        javax.swing.GroupLayout dlAddOrderLayout = new javax.swing.GroupLayout(dlAddOrder.getContentPane());
+        dlAddOrder.getContentPane().setLayout(dlAddOrderLayout);
+        dlAddOrderLayout.setHorizontalGroup(
+            dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlAddOrderLayout.createSequentialGroup()
+                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlAddOrderLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton9))
+                    .addGroup(dlAddOrderLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(dlAddOrderLayout.createSequentialGroup()
+                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jTextField2)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton10)))))
+                .addGap(55, 55, 55))
+        );
+        dlAddOrderLayout.setVerticalGroup(
+            dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlAddOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlAddOrderLayout.createSequentialGroup()
+                        .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dlAddOrderLayout.createSequentialGroup()
+                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel18))
+                                .addGap(18, 18, 18)
+                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15))
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16))
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10))
+                .addGap(18, 18, 18)
+                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
+                .addContainerGap())
+        );
+
+        jLabel34.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel34.setText("New Customer");
+
+        jLabel35.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel35.setText("Customer Email:");
+
+        jLabel36.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel36.setText("Name:");
+
+        jLabel37.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel37.setText("Address:");
+
+        jLabel39.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel39.setText("Work phone:");
+
+        jTextField3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField3.setText("jTextField3");
+
+        jTextField4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField4.setText("jTextField4");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel40.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel40.setText("Mobile phone:");
+
+        jTextField5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField5.setText("jTextField5");
+
+        jTextField6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField6.setText("jTextField6");
+
+        jButton13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-gr.png"))); // NOI18N
+        jButton13.setText("Add");
+
+        jButton14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-eraser-30.png"))); // NOI18N
+        jButton14.setText("Clear");
+
+        jButton15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
+        jButton15.setText("Back");
+
+        javax.swing.GroupLayout dlAddCusLayout = new javax.swing.GroupLayout(dlAddCus.getContentPane());
+        dlAddCus.getContentPane().setLayout(dlAddCusLayout);
+        dlAddCusLayout.setHorizontalGroup(
+            dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlAddCusLayout.createSequentialGroup()
+                .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlAddCusLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton13)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton14)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton15))
+                    .addGroup(dlAddCusLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel39)
+                            .addComponent(jLabel40))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1)
+                                .addComponent(jTextField3)
+                                .addComponent(jTextField4)
+                                .addComponent(jTextField5)
+                                .addComponent(jTextField6)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlAddCusLayout.setVerticalGroup(
+            dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlAddCusLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel34)
+                .addGap(10, 10, 10)
+                .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlAddCusLayout.createSequentialGroup()
+                        .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel35)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel36)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel37)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel40))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dlAddCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton13)
+                    .addComponent(jButton14)
+                    .addComponent(jButton15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel38.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel38.setText("Update Customer");
+
+        jLabel41.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel41.setText("Customer Email:");
+
+        jTextField7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField7.setText("jTextField3");
+
+        jTextField8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField8.setText("jTextField4");
+
+        jLabel42.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel42.setText("Name:");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jLabel43.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel43.setText("Address:");
+
+        jLabel44.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel44.setText("Mobile phone:");
+
+        jTextField9.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField9.setText("jTextField5");
+
+        jTextField10.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextField10.setText("jTextField6");
+
+        jLabel45.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel45.setText("Work phone:");
+
+        jButton16.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-save-30.png"))); // NOI18N
+        jButton16.setText("Save");
+
+        jButton17.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
+        jButton17.setText("Back");
+
+        javax.swing.GroupLayout dlUpdateCusLayout = new javax.swing.GroupLayout(dlUpdateCus.getContentPane());
+        dlUpdateCus.getContentPane().setLayout(dlUpdateCusLayout);
+        dlUpdateCusLayout.setHorizontalGroup(
+            dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlUpdateCusLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jButton16)
+                .addGap(18, 18, 18)
+                .addComponent(jButton17)
+                .addGap(114, 114, 114))
+            .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dlUpdateCusLayout.createSequentialGroup()
+                    .addGap(58, 58, 58)
+                    .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel42)
+                        .addComponent(jLabel41)
+                        .addComponent(jLabel43)
+                        .addComponent(jLabel45)
+                        .addComponent(jLabel44))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel38)
+                        .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jTextField7)
+                            .addComponent(jTextField8)
+                            .addComponent(jTextField9)
+                            .addComponent(jTextField10)))
+                    .addContainerGap(85, Short.MAX_VALUE)))
+        );
+        dlUpdateCusLayout.setVerticalGroup(
+            dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlUpdateCusLayout.createSequentialGroup()
+                .addGap(309, 309, 309)
+                .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton17)
+                    .addComponent(jButton16))
+                .addGap(25, 25, 25))
+            .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dlUpdateCusLayout.createSequentialGroup()
+                    .addGap(15, 15, 15)
+                    .addComponent(jLabel38)
+                    .addGap(10, 10, 10)
+                    .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(dlUpdateCusLayout.createSequentialGroup()
+                            .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel41)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel42)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel43)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel44))
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(dlUpdateCusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel45)
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(88, Short.MAX_VALUE)))
+        );
+
+        jLabel46.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel46.setText("New Child");
+
+        jLabel47.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel47.setText("Fullname:");
+
+        txtfullname1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtfullname1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfullname1ActionPerformed(evt);
+            }
+        });
+
+        jLabel48.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel48.setText("Birth Day:");
+
+        jComboBox5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+
+        txtCurent1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel49.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel49.setText("Curent Medication:");
+
+        jLabel50.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel50.setText("Pass Iless:");
+
+        txtPass1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        txtDoctor1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabel51.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel51.setText("Doctor:");
+
+        jLabel52.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel52.setText("Email  Parent:");
+
+        txtEmail1.setEditable(false);
+        txtEmail1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        bntOk1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        bntOk1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30.png"))); // NOI18N
+        bntOk1.setText("Add");
+        bntOk1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntOk1ActionPerformed(evt);
+            }
+        });
+
+        bntReset1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        bntReset1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-eraser-30.png"))); // NOI18N
+        bntReset1.setText("Reset");
+
+        jButton18.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
+        jButton18.setText("Back");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlAddChildLayout = new javax.swing.GroupLayout(dlAddChild.getContentPane());
+        dlAddChild.getContentPane().setLayout(dlAddChildLayout);
+        dlAddChildLayout.setHorizontalGroup(
+            dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 519, Short.MAX_VALUE)
+            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dlAddChildLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                            .addGap(55, 55, 55)
+                            .addComponent(bntOk1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(bntReset1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton18)
+                            .addGap(129, 129, 129))
+                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dlAddChildLayout.createSequentialGroup()
+                                .addGap(125, 125, 125)
+                                .addComponent(jLabel46))
+                            .addGroup(dlAddChildLayout.createSequentialGroup()
+                                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel48)
+                                    .addComponent(jLabel47)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jLabel50)
+                                    .addComponent(jLabel51)
+                                    .addComponent(jLabel52))
+                                .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(dlAddChildLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtPass1)
+                                            .addComponent(txtDoctor1)
+                                            .addComponent(txtEmail1)))
+                                    .addGroup(dlAddChildLayout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtCurent1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtfullname1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(dlAddChildLayout.createSequentialGroup()
+                                                .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(81, 81, 81)
+                                                .addComponent(jComboBox5, 0, 139, Short.MAX_VALUE))))))))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        dlAddChildLayout.setVerticalGroup(
+            dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
+            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dlAddChildLayout.createSequentialGroup()
+                    .addGap(41, 41, 41)
+                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(dlAddChildLayout.createSequentialGroup()
+                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(dlAddChildLayout.createSequentialGroup()
+                                    .addComponent(jLabel46)
+                                    .addGap(36, 36, 36)
+                                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel47)
+                                        .addComponent(txtfullname1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel48)
+                                        .addComponent(jComboBox5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel49)
+                                .addComponent(txtCurent1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel50)
+                                .addComponent(txtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel51))
+                        .addComponent(txtDoctor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(21, 21, 21)
+                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel52)
+                        .addComponent(txtEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dlAddChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bntOk1)
+                        .addComponent(bntReset1)
+                        .addComponent(jButton18))
+                    .addGap(42, 42, 42)))
+        );
+
+        jLabel19.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel19.setText("Comfirm Order");
+
+        jLabel20.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel20.setText("Name:");
+
+        jLabel21.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel21.setText("Activity:");
+
+        jLabel22.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel22.setText("Time");
+
+        jLabel23.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel23.setText("Start:");
+
+        jLabel24.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel24.setText("End:");
+
+        jLabel25.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel25.setText("Nanny:");
+
+        jLabel26.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel26.setText("Price:");
+
+        jButton11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-approval-30.png"))); // NOI18N
+        jButton11.setText("Comfirm");
+
+        jButton12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
+        jButton12.setText("Back");
+
+        jLabel27.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel27.setText("jLabel27");
+
+        jLabel28.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel28.setText("jLabel28");
+
+        jLabel29.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel29.setText("jLabel29");
+
+        jLabel30.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel30.setText("jLabel30");
+
+        jLabel31.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel31.setText("jLabel31");
+
+        jLabel32.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel32.setText("jLabel32");
+
+        jLabel33.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel33.setText("jLabel33");
+
+        javax.swing.GroupLayout dlComfirmOrderLayout = new javax.swing.GroupLayout(dlComfirmOrder.getContentPane());
+        dlComfirmOrder.getContentPane().setLayout(dlComfirmOrderLayout);
+        dlComfirmOrderLayout.setHorizontalGroup(
+            dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlComfirmOrderLayout.createSequentialGroup()
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlComfirmOrderLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel19)))
+                    .addGroup(dlComfirmOrderLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton12)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlComfirmOrderLayout.setVerticalGroup(
+            dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlComfirmOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addGap(34, 34, 34)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel27))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel28))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel29))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel30))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel31))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel32))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel33))
+                .addGap(18, 18, 18)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jButton12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -638,7 +1380,7 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         // Lay du lieu trong dong
         int child_id = (int) tbModel.getValueAt(currentRow, 0);
-        MMt.displaydialog(dlAddChild);
+        MMt.displaydialog(dlUpdateChild);
         txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
         String strBirth = tbModel.getValueAt(currentRow, 2).toString();
         String strGen = tbModel.getValueAt(currentRow, 3).toString();
@@ -683,44 +1425,145 @@ public class ChildAdmin extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_bntUpdateActionPerformed
 
+    private void txtfullname1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfullname1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfullname1ActionPerformed
+
+    private void bntOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOk1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntOk1ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntOk;
+    private javax.swing.JButton bntOk1;
     private javax.swing.JButton bntReset;
+    private javax.swing.JButton bntReset1;
     private javax.swing.JButton bntUpdate;
     private javax.swing.JButton btnCreateOrder;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearch1;
     private javax.swing.JDialog dlAddChild;
+    private javax.swing.JDialog dlAddCus;
+    private javax.swing.JDialog dlAddOrder;
+    private javax.swing.JDialog dlComfirmOrder;
+    private javax.swing.JDialog dlUpdateChild;
+    private javax.swing.JDialog dlUpdateCus;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JTable tbChild;
     private javax.swing.JTable tbCus;
     private javax.swing.JTextField txtCurent;
+    private javax.swing.JTextField txtCurent1;
     private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtDoctor1;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtPass1;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearch1;
     private javax.swing.JTextField txtfullname;
+    private javax.swing.JTextField txtfullname1;
     // End of variables declaration//GEN-END:variables
 }

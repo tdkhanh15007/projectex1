@@ -114,15 +114,16 @@ public class ReportsPn extends javax.swing.JPanel {
         txtOutcome = new javax.swing.JLabel();
         jlabel4 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("From");
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("To");
 
-        jButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Search");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
