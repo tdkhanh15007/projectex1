@@ -6,6 +6,7 @@
 package Code;
 
 import controlpack.ReportsBean;
+import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -28,6 +29,7 @@ public class ReportsPn extends javax.swing.JPanel {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         loadAll();
+        jTable1.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
     }
 
     public void loadAll() {
@@ -167,17 +169,17 @@ public class ReportsPn extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 51));
         jLabel3.setText("Income:");
 
-        txtIncome.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtIncome.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         txtIncome.setForeground(new java.awt.Color(51, 204, 0));
 
-        txtOutcome.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtOutcome.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         txtOutcome.setForeground(new java.awt.Color(255, 153, 51));
 
-        jlabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jlabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jlabel4.setForeground(new java.awt.Color(255, 153, 51));
         jlabel4.setText("Outcome:");
 
@@ -206,7 +208,7 @@ public class ReportsPn extends javax.swing.JPanel {
                         .addComponent(txtIncome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtOutcome)))
                 .addContainerGap())
         );
@@ -222,13 +224,13 @@ public class ReportsPn extends javax.swing.JPanel {
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
+                    .addComponent(jlabel4)
                     .addComponent(txtIncome)
-                    .addComponent(txtOutcome)
-                    .addComponent(jlabel4))
-                .addContainerGap())
+                    .addComponent(txtOutcome))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

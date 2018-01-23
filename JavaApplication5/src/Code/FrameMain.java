@@ -7,14 +7,23 @@ package Code;
 
 import controlpack.CustomerBean;
 import controlpack.UserBean;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +36,7 @@ public class FrameMain extends javax.swing.JFrame {
 
     public FrameMain() {
         initComponents();
+        clock();
         ChildAdmin ca = new ChildAdmin(this);
         if (role == "false") {
             bntCash.setVisible(false);
@@ -36,10 +46,10 @@ public class FrameMain extends javax.swing.JFrame {
         labelImage.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         labelImage.setVerticalAlignment((int) BOTTOM_ALIGNMENT);
         //ngày hiện tại
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date today = Calendar.getInstance().getTime();
-        String reportDate = df.format(today);
-        txtTimenow.setText(reportDate);
+//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//        Date today = Calendar.getInstance().getTime();
+//        String reportDate = df.format(today);
+//        txtTimenow.setText(reportDate);
         //fullscreen
         this.setResizable(false);
         this.setSize(getMaxWidth(), getMaxHeight());
@@ -58,6 +68,25 @@ public class FrameMain extends javax.swing.JFrame {
 
     public int getMaxHeight() {
         return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
+    }
+    //đồng hồ dynamic
+    public void clock() {
+        Thread clock = new Thread() {
+            public void run() {
+                try {
+                    for (;;) {
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                        Date today = Calendar.getInstance().getTime();
+                        String reportDate = df.format(today);
+                        txtTimenow.setText(reportDate);
+                        sleep(1000);
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        clock.start();
     }
 
     /**
@@ -202,7 +231,7 @@ public class FrameMain extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel2.setText("Client Time:");
 
-        txtTimenow.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtTimenow.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         txtTimenow.setText("jLabel3");
 
         txtUser.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N

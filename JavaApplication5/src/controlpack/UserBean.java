@@ -30,28 +30,28 @@ public class UserBean {
     public String pass;
     public String ussname;
     public String phone;
-
-    public boolean getUserRole(String user_email){
+    //xét role khi đăng nhập
+    public boolean getUserRole(String user_email) {
         boolean isAdmin = false;
         try {
             PreparedStatement ps = conn.prepareStatement("Select role from Users where user_email = ?");
             ps.setString(1, user_email);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 isAdmin = rs.getBoolean("role");
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return isAdmin;
+        return isAdmin;
     }
-    
-    public Vector<UserBean> displayAll(){
+
+    public Vector<UserBean> displayAll() {
         Vector<UserBean> v = new Vector<UserBean>();
         try {
             PreparedStatement ps = conn.prepareStatement("select user_email,phone,role,name from Users");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 UserBean us = new UserBean();
                 us.ussname = rs.getString("name");
                 us.user = rs.getString("user_email");
@@ -64,14 +64,14 @@ public class UserBean {
         }
         return v;
     }
-    
-    public String md5Pass(String useremail){
-        String md5pas ="";
+
+    public String md5Pass(String useremail) {
+        String md5pas = "";
         try {
             PreparedStatement ps = conn.prepareStatement("select password from Users where user_email=?");
             ps.setString(1, useremail);
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 md5pas = rs.getString("password");
             }
         } catch (SQLException ex) {
@@ -79,10 +79,10 @@ public class UserBean {
         }
         return md5pas;
     }
-    
-    public void quickSet(String useremail,boolean role){
+
+    public void quickSet(String useremail, boolean role) {
         try {
-            PreparedStatement ps = conn.prepareStatement("update User set role = ? where user_email=?");
+            PreparedStatement ps = conn.prepareStatement("update Users set role = ? where user_email=?");
             ps.setBoolean(1, role);
             ps.setString(2, useremail);
             ps.executeUpdate();
@@ -90,8 +90,8 @@ public class UserBean {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public boolean updateUser(String name,String phone,boolean role,String md5pass,String usermail){
+
+    public boolean updateUser(String name, String phone, boolean role, String md5pass, String usermail) {
         try {
             PreparedStatement ps = conn.prepareStatement("update Users set name=?,phone=?,role=?,password=? where user_email=?");
             ps.setString(1, name);
@@ -101,13 +101,45 @@ public class UserBean {
             ps.setString(5, usermail);
             ps.executeUpdate();
             return true;
-        } catch (SQLException ex) {            
+        } catch (SQLException ex) {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
-    public String covertoMD5(String plainpass){
+
+    public boolean createUser(String usmail, String name, String phone, String passMD5, boolean role) {
+        if (checkExist(usmail)) {
+            return false;
+        } else {
+            try {
+                PreparedStatement ps = conn.prepareStatement("insert into Users(user_email,password,phone,role,name) values(?,?,?,?,?)");
+                ps.setString(1, usmail);
+                ps.setString(2, passMD5);
+                ps.setString(3, phone);
+                ps.setString(5, name);
+                ps.setBoolean(4, role);
+                ps.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        }
+    }
+
+    public boolean checkExist(String usmail) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("select name from Users where user_email=?");
+            ps.setString(1, usmail);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public String covertoMD5(String plainpass) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(plainpass.getBytes());
@@ -121,18 +153,25 @@ public class UserBean {
             throw new RuntimeException(e);
         }
     }
-    
-    public boolean checkSyb(String s){
+
+    public boolean checkSyb(String s) {
         boolean check = false;
-        char syb[] = {'-','!','@','#','$','%','^','&','*','(',')','='};
+        char syb[] = {'-', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '='};
         char a[] = s.toCharArray();
-        for(int i=0; i<a.length; i++){
-            for(int j=0; j<syb.length; j++){
-                if(a[i]==syb[j]){
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < syb.length; j++) {
+                if (a[i] == syb[j]) {
                     check = true;
                 }
             }
         }
         return check;
+    }
+
+    public boolean repeatPass(String pas1, String pas2) {
+        if (pas1.equals(pas2)) {
+            return true;
+        }
+        return false;
     }
 }

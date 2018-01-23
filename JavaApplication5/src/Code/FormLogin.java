@@ -46,6 +46,7 @@ public class FormLogin extends javax.swing.JFrame {
         bntReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         setResizable(false);
 
         lbLogin.setFont(new java.awt.Font("Trebuchet MS", 1, 30)); // NOI18N
@@ -180,11 +181,10 @@ public class FormLogin extends javax.swing.JFrame {
 
         String username = txtUser.getText();
         String password = txtPass.getText();
-
         boolean isLogin;
         
         try {
-            isLogin = MyDatabase.checkLogin(username, password);
+            isLogin = MyDatabase.checkLogin(username, us.covertoMD5(password));
         } catch (Exception e) {
             // Thong bao loi
             JOptionPane.showMessageDialog(null, "Login Failed");

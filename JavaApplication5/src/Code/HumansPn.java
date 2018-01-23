@@ -3,10 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Code;
 
+import controlpack.ActBean;
 import controlpack.MainMethod;
+import controlpack.NannyBean;
+import controlpack.UserBean;
+import java.awt.Font;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,11 +21,208 @@ import controlpack.MainMethod;
 public class HumansPn extends javax.swing.JPanel {
 
     MainMethod Mmt = new MainMethod();
+    UserBean us = new UserBean();
+    NannyBean nb = new NannyBean();
+    ActBean acb = new ActBean();
+
     /**
      * Creates new form HumansPn
      */
     public HumansPn() {
         initComponents();
+        hiddenAll();
+        hiddenNUp();
+        loadUser();
+        loadNanny();
+        loadAct();
+        tbUser.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+        tbNanny.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+    }
+
+    public void loadUser() {
+        DefaultTableModel model = (DefaultTableModel) tbUser.getModel();
+        model.setRowCount(0);
+        Vector<UserBean> item = us.displayAll();
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            UserBean temp = item.get(i);
+            String email = temp.user;
+            String name = temp.ussname;
+            String phone = temp.phone;
+            boolean role = temp.role;
+            String strRole = "";
+            if (role) {
+                strRole = "Admin";
+            } else {
+                strRole = "Employee";
+            }
+            v.add(email);
+            v.add(name);
+            v.add(phone);
+            v.add(strRole);
+            model.addRow(v);
+        }
+    }
+
+    public void loadNanny() {
+        DefaultTableModel model = (DefaultTableModel) tbNanny.getModel();
+        model.setRowCount(0);
+        Vector<NannyBean> item = nb.loadAll();
+        Vector v;
+        int idFake = 0;
+        for (int i = 0; i < item.size(); i++) {
+            idFake++;
+            v = new Vector();
+            NannyBean temp = item.get(i);
+            int id = temp.nanny_id;
+            String name = temp.nanny_name;
+            String phone = temp.phone;
+            String act = temp.act_name;
+            String strStatus = "Working";
+            if (!temp.status) {
+                strStatus = "Quit";
+            }
+            v.add(idFake);
+            v.add(name);
+            v.add(phone);
+            v.add(act);
+            v.add(strStatus);
+            model.addRow(v);
+        }
+    }
+
+    public void seachNanny(String character) {
+        DefaultTableModel model = (DefaultTableModel) tbNanny.getModel();
+        model.setRowCount(0);
+        Vector<NannyBean> item = nb.searchNanny(character);
+        Vector v;
+        int idFake = 0;
+        for (int i = 0; i < item.size(); i++) {
+            idFake++;
+            v = new Vector();
+            NannyBean temp = item.get(i);
+            int id = temp.nanny_id;
+            String name = temp.nanny_name;
+            String phone = temp.phone;
+            String act = temp.act_name;
+            String strStatus = "Working";
+            if (!temp.status) {
+                strStatus = "Quit";
+            }
+            v.add(idFake);
+            v.add(name);
+            v.add(phone);
+            v.add(act);
+            v.add(strStatus);
+            model.addRow(v);
+        }
+    }
+
+    public void loadAct() {
+        Vector<ActBean> item = acb.displayAll();
+        for (int i = 0; i < item.size(); i++) {
+            ActBean temp = item.get(i);
+            String name = temp.act_type;
+            jComboBox2.addItem(name);
+        }
+    }
+
+    public void hiddenNUp() {
+        jLabel7.setVisible(false);
+        jTextField5.setVisible(false);
+        jLabel9.setVisible(false);
+        jTextField6.setVisible(false);
+        jLabel8.setVisible(false);
+        jTextArea1.setVisible(false);
+        jLabel10.setVisible(false);
+        jComboBox2.setVisible(false);
+        jButton6.setVisible(false);
+        jButton7.setVisible(false);
+        jButton8.setVisible(false);
+
+    }
+
+    public void displayNUp() {
+        jLabel7.setVisible(true);
+        jTextField5.setVisible(true);
+        jLabel9.setVisible(true);
+        jTextField6.setVisible(true);
+        jLabel8.setVisible(true);
+        jTextArea1.setVisible(true);
+        jLabel10.setVisible(true);
+        jComboBox2.setVisible(true);
+        jButton6.setVisible(true);
+        jButton7.setVisible(true);
+        jButton8.setVisible(false);
+    }
+
+    public void displayNCr() {
+        jLabel7.setVisible(true);
+        jTextField5.setVisible(true);
+        jLabel9.setVisible(true);
+        jTextField6.setVisible(true);
+        jLabel8.setVisible(true);
+        jTextArea1.setVisible(true);
+        jLabel10.setVisible(true);
+        jComboBox2.setVisible(true);
+        jButton6.setVisible(true);
+        jButton7.setVisible(false);
+        jButton8.setVisible(true);
+    }
+
+    public void hiddenAll() {
+        jLabel1.setVisible(false);
+        jTextField1.setVisible(false);
+        jLabel3.setVisible(false);
+        jTextField3.setVisible(false);
+        jLabel2.setVisible(false);
+        jTextField2.setVisible(false);
+        jLabel4.setVisible(false);
+        jComboBox1.setVisible(false);
+        jLabel5.setVisible(false);
+        jPasswordField1.setVisible(false);
+        jLabel6.setVisible(false);
+        jPasswordField2.setVisible(false);
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+    }
+
+    public void displaytoUp() {
+        jLabel1.setVisible(false);
+        jTextField1.setVisible(false);
+        jLabel3.setVisible(true);
+        jTextField3.setVisible(true);
+        jLabel2.setVisible(true);
+        jTextField2.setVisible(true);
+        jLabel4.setVisible(true);
+        jComboBox1.setVisible(true);
+        jLabel5.setVisible(true);
+        jPasswordField1.setVisible(true);
+        jLabel6.setVisible(true);
+        jPasswordField2.setVisible(true);
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
+    }
+
+    public void displaytoNew() {
+        jLabel1.setVisible(true);
+        jTextField1.setVisible(true);
+        jLabel3.setVisible(true);
+        jTextField3.setVisible(true);
+        jLabel2.setVisible(true);
+        jTextField2.setVisible(true);
+        jLabel4.setVisible(true);
+        jComboBox1.setVisible(true);
+        jLabel5.setVisible(true);
+        jPasswordField1.setVisible(true);
+        jLabel6.setVisible(true);
+        jPasswordField2.setVisible(true);
+        jButton1.setVisible(true);
+        jButton2.setVisible(false);
+        jButton3.setVisible(true);
     }
 
     /**
@@ -31,39 +234,10 @@ public class HumansPn extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dlAddEmp = new javax.swing.JDialog();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        dlAddNanny = new javax.swing.JDialog();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jLabel23 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panel1 = new java.awt.Panel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbUser = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -82,243 +256,59 @@ public class HumansPn extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         panel2 = new java.awt.Panel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTextField4 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        tbNanny = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jComboBox2 = new javax.swing.JComboBox();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-
-        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        jLabel11.setText("New User");
-
-        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel12.setText("Email:");
-
-        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel13.setText("Name:");
-
-        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel14.setText("Phone:");
-
-        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel15.setText("Password:");
-
-        jLabel16.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel16.setText("Comfirm Password:");
-
-        jTextField7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextField8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextField9.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextField10.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextField11.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jLabel17.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel17.setText("Role:");
-
-        jComboBox3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee", "Admin" }));
-
-        jButton10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-pi.png"))); // NOI18N
-        jButton10.setText("Add");
-
-        jButton11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
-        jButton11.setText("Back");
-
-        javax.swing.GroupLayout dlAddEmpLayout = new javax.swing.GroupLayout(dlAddEmp.getContentPane());
-        dlAddEmp.getContentPane().setLayout(dlAddEmpLayout);
-        dlAddEmpLayout.setHorizontalGroup(
-            dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlAddEmpLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addGroup(dlAddEmpLayout.createSequentialGroup()
-                        .addComponent(jButton10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton11))
-                    .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7)
-                        .addComponent(jTextField8)
-                        .addComponent(jTextField9)
-                        .addComponent(jTextField10)
-                        .addComponent(jTextField11)
-                        .addComponent(jComboBox3, 0, 193, Short.MAX_VALUE)))
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
-        dlAddEmpLayout.setVerticalGroup(
-            dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlAddEmpLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        jLabel18.setText("New Nanny");
-
-        jLabel19.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel19.setText("jLabel19");
-
-        jLabel20.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel20.setText("jLabel20");
-
-        jLabel21.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel21.setText("jLabel21");
-
-        jTextField12.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextField13.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextArea2.setRows(5);
-        jScrollPane4.setViewportView(jTextArea2);
-
-        jLabel23.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel23.setText("jLabel23");
-
-        jComboBox4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-or.png"))); // NOI18N
-        jButton12.setText("Add");
-
-        jButton13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
-        jButton13.setText("Back");
-
-        javax.swing.GroupLayout dlAddNannyLayout = new javax.swing.GroupLayout(dlAddNanny.getContentPane());
-        dlAddNanny.getContentPane().setLayout(dlAddNannyLayout);
-        dlAddNannyLayout.setHorizontalGroup(
-            dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlAddNannyLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel23))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addGroup(dlAddNannyLayout.createSequentialGroup()
-                        .addComponent(jButton12)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton13))
-                    .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                        .addComponent(jTextField13)
-                        .addComponent(jTextField12)
-                        .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-        dlAddNannyLayout.setVerticalGroup(
-            dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlAddNannyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel18)
-                .addGap(18, 18, 18)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dlAddNannyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
 
         panel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         panel1.setForeground(new java.awt.Color(102, 0, 102));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Email", "Name", "Phone"
+                "Email", "Name", "Phone", "Role"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tbUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUserMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbUser);
+        if (tbUser.getColumnModel().getColumnCount() > 0) {
+            tbUser.getColumnModel().getColumn(0).setResizable(false);
+            tbUser.getColumnModel().getColumn(1).setResizable(false);
+            tbUser.getColumnModel().getColumn(2).setResizable(false);
+            tbUser.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 102));
@@ -328,7 +318,6 @@ public class HumansPn extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(102, 0, 102));
         jLabel2.setText("Name:");
 
-        jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 0, 102));
 
@@ -348,7 +337,7 @@ public class HumansPn extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(102, 0, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin", "Employee" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee", "Admin" }));
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 0, 102));
@@ -366,18 +355,33 @@ public class HumansPn extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 0, 102));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-edit-30-p.png"))); // NOI18N
-        jButton1.setText("Update");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-save-30.png"))); // NOI18N
+        jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(102, 0, 102));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-theatre-mask-30.png"))); // NOI18N
         jButton2.setText("Set Role");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(102, 0, 102));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30 -p.png"))); // NOI18N
         jButton3.setText("Clear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(102, 0, 102));
@@ -468,7 +472,7 @@ public class HumansPn extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Employees", panel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbNanny.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -487,14 +491,24 @@ public class HumansPn extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        tbNanny.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbNannyMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbNanny);
 
-        jTextField4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(204, 102, 0));
+        txtSearch.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtSearch.setForeground(new java.awt.Color(204, 102, 0));
 
-        jButton5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(204, 102, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-search-15-or.png"))); // NOI18N
+        btnSearch.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(204, 102, 0));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-search-15-or.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 102, 0));
@@ -518,30 +532,38 @@ public class HumansPn extends javax.swing.JPanel {
         jTextField6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(204, 102, 0));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(204, 102, 0));
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
-
         jComboBox2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jComboBox2.setForeground(new java.awt.Color(204, 102, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(204, 102, 0));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-edit-30-or.png"))); // NOI18N
-        jButton6.setText("Update");
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-save-30.png"))); // NOI18N
+        jButton6.setText("Save");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton7.setForeground(new java.awt.Color(204, 102, 0));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-transfer-30.png"))); // NOI18N
         jButton7.setText("Set Status");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton8.setForeground(new java.awt.Color(204, 102, 0));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30 -or.png"))); // NOI18N
         jButton8.setText("Clear");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton9.setForeground(new java.awt.Color(204, 102, 0));
@@ -553,6 +575,10 @@ public class HumansPn extends javax.swing.JPanel {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -561,9 +587,9 @@ public class HumansPn extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,8 +608,8 @@ public class HumansPn extends javax.swing.JPanel {
                                 .addComponent(jButton8))
                             .addGroup(panel2Layout.createSequentialGroup()
                                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jTextField5))
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -602,8 +628,8 @@ public class HumansPn extends javax.swing.JPanel {
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(txtSearch)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton9))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -650,49 +676,187 @@ public class HumansPn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Mmt.displaydialog(dlAddEmp);
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+        jPasswordField2.setText("");
+        jTextField3.setText("");
+        jTextField2.setText("");
+        displaytoNew();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        Mmt.displaydialog(dlAddNanny);
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextArea1.setText("");
+        jComboBox2.setSelectedIndex(0);
+        displayNCr();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
+        DefaultTableModel tbModel = (DefaultTableModel) tbUser.getModel();
+        int currentRow = tbUser.getSelectedRow();
+        String phone = tbModel.getValueAt(currentRow, 2).toString();
+        String name = tbModel.getValueAt(currentRow, 1).toString();
+        String strrole = tbModel.getValueAt(currentRow, 3).toString();
+        if (strrole.equals("Admin")) {
+            jComboBox1.setSelectedIndex(1);
+        } else {
+            jComboBox1.setSelectedIndex(0);
+        }
+        jPasswordField1.setText("");
+        jPasswordField2.setText("");
+        jTextField3.setText(phone);
+        jTextField2.setText(name);
+        displaytoUp();
+        jButton3.setVisible(false);
+    }//GEN-LAST:event_tbUserMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbUser.getModel();
+        int currentRow = tbUser.getSelectedRow();
+        String email = tbModel.getValueAt(currentRow, 0).toString();
+        String strRole = tbModel.getValueAt(currentRow, 3).toString();
+        boolean newRole = true;
+        if (strRole.equals("Admin")) {
+            newRole = false;
+        }
+        us.quickSet(email, newRole);
+        hiddenAll();
+        loadUser();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jTextField1.isVisible()) {
+            String pass1 = jPasswordField1.getText();
+            String pass2 = jPasswordField2.getText();
+            if (us.repeatPass(pass1, pass2)) {
+                String pass = us.covertoMD5(pass1);
+                boolean role = true;
+                if (jComboBox1.getSelectedIndex() == 0) {
+                    role = false;
+                }
+                if (!us.createUser(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), pass, role)) {
+                    JOptionPane.showMessageDialog(this, "User Email is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    loadUser();
+                    hiddenAll();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Password and Comfirm Password does not match!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            DefaultTableModel tbModel = (DefaultTableModel) tbUser.getModel();
+            int currentRow = tbUser.getSelectedRow();
+            String email = tbModel.getValueAt(currentRow, 0).toString();
+            String phone = jTextField3.getText();
+            String name = jTextField2.getText();
+            boolean role = true;
+            if (jComboBox1.getSelectedIndex() == 0) {
+                role = false;
+            }
+            if (jPasswordField1.getText().equals("") && jPasswordField2.getText().equals("")) {
+                String pass = us.md5Pass(tbModel.getValueAt(currentRow, 0).toString());
+                us.updateUser(name, phone, role, pass, email);
+                hiddenAll();
+                loadUser();
+            } else {
+                if (us.repeatPass(jPasswordField1.getText(), jPasswordField2.getText())) {
+                    String pass = us.covertoMD5(jPasswordField1.getText());
+                    us.updateUser(name, phone, role, pass, email);
+                    hiddenAll();
+                    loadUser();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Password and Comfirm Password does not match!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextField1.setText("");
+        jTextField3.setText("");
+        jTextField2.setText("");
+        jComboBox1.setSelectedIndex(0);
+        jPasswordField1.setText("");
+        jPasswordField2.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if (!txtSearch.getText().equals("") || !txtSearch.getText().equals(null)) {
+            seachNanny(txtSearch.getText());
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void tbNannyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNannyMouseClicked
+        DefaultTableModel tbModel = (DefaultTableModel) tbNanny.getModel();
+        int currentRow = tbNanny.getSelectedRow();
+        jTextField5.setText(tbModel.getValueAt(currentRow, 1).toString());
+        jTextField6.setText(tbModel.getValueAt(currentRow, 2).toString());
+        jTextArea1.setText(nb.getAddr(tbModel.getValueAt(currentRow, 2).toString()));
+        jComboBox2.setSelectedItem(tbModel.getValueAt(currentRow, 3).toString());
+        displayNUp();
+    }//GEN-LAST:event_tbNannyMouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbNanny.getModel();
+        int currentRow = tbNanny.getSelectedRow();
+        String strstatus = tbModel.getValueAt(currentRow, 4).toString();
+        boolean status = true;
+        if (strstatus.equals("Working")) {
+            status = false;
+        }
+        String phone = tbModel.getValueAt(currentRow, 2).toString();
+        nb.deleteNanny(phone, status);
+        loadNanny();
+        hiddenNUp();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextArea1.setText("");
+        jComboBox2.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (jButton8.isVisible()) {
+            int actID = acb.nametoID(jComboBox2.getSelectedItem().toString());
+            if (nb.createNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID)) {
+                hiddenNUp();
+                loadNanny();
+            } else {
+                JOptionPane.showMessageDialog(this, "Nanny is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            DefaultTableModel tbModel = (DefaultTableModel) tbNanny.getModel();
+            int currentRow = tbNanny.getSelectedRow();
+            int actID = acb.nametoID(tbModel.getValueAt(currentRow, 3).toString());
+            int nnID = nb.phonetoID(tbModel.getValueAt(currentRow, 2).toString());
+            if(nb.updateNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID, nnID)){
+                hiddenNUp();
+                loadNanny();
+            }else{
+                JOptionPane.showMessageDialog(this, "Phonenumber in used!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog dlAddEmp;
-    private javax.swing.JDialog dlAddNanny;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -705,26 +869,17 @@ public class HumansPn extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
+    private javax.swing.JTable tbNanny;
+    private javax.swing.JTable tbUser;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

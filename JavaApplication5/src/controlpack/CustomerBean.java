@@ -76,27 +76,6 @@ public class CustomerBean {
         }
         return v;
     }
-//    public Vector<CustomerBean> displayHide(){
-//        Vector<CustomerBean> v = new Vector<CustomerBean>();
-//        try {
-//            PreparedStatement ps1 = conn.prepareStatement("select cus_email,cus_name,phone_number,work_phone,status from Customer where status=?");
-//            ps1.setBoolean(1, false);
-//            ResultSet rs1 = ps1.executeQuery();
-//            while(rs1.next()){
-//                CustomerBean cb = new CustomerBean();
-//                cb.cus_email = rs1.getString("cus_email");
-//                cb.cus_name = rs1.getString("cus_name");
-//                cb.phone_number = rs1.getString("phone_number");
-//                cb.work_phone = rs1.getString("work_phone");
-//                cb.status = rs1.getBoolean("status");
-//                v.add(cb);
-//            }
-//            ps1.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(CustomerBean.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return v;
-//    }
     
     public void addCus(String cus_email, String cus_name, String address, String phone_number, String work_phone){
         try {
