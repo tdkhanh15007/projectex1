@@ -1276,8 +1276,6 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addGap(25, 25, 25))
         );
 
-        jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
         tbChild.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1300,18 +1298,6 @@ public class ChildAdmin extends javax.swing.JPanel {
             }
         });
         jScrollPane4.setViewportView(tbChild);
-        if (tbChild.getColumnModel().getColumnCount() > 0) {
-            tbChild.getColumnModel().getColumn(0).setResizable(false);
-            tbChild.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tbChild.getColumnModel().getColumn(1).setResizable(false);
-            tbChild.getColumnModel().getColumn(1).setPreferredWidth(50);
-            tbChild.getColumnModel().getColumn(2).setResizable(false);
-            tbChild.getColumnModel().getColumn(2).setPreferredWidth(50);
-            tbChild.getColumnModel().getColumn(3).setResizable(false);
-            tbChild.getColumnModel().getColumn(3).setPreferredWidth(10);
-            tbChild.getColumnModel().getColumn(4).setResizable(false);
-            tbChild.getColumnModel().getColumn(4).setPreferredWidth(100);
-        }
 
         btnUpdateChild.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         btnUpdateChild.setForeground(new java.awt.Color(255, 0, 204));
@@ -1365,7 +1351,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                     .addComponent(btnUpdateChild, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnStatusChild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1385,7 +1371,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                         .addComponent(btnStatusChild, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -1413,13 +1399,6 @@ public class ChildAdmin extends javax.swing.JPanel {
             }
         });
         jScrollPane5.setViewportView(tbCus);
-        if (tbCus.getColumnModel().getColumnCount() > 0) {
-            tbCus.getColumnModel().getColumn(0).setResizable(false);
-            tbCus.getColumnModel().getColumn(1).setResizable(false);
-            tbCus.getColumnModel().getColumn(2).setResizable(false);
-            tbCus.getColumnModel().getColumn(3).setResizable(false);
-            tbCus.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         btnNewCus.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         btnNewCus.setForeground(new java.awt.Color(0, 153, 51));
@@ -1507,7 +1486,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                     .addComponent(jCheckBox1)
                     .addComponent(btnActive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1516,7 +1495,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1543,11 +1522,17 @@ public class ChildAdmin extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1567,78 +1552,6 @@ public class ChildAdmin extends javax.swing.JPanel {
         dlUpdateChild.dispose();
         loadChild();
     }//GEN-LAST:event_bntOkActionPerformed
-
-    private void btnSearchCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCusActionPerformed
-        if (!txtSearchCus.getText().equals("") || !txtSearchCus.getText().equals(null)) {
-            searchCus(txtSearchCus.getText(), jCheckBox1.isSelected());
-        }
-    }//GEN-LAST:event_btnSearchCusActionPerformed
-
-    private void btnNewCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCusActionPerformed
-        MMt.displaydialog(dlAddCus);
-        loadCus(jCheckBox1.isSelected());
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewCusActionPerformed
-
-    private void btnSearchChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchChildActionPerformed
-        if (!txtSearch.getText().equals("") || !txtSearch.getText().equals(null)) {
-            searchChild(txtSearch.getText());
-        }
-    }//GEN-LAST:event_btnSearchChildActionPerformed
-
-    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
-//        JFrame fInsertChild = new JFrame();
-//        fInsertChild.add(new InsertChild());
-//
-//        fInsertChild.pack();
-//        fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        fInsertChild.setVisible(true);
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        int currentRow = tbChild.getSelectedRow();
-        MMt.displaydialog(dlAddOrder);
-    }//GEN-LAST:event_btnCreateOrderActionPerformed
-
-    private void btnStatusChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusChildActionPerformed
-        // TODO add your handling code here:
-
-        // Lay dong hien tai dang chon
-        int selectedRow = tbChild.getSelectedRow();
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-
-        // Lay email
-        String childname = tbModel.getValueAt(selectedRow, 1).toString();
-        jLabel56.setText(childname);
-        MMt.displaydialog(dlCfChild);
-    }//GEN-LAST:event_btnStatusChildActionPerformed
-
-    private void btnUpdateChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateChildActionPerformed
-        // Lay dong hien tai dang chon trong bang
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        int currentRow = tbChild.getSelectedRow();
-
-        // Lay du lieu trong dong
-        int child_id = (int) tbModel.getValueAt(currentRow, 0);
-        MMt.displaydialog(dlUpdateChild);
-        txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
-        String strBirth = tbModel.getValueAt(currentRow, 2).toString();
-        String strGen = tbModel.getValueAt(currentRow, 3).toString();
-        if (strGen == "Male") {
-            jComboBox1.setSelectedIndex(0);
-        } else {
-            jComboBox1.setSelectedIndex(1);
-        }
-        txtCurent.setText(chBean.getcurrent_medications(child_id));
-        txtPass.setText(chBean.getpass_illess(child_id));
-        txtDoctor.setText(chBean.getdoctor(child_id));
-        txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-        try {
-            Date birthdate = df.parse(strBirth);
-            jDateChooser1.setDate(birthdate);
-        } catch (ParseException ex) {
-            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnUpdateChildActionPerformed
 
     private void txtNewChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewChildActionPerformed
         // TODO add your handling code here:
@@ -1660,25 +1573,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         dlAddChild.dispose();
     }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void btnUpdateCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCusActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
-        int currentRow = tbCus.getSelectedRow();
-        txtUpdateCus.setText(tbModel.getValueAt(currentRow, 0).toString());
-        txtUpdateCusName.setText(tbModel.getValueAt(currentRow, 1).toString());
-        txtUpdateCusAddress.setText(cb.getCusAdd(tbModel.getValueAt(currentRow, 0).toString()));
-        txtUpdateCusmobile.setText(tbModel.getValueAt(currentRow, 2).toString());
-        txtUpdateCusWorkP.setText(tbModel.getValueAt(currentRow, 3).toString());
-        MMt.displaydialog(dlUpdateCus);
-    }//GEN-LAST:event_btnUpdateCusActionPerformed
-
-    private void btnNewChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewChildActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
-        int currentRow = tbCus.getSelectedRow();
-        String parentsEmail = tbModel.getValueAt(currentRow, 0).toString();
-        txtNewEmailParents.setText(parentsEmail);
-        MMt.displaydialog(dlAddChild);
-    }//GEN-LAST:event_btnNewChildActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         dlAddCus.dispose();
@@ -1702,22 +1596,9 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtNewCusWorkFone.setText("");
     }//GEN-LAST:event_btnClearAddCussActionPerformed
 
-    private void btnStatusCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusCusActionPerformed
-        MMt.displaydialog(dlCfCus);
-        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
-        int currentRow = tbCus.getSelectedRow();
-        jLabel54.setText(tbModel.getValueAt(currentRow, 1).toString());
-        loadChild();
-    }//GEN-LAST:event_btnStatusCusActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dlCfCus.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        loadCus(jCheckBox1.isSelected());
-        hiddenBtn();
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void btnCfDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCfDeleteActionPerformed
         DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
@@ -1738,38 +1619,6 @@ public class ChildAdmin extends javax.swing.JPanel {
         dlUpdateCus.dispose();
         loadCus(jCheckBox1.isSelected());
     }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void tbCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCusMouseClicked
-        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
-        int currentRow = tbCus.getSelectedRow();
-        String status = tbModel.getValueAt(currentRow, 4).toString();
-        displayBtn();
-        if (status.equals("InActivce")) {
-            btnStatusCus.setVisible(false);
-            btnActive.setVisible(true);
-            btnNewChild.setEnabled(false);
-        } else {
-            btnNewChild.setEnabled(true);
-            btnActive.setVisible(false);
-        }
-    }//GEN-LAST:event_tbCusMouseClicked
-
-    private void btnActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActiveActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
-        int currentRow = tbCus.getSelectedRow();
-        String cusmail = tbModel.getValueAt(currentRow, 0).toString();
-        cb.activeCus(cusmail);
-        loadCus(jCheckBox1.isSelected());
-        btnActive.setVisible(false);
-        hiddenBtn();
-        loadChild();
-    }//GEN-LAST:event_btnActiveActionPerformed
-
-    private void tbChildMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChildMouseClicked
-        btnUpdateChild.setVisible(true);
-        btnCreateOrder.setVisible(true);
-        btnStatusChild.setVisible(true);
-    }//GEN-LAST:event_tbChildMouseClicked
 
     private void btnCfDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCfDelete1ActionPerformed
         int selectedRow = tbChild.getSelectedRow();
@@ -1817,6 +1666,145 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtNewChilIlle.setText("");
         txtNewChildDoctor.setText("");
     }//GEN-LAST:event_bntReset1ActionPerformed
+
+    private void tbChildMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChildMouseClicked
+        btnUpdateChild.setVisible(true);
+        btnCreateOrder.setVisible(true);
+        btnStatusChild.setVisible(true);
+    }//GEN-LAST:event_tbChildMouseClicked
+
+    private void btnUpdateChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateChildActionPerformed
+        // Lay dong hien tai dang chon trong bang
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbChild.getSelectedRow();
+
+        // Lay du lieu trong dong
+        int child_id = (int) tbModel.getValueAt(currentRow, 0);
+        MMt.displaydialog(dlUpdateChild);
+        txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
+        String strBirth = tbModel.getValueAt(currentRow, 2).toString();
+        String strGen = tbModel.getValueAt(currentRow, 3).toString();
+        if (strGen == "Male") {
+            jComboBox1.setSelectedIndex(0);
+        } else {
+            jComboBox1.setSelectedIndex(1);
+        }
+        txtCurent.setText(chBean.getcurrent_medications(child_id));
+        txtPass.setText(chBean.getpass_illess(child_id));
+        txtDoctor.setText(chBean.getdoctor(child_id));
+        txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            Date birthdate = df.parse(strBirth);
+            jDateChooser1.setDate(birthdate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnUpdateChildActionPerformed
+
+    private void btnStatusChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusChildActionPerformed
+        // TODO add your handling code here:
+
+        // Lay dong hien tai dang chon
+        int selectedRow = tbChild.getSelectedRow();
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+
+        // Lay email
+        String childname = tbModel.getValueAt(selectedRow, 1).toString();
+        jLabel56.setText(childname);
+        MMt.displaydialog(dlCfChild);
+    }//GEN-LAST:event_btnStatusChildActionPerformed
+
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+        //        JFrame fInsertChild = new JFrame();
+        //        fInsertChild.add(new InsertChild());
+        //
+        //        fInsertChild.pack();
+        //        fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //        fInsertChild.setVisible(true);
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbChild.getSelectedRow();
+        jDateChooser2.setDate(new Date());
+        jDateChooser3.setDate(new Date());
+        MMt.displaydialog(dlAddOrder);
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
+
+    private void btnSearchChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchChildActionPerformed
+        if (!txtSearch.getText().equals("") || !txtSearch.getText().equals(null)) {
+            searchChild(txtSearch.getText());
+        }
+    }//GEN-LAST:event_btnSearchChildActionPerformed
+
+    private void tbCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCusMouseClicked
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        String status = tbModel.getValueAt(currentRow, 4).toString();
+        displayBtn();
+        if (status.equals("InActivce")) {
+            btnStatusCus.setVisible(false);
+            btnActive.setVisible(true);
+            btnNewChild.setEnabled(false);
+        } else {
+            btnNewChild.setEnabled(true);
+            btnActive.setVisible(false);
+        }
+    }//GEN-LAST:event_tbCusMouseClicked
+
+    private void btnNewCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCusActionPerformed
+        MMt.displaydialog(dlAddCus);
+        loadCus(jCheckBox1.isSelected());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewCusActionPerformed
+
+    private void btnUpdateCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCusActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        txtUpdateCus.setText(tbModel.getValueAt(currentRow, 0).toString());
+        txtUpdateCusName.setText(tbModel.getValueAt(currentRow, 1).toString());
+        txtUpdateCusAddress.setText(cb.getCusAdd(tbModel.getValueAt(currentRow, 0).toString()));
+        txtUpdateCusmobile.setText(tbModel.getValueAt(currentRow, 2).toString());
+        txtUpdateCusWorkP.setText(tbModel.getValueAt(currentRow, 3).toString());
+        MMt.displaydialog(dlUpdateCus);
+    }//GEN-LAST:event_btnUpdateCusActionPerformed
+
+    private void btnStatusCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusCusActionPerformed
+        MMt.displaydialog(dlCfCus);
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        jLabel54.setText(tbModel.getValueAt(currentRow, 1).toString());
+        loadChild();
+    }//GEN-LAST:event_btnStatusCusActionPerformed
+
+    private void btnSearchCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCusActionPerformed
+        if (!txtSearchCus.getText().equals("") || !txtSearchCus.getText().equals(null)) {
+            searchCus(txtSearchCus.getText(), jCheckBox1.isSelected());
+        }
+    }//GEN-LAST:event_btnSearchCusActionPerformed
+
+    private void btnNewChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewChildActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        String parentsEmail = tbModel.getValueAt(currentRow, 0).toString();
+        txtNewChildBirth.setDate(new Date());
+        txtNewEmailParents.setText(parentsEmail);
+        MMt.displaydialog(dlAddChild);
+    }//GEN-LAST:event_btnNewChildActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        loadCus(jCheckBox1.isSelected());
+        hiddenBtn();
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void btnActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActiveActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        String cusmail = tbModel.getValueAt(currentRow, 0).toString();
+        cb.activeCus(cusmail);
+        loadCus(jCheckBox1.isSelected());
+        btnActive.setVisible(false);
+        hiddenBtn();
+        loadChild();
+    }//GEN-LAST:event_btnActiveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

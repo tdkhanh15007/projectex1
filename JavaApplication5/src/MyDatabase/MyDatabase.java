@@ -70,27 +70,5 @@ public class MyDatabase {
 //        }
 
         return rs.next();
-    }
-    
-    public static ArrayList<String> getListCusEmail() throws SQLException, ClassNotFoundException {
-        
-        if (!isConnected()) connect();
-        
-        
-        // Lam viec voi CSDL
-        String sqlQuery = "SELECT cus_email FROM [Customer]";
-        PreparedStatement ps;
-        ResultSet rs;
-        ArrayList<String> dsCusEmail = new ArrayList<>();
-        
-        ps = _connection.prepareStatement(sqlQuery);
-        rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            dsCusEmail.add(rs.getString("cus_email"));
-        }
-        return dsCusEmail;
-        
-    }
-    
+    }    
 }
