@@ -173,6 +173,7 @@ public class SystemPn extends javax.swing.JPanel {
 
         jTabbedPane2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
 
+        tbGroups.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbGroups.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -304,6 +305,7 @@ public class SystemPn extends javax.swing.JPanel {
 
         jTabbedPane2.addTab("Groups", panel1);
 
+        tbAct.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbAct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -537,15 +539,7 @@ public class SystemPn extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private java.awt.Panel panel1;
-    private java.awt.Panel panel10;
     private java.awt.Panel panel11;
-    private java.awt.Panel panel3;
-    private java.awt.Panel panel4;
-    private java.awt.Panel panel5;
-    private java.awt.Panel panel6;
-    private java.awt.Panel panel7;
-    private java.awt.Panel panel8;
-    private java.awt.Panel panel9;
     private javax.swing.JTable tbAct;
     private javax.swing.JTable tbGroups;
     private javax.swing.JTextField txtCharges;

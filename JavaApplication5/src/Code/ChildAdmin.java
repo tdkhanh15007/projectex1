@@ -1276,6 +1276,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addGap(25, 25, 25))
         );
 
+        tbChild.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbChild.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1377,6 +1378,7 @@ public class ChildAdmin extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Children", jPanel1);
 
+        tbCus.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbCus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1524,14 +1526,14 @@ public class ChildAdmin extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

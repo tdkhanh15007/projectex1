@@ -278,6 +278,7 @@ public class HumansPn extends javax.swing.JPanel {
         panel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         panel1.setForeground(new java.awt.Color(102, 0, 102));
 
+        tbUser.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -472,6 +473,7 @@ public class HumansPn extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Employees", panel1);
 
+        tbNanny.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbNanny.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

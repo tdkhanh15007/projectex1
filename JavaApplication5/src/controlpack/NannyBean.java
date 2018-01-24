@@ -144,7 +144,6 @@ public class NannyBean {
 
     public boolean updateNanny(String name, String addr, String phone, int act_id, int nannyid) {
         if (checkforUpdate(nannyid, phone)) {
-            System.out.println("so dt trùng");
             try {
                 PreparedStatement ps = conn.prepareStatement("update Nannies set name=?,address=?,phone=?,activity_id=? where nanny_id=?");
                 ps.setString(1, name);
@@ -159,7 +158,6 @@ public class NannyBean {
                 return false;
             }
         } else {
-            System.out.println("sdt thay đổi");
             if (!checkExist(phone)) {
                 try {
                     PreparedStatement ps = conn.prepareStatement("update Nannies set name=?,address=?,phone=?,activity_id=? where nanny_id=?");
@@ -253,11 +251,15 @@ public class NannyBean {
         }
     }
 
-    public void changePay(int order_id) {
+    public void changePay(int order_id, boolean status) {
         try {
-            PreparedStatement ps = conn.prepareStatement("delete from Payments where order_id=?");
-            ps.setInt(1, order_id);
-            ps.executeUpdate();
+            if (status) {
+                paidforNanny(order_id);
+            } else {
+                PreparedStatement ps = conn.prepareStatement("delete from Payments where order_id=?");
+                ps.setInt(1, order_id);
+                ps.executeUpdate();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(NannyBean.class.getName()).log(Level.SEVERE, null, ex);
         }

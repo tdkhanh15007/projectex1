@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Code;
+
+import controlpack.OrderBean;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +16,53 @@ package Code;
  */
 public class OrderPn extends javax.swing.JPanel {
 
+    OrderBean ob = new OrderBean();
+
+    ;
     /**
      * Creates new form OrderPn
      */
     public OrderPn() {
         initComponents();
+        hiddenAll();
+    }
+
+    public void loadOrder(String cusname) {
+        DefaultTableModel model = (DefaultTableModel) tbOrder.getModel();
+        model.setRowCount(0);
+        Vector<OrderBean> item = ob.loadAll(cusname);
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            OrderBean temp = item.get(i);
+            int orid = temp.order_id;
+            String child = temp.child_name;
+            String parents = temp.cus_name;
+            String nanny = temp.nanny_name;
+            String act = temp.act_name;
+            String timeslot = temp.time_slot;
+            v.add(orid);
+            v.add(child);
+            v.add(parents);
+            v.add(nanny);
+            v.add(act);
+            v.add(timeslot);
+            model.addRow(v);
+        }
+    }
+
+    public void hiddenAll() {
+        tbOrder.setVisible(false);
+        jLabel1.setVisible(false);
+        txtOrderDate.setVisible(false);
+        jLabel2.setVisible(false);
+        jDateChooser1.setVisible(false);
+        jLabel3.setVisible(false);
+        txtPrice.setVisible(false);
+        jLabel4.setVisible(false);
+        txtComments.setVisible(false);
+        btnUpdate.setVisible(false);
+        btnUpdate1.setVisible(false);
     }
 
     /**
@@ -40,11 +86,12 @@ public class OrderPn extends javax.swing.JPanel {
         txtComments = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        btnUpdate1 = new javax.swing.JButton();
 
-        tbOrder.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        tbOrder.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbOrder.setForeground(new java.awt.Color(0, 51, 255));
         tbOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,6 +110,11 @@ public class OrderPn extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbOrderMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbOrder);
@@ -102,18 +154,25 @@ public class OrderPn extends javax.swing.JPanel {
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-edit-30-bl.png"))); // NOI18N
         btnUpdate.setText("Update");
 
-        jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30.png"))); // NOI18N
-        jButton1.setText("Clear");
-
         jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 51, 255));
-        jTextField1.setText("Enter name here");
 
         btnSearch.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(0, 51, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-search-15 -bl.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 2, 12)); // NOI18N
+        jLabel5.setText("Enter parents name");
+
+        btnUpdate1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        btnUpdate1.setForeground(new java.awt.Color(0, 51, 255));
+        btnUpdate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-delete-30.png"))); // NOI18N
+        btnUpdate1.setText("Close Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,9 +180,12 @@ public class OrderPn extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -136,16 +198,17 @@ public class OrderPn extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnUpdate)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(btnUpdate1))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtOrderDate)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtOrderDate)
+                                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2)))
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
                 .addContainerGap())
@@ -156,9 +219,12 @@ public class OrderPn extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,21 +243,37 @@ public class OrderPn extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
-                    .addComponent(jButton1))
+                    .addComponent(btnUpdate1))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if (!jTextField1.getText().equals("") || !jTextField1.getText().equals(null)) {
+            if (ob.checkbeforeSearch(jTextField1.getText())) {
+                tbOrder.setVisible(true);
+                loadOrder(jTextField1.getText());
+            }else{
+                JOptionPane.showMessageDialog(this, "No Order found!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void tbOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbOrderMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnUpdate1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;

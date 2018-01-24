@@ -5,6 +5,7 @@
  */
 package Code;
 
+import controlpack.MainMethod;
 import controlpack.NannyBean;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class CashPn extends javax.swing.JPanel {
 
     NannyBean nb = new NannyBean();
+    MainMethod mmt = new MainMethod();
 
     /**
      * Creates new form CashPn
@@ -103,7 +105,7 @@ public class CashPn extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel5.setText("Are you sure want to cashout this Bill?");
+        jLabel5.setText("Are you sure want to update status of Bill?");
 
         jButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton3.setText("Yes");
@@ -149,6 +151,7 @@ public class CashPn extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jTable1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -166,6 +169,11 @@ public class CashPn extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -197,6 +205,11 @@ public class CashPn extends javax.swing.JPanel {
         jButton2.setForeground(new java.awt.Color(0, 153, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-receive-cash-30.png"))); // NOI18N
         jButton2.setText("Cashout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 0));
@@ -298,9 +311,41 @@ public class CashPn extends javax.swing.JPanel {
         DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
         int currentRow = jTable1.getSelectedRow();
         int id = (int) tbModel.getValueAt(currentRow, 0);
-        nb.changePay(id);
+        String str = tbModel.getValueAt(currentRow, 2).toString();
+        boolean status = true;
+        if(str.equals("Paid")){
+            status = false;
+        }
+        nb.changePay(id,status);
+        jDialog1.dispose();
+        jButton2.setVisible(false);
+        visibleSearch();
         loadNanny(jTextField1.getText());
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
+        int currentRow = jTable1.getSelectedRow();
+        int id = (int) tbModel.getValueAt(currentRow, 0);
+        String status = tbModel.getValueAt(currentRow, 2).toString();
+        if(status.equals("Hold")){
+            jButton2.setText("Paid");
+            jButton2.setVisible(true);
+        }else{
+            jButton2.setText("Cancel");
+            jButton2.setVisible(true);
+        }
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+        txtSalary.setVisible(false);
+        txtPaid.setVisible(false);
+        txtOnhold.setVisible(false);        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        mmt.displaydialog(jDialog1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
