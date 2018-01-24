@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -29,6 +30,10 @@ public class OrderBean {
     public String nanny_name;
     public String act_name;
     public String time_slot;
+    public Date startDate;
+    public Date endDate;
+    public float payments;
+    public String cmts;
 
     public Vector<OrderBean> loadAll(String cusname) {
         Vector<OrderBean> v = new Vector<OrderBean>();
@@ -157,6 +162,39 @@ public class OrderBean {
             Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return name;
-
+    }
+    
+    public void setStatus(int orID){
+        try {
+            PreparedStatement ps = conn.prepareStatement("update Orders set status = 'false' where order_id=?");
+            ps.setInt(1, orID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Vector<OrderBean> onclickTable(int id){
+        Vector<OrderBean> v = new Vector<OrderBean>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select startdate,enddate,payment,comments from Orders where order_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                OrderBean ob = new OrderBean();
+                Date startdate = new Date(rs.getDate("startdate").getTime());
+                Date enddate = new Date(rs.getDate("enddate").getTime());
+                float payment = rs.getFloat("payment");
+                String cmt = rs.getString("comments");
+                ob.startDate= startdate;
+                ob.endDate = enddate;
+                ob.payments = payment;
+                ob.cmts = cmt;
+                v.add(ob);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v;
     }
 }

@@ -5,6 +5,7 @@
  */
 package Code;
 
+import controlpack.MainMethod;
 import controlpack.OrderBean;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class OrderPn extends javax.swing.JPanel {
 
     OrderBean ob = new OrderBean();
+    MainMethod mmt = new MainMethod();
 
     ;
     /**
@@ -65,6 +67,19 @@ public class OrderPn extends javax.swing.JPanel {
         btnUpdate1.setVisible(false);
     }
 
+    public void display() {
+        jLabel1.setVisible(true);
+        txtOrderDate.setVisible(true);
+        jLabel2.setVisible(true);
+        jDateChooser1.setVisible(true);
+        jLabel3.setVisible(true);
+        txtPrice.setVisible(true);
+        jLabel4.setVisible(true);
+        txtComments.setVisible(true);
+        btnUpdate.setVisible(true);
+        btnUpdate1.setVisible(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +89,10 @@ public class OrderPn extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlConfirm = new javax.swing.JDialog();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbOrder = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -90,6 +109,53 @@ public class OrderPn extends javax.swing.JPanel {
         btnSearch = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnUpdate1 = new javax.swing.JButton();
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel6.setText("Are you sure want to close this order?");
+
+        jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-approval-30.png"))); // NOI18N
+        jButton1.setText("Yes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-delete-30.png"))); // NOI18N
+        jButton2.setText("No");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlConfirmLayout = new javax.swing.GroupLayout(dlConfirm.getContentPane());
+        dlConfirm.getContentPane().setLayout(dlConfirmLayout);
+        dlConfirmLayout.setHorizontalGroup(
+            dlConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlConfirmLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(dlConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlConfirmLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addComponent(jLabel6))
+                .addGap(40, 40, 40))
+        );
+        dlConfirmLayout.setVerticalGroup(
+            dlConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlConfirmLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(dlConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         tbOrder.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tbOrder.setForeground(new java.awt.Color(0, 51, 255));
@@ -173,6 +239,11 @@ public class OrderPn extends javax.swing.JPanel {
         btnUpdate1.setForeground(new java.awt.Color(0, 51, 255));
         btnUpdate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-delete-30.png"))); // NOI18N
         btnUpdate1.setText("Close Order");
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -253,27 +324,53 @@ public class OrderPn extends javax.swing.JPanel {
             if (ob.checkbeforeSearch(jTextField1.getText())) {
                 tbOrder.setVisible(true);
                 loadOrder(jTextField1.getText());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "No Order found!", "Warning", JOptionPane.WARNING_MESSAGE);
+                hiddenAll();
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tbOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderMouseClicked
-        // TODO add your handling code here:
+        display();
+        DefaultTableModel tbModel = (DefaultTableModel) tbOrder.getModel();
+        int currentRow = tbOrder.getSelectedRow();
+        
     }//GEN-LAST:event_tbOrderMouseClicked
+
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
+        mmt.displaydialog(dlConfirm);
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) tbOrder.getModel();
+        int currentRow = tbOrder.getSelectedRow();
+        int id = (int) tbModel.getValueAt(currentRow, 0);
+        ob.setStatus(id);
+        dlConfirm.dispose();
+        loadOrder(jTextField1.getText());
+        hiddenAll();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dlConfirm.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate1;
+    private javax.swing.JDialog dlConfirm;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;

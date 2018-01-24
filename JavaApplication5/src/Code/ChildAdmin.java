@@ -1567,6 +1567,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         if (!chBean.isExist(txtNewEmailParents.getText(), txtNewChild.getText())) {
             chBean.addChild(txtNewChild.getText(), txtNewChildBirth.getDate(), txtNewChildMedication.getText(), txtNewChilIlle.getText(), txtNewChildDoctor.getText(), gender, txtNewEmailParents.getText());
             loadChild();
+            dlAddChild.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -1789,6 +1790,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         String parentsEmail = tbModel.getValueAt(currentRow, 0).toString();
         txtNewChildBirth.setDate(new Date());
         txtNewEmailParents.setText(parentsEmail);
+        txtNewChild.setText("");
+        txtNewChildBirth.setDate(new Date());
+        txtNewChildMedication.setText("");
+        txtNewChilIlle.setText("");
+        txtNewChildDoctor.setText("");        
         MMt.displaydialog(dlAddChild);
     }//GEN-LAST:event_btnNewChildActionPerformed
 
