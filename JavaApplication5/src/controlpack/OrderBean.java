@@ -197,4 +197,77 @@ public class OrderBean {
         }
         return v;
     }
+    
+    public boolean update(int id,String cmt,Date endDate){
+        if(!cmt.isEmpty()||cmt.equals("")){
+            try {
+                Date startD = getStartDate(id);
+                priceChange(id, endDate);
+                PreparedStatement ps = conn.prepareStatement("update Orders set enddate=?,comments=? where order_id=?");
+                ps.setDate(1, new java.sql.Date(endDate.getTime()));
+                ps.setString(2, cmt);
+                ps.setInt(3, id);
+                ps.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            
+        }return false;
+    }
+    
+    public void priceChange(int id,Date endDate){
+        float price = 0;
+        try {
+            int days = daysBetween(endDate, startDate);            
+            PreparedStatement ps = conn.prepareStatement("update Orders set payment=? where order_id=?");
+            ps.setFloat(1, getPrice(id)*days);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public int daysBetween(Date d1, Date d2) {
+        return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
+    
+    public Date getStartDate(int id){
+        Date startD = new Date();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select startdate from Orders where order_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                startD = new Date(rs.getDate("startdate").getTime());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return startD;
+    }
+    
+    public float getPrice(int id){
+        float price = 0;
+        float price1 = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select payment from Orders where order_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                price = rs.getFloat("payment");
+            }
+            PreparedStatement ps1 = conn.prepareStatement("select startdate,enddate from Orders where order_id=?");
+            ps1.setInt(1, id);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {             
+                Date startdate = new Date(rs1.getDate("startdate").getTime());
+                Date enddate = new Date(rs1.getDate("enddate").getTime());
+                price1 = price/daysBetween(startdate, enddate);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return price1;
+    }
 }

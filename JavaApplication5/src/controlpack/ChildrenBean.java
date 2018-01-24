@@ -191,7 +191,7 @@ public class ChildrenBean {
         return doctor;
     }
 
-    public void updateChild(int child_id, String fullName, Date birth, String current_medications, String pass_illess, String doctor, boolean gender) {
+    public boolean updateChild(int child_id, String fullName, Date birth, String current_medications, String pass_illess, String doctor, boolean gender) {
         try {
             PreparedStatement ps = conn.prepareStatement("update Chirldren set fullname=?,birth=?,current_medications=?,pass_illess=?,doctor=?,gender=? where child_id=?");
             ps.setString(1, fullName);
@@ -203,8 +203,10 @@ public class ChildrenBean {
             ps.setInt(7, child_id);
             ps.executeUpdate();
             ps.close();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(ChildrenBean.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 

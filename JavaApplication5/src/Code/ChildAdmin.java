@@ -888,11 +888,6 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel47.setText("Fullname:");
 
         txtNewChild.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtNewChild.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewChildActionPerformed(evt);
-            }
-        });
 
         jLabel48.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel48.setText("Birth Day:");
@@ -1539,7 +1534,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        dlUpdateChild.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
@@ -1550,14 +1545,12 @@ public class ChildAdmin extends javax.swing.JPanel {
         if (jComboBox1.getSelectedIndex() == 0) {
             gender = true;
         }
-        chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender);
+        if(chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)){
+            JOptionPane.showMessageDialog(this, "Update successful!!");
+        }
         dlUpdateChild.dispose();
         loadChild();
     }//GEN-LAST:event_bntOkActionPerformed
-
-    private void txtNewChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewChildActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNewChildActionPerformed
 
     private void bntOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOk1ActionPerformed
         boolean gender = false;
@@ -1568,6 +1561,7 @@ public class ChildAdmin extends javax.swing.JPanel {
             chBean.addChild(txtNewChild.getText(), txtNewChildBirth.getDate(), txtNewChildMedication.getText(), txtNewChilIlle.getText(), txtNewChildDoctor.getText(), gender, txtNewEmailParents.getText());
             loadChild();
             dlAddChild.dispose();
+            JOptionPane.showMessageDialog(this, "Child was added!!");
         } else {
             JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -1585,6 +1579,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         if (!cb.isExist(txtNewCusEmail.getText())) {
             cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
             dlAddCus.dispose();
+            JOptionPane.showMessageDialog(this, "Customer was added!!");
             loadCus(jCheckBox1.isSelected());
         }else{
             JOptionPane.showMessageDialog(this, "Customer Email is Exist!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -1609,6 +1604,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         String cusmail = tbModel.getValueAt(currentRow, 0).toString();
         cb.deleteCus(cusmail);
         dlCfCus.dispose();
+        JOptionPane.showMessageDialog(this, "Customer was hided click hidden items for display again!!");
         loadCus(jCheckBox1.isSelected());
         hiddenBtn();
     }//GEN-LAST:event_btnCfDeleteActionPerformed
@@ -1620,6 +1616,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         cb.updateCus(txtUpdateCus.getText(), txtUpdateCusName.getText(), txtUpdateCusAddress.getText(), txtUpdateCusmobile.getText(), txtUpdateCusWorkP.getText());
         dlUpdateCus.dispose();
+        JOptionPane.showMessageDialog(this, "Update successful!!");
         loadCus(jCheckBox1.isSelected());
     }//GEN-LAST:event_jButton16ActionPerformed
 
@@ -1630,6 +1627,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         // Lay email
         int childid = (int) tbModel.getValueAt(selectedRow, 0);
         chBean.deleteChild(childid);
+        JOptionPane.showMessageDialog(this, "Child deleted!");
         dlCfChild.dispose();
         loadChild();
     }//GEN-LAST:event_btnCfDelete1ActionPerformed
@@ -1810,6 +1808,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         cb.activeCus(cusmail);
         loadCus(jCheckBox1.isSelected());
         btnActive.setVisible(false);
+        JOptionPane.showMessageDialog(this, "Customer actived!!");
         hiddenBtn();
         loadChild();
     }//GEN-LAST:event_btnActiveActionPerformed

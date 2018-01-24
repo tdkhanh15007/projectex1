@@ -885,3 +885,4 @@ public class HumansPn extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
+
