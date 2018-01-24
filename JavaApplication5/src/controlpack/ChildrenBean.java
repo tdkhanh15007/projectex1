@@ -11,6 +11,7 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -249,6 +250,23 @@ public class ChildrenBean {
             Logger.getLogger(ChildrenBean.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+    
+    public String strofBirth(int id){
+        String str = "";
+        try {
+            PreparedStatement ps = conn.prepareStatement("select birth from Chirldren where child_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Date birth = new java.util.Date(rs.getDate("birth").getTime());
+                SimpleDateFormat form = new SimpleDateFormat("dd/mm/yyyy");
+                str = form.format(birth);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChildrenBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return str;
     }
 
 }

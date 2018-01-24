@@ -121,6 +121,20 @@ public class NannyBean {
         }
         return id;
     }
+    public int nametoID(String phone) {
+        int id = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select nanny_id from Nannies where name=?");
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("nanny_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NannyBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 
     public boolean createNanny(String name, String addr, String phone, int act_id) {
         if (!checkExist(phone)) {

@@ -7,6 +7,7 @@ package Code;
 
 import controlpack.MainMethod;
 import controlpack.OrderBean;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -652,11 +653,23 @@ public class OrderPn extends javax.swing.JPanel {
         DefaultTableModel tbModel = (DefaultTableModel) tbOrder.getModel();
         int currentRow = tbOrder.getSelectedRow();
         int id = (int) tbModel.getValueAt(currentRow, 0);
-        Date date2 = jDateChooser1.getDate();
-        String cmt = txtComments.getText();
-        ob.update(id, cmt, date2);
-        loadOrder(jTextField1.getText());
-        hiddenAll();
+        String strDate = txtOrderDate.getText();
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            Date sDate = df.parse(strDate);
+            Date eDate = jDateChooser1.getDate();
+            String cmt = txtComments.getText();
+            if(ob.updateOr(id, sDate, eDate, cmt)){
+                JOptionPane.showMessageDialog(this, "Order was updated!!");
+                hiddenAll();
+                loadOrder(jTextField1.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Update failed");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(OrderPn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnUpdate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate2ActionPerformed

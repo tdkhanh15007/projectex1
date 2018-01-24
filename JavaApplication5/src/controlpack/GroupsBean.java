@@ -10,6 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,58 +28,34 @@ public class GroupsBean {
 
     MyDatabase dt = new MyDatabase();
     Connection conn = dt.getConnection();
-    public String group_type;
+    public int id, fromOld;
     public float charges;
-    public int group_id;
 
-    public GroupsBean() {
-    }
-
-    public Vector<GroupsBean> displayAll() {
+    public Vector<GroupsBean> loadAll() {
         Vector<GroupsBean> v = new Vector<GroupsBean>();
         try {
-            PreparedStatement ps = conn.prepareStatement("select group_id,group_type,group_charges from Groups");
+            PreparedStatement ps = conn.prepareStatement("select group_id,group_ages,group_charges from Groups");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 GroupsBean gb = new GroupsBean();
-                gb.group_id = rs.getInt("group_id");
-                gb.group_type = rs.getString("group_type");
+                gb.id = rs.getInt("group_id");
+                gb.fromOld = rs.getInt("group_ages");
                 gb.charges = rs.getFloat("group_charges");
                 v.add(gb);
             }
-            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(GroupsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return v;
     }
 
-    public boolean createGroup(String grouptype, float groupcharges) {
-        if (!isExist(grouptype)) {
-            try {
-                PreparedStatement ps = conn.prepareStatement("insert into Groups(group_type,group_charges) values(?,?)");
-                ps.setString(1, grouptype);
-                ps.setFloat(2, groupcharges);
-                ps.executeUpdate();
-                ps.close();
-                return true;
-            } catch (SQLException ex) {
-                Logger.getLogger(GroupsBean.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public boolean updateGroup(int groupid, String grouptype, float groupcharges) {
+    public boolean updateGroup(int id, float charges) {
         try {
-            PreparedStatement ps = conn.prepareStatement("update Groups set group_type=?,group_charges=? where group_id=?");
-            ps.setString(1, grouptype);
-            ps.setFloat(2, groupcharges);
-            ps.setInt(3, groupid);
+            PreparedStatement ps = conn.prepareStatement("update Groups set group_charges=? where group_id = ?");
+            ps.setFloat(1, charges);
+            ps.setInt(2, id);
             ps.executeUpdate();
-            ps.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(GroupsBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,15 +63,25 @@ public class GroupsBean {
         }
     }
 
-    public boolean isExist(String grouptype) {
-        try {
-            PreparedStatement ps = conn.prepareStatement("select group_id from Groups where group_type=?");
-            ps.setString(1, grouptype);
-            ResultSet rs = ps.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            Logger.getLogger(GroupsBean.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+    public int calYear(String birth) {
+        int years = 0;
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int month = localDate.getMonthValue();
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DATE);
+
+        String str[] = birth.split("/");
+        int dayb = Integer.parseInt(str[0]);
+        int monthb = Integer.parseInt(str[1]);
+        int yearb = Integer.parseInt(str[2]);
+        LocalDate start = LocalDate.of(yearb, monthb, dayb);
+        LocalDate end = LocalDate.of(year,month,day);
+        long yearsold = ChronoUnit.YEARS.between(start, end);
+        years = (int) yearsold;
+        return years;
     }
+
 }

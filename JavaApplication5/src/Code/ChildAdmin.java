@@ -5,9 +5,13 @@
  */
 package Code;
 
+import controlpack.ActBean;
 import controlpack.ChildrenBean;
 import controlpack.CustomerBean;
+import controlpack.GroupsBean;
 import controlpack.MainMethod;
+import controlpack.NannyBean;
+import controlpack.OrderBean;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.PreparedStatement;
@@ -16,6 +20,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -39,6 +45,9 @@ public class ChildAdmin extends javax.swing.JPanel {
     CustomerBean cb = new CustomerBean();
     ChildrenBean chBean = new ChildrenBean();
     MainMethod MMt = new MainMethod();
+    GroupsBean gb = new GroupsBean();
+    ActBean acb = new ActBean();
+    OrderBean ob = new OrderBean();
 
     public ChildAdmin(FrameMain fM) {
         initComponents();
@@ -49,6 +58,8 @@ public class ChildAdmin extends javax.swing.JPanel {
         loadChild();
         tbCus.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
         tbChild.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+        loadAct();
+        loadTime();
     }
 
     public void hiddenBtn() {
@@ -59,6 +70,8 @@ public class ChildAdmin extends javax.swing.JPanel {
         btnNewChild.setVisible(false);
         jCheckBox1.setVisible(false);
         btnStatusCus.setVisible(false);
+        lbNN.setVisible(false);
+        cbAddOrderNN.setVisible(false);
     }
 
     public void displayBtn() {
@@ -184,6 +197,46 @@ public class ChildAdmin extends javax.swing.JPanel {
         }
     }
 
+    public void loadAct() {
+        Vector<ActBean> item = acb.displayAll();
+        for (int i = 0; i < item.size(); i++) {
+            ActBean temp = item.get(i);
+            String name = temp.act_type;
+            cbAddOrderAct.addItem(name);
+        }
+    }
+
+    public void loadTime() {
+        Vector<OrderBean> item = ob.displayTime();
+        for (int i = 0; i < item.size(); i++) {
+            OrderBean temp = item.get(i);
+            String name = temp.time_slot;
+            cbAddOrderTime.addItem(name);
+        }
+    }
+
+    public void loadNanny(String actName, int timeID, Date fromDay) {
+        Vector<OrderBean> item = ob.searchFreeNanny(actName, timeID, fromDay);
+        for (int i = 0; i < item.size(); i++) {
+            OrderBean temp = item.get(i);
+            String name = temp.nanny_name;
+            cbAddOrderNN.addItem(name);
+            cbAddOrderNN.setVisible(true);
+            lbNN.setVisible(true);
+        }
+    }
+
+    public void clearData() {
+        txtAddOrChildID.setText("");
+        txtAddOrChildname.setText("");
+        Instant now = Instant.now(); //current date
+        Instant before = now.plus(Duration.ofDays(1));
+        Date dateAfter = Date.from(before);
+        dateChooseStart.setDate(new Date());
+        datChooseEnd.setDate(dateAfter);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,20 +273,18 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtAddOrChildID = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lbNN = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jComboBox4 = new javax.swing.JComboBox();
-        jButton8 = new javax.swing.JButton();
+        txtAddOrChildname = new javax.swing.JTextField();
+        txtAddOrderGroup = new javax.swing.JLabel();
+        cbAddOrderAct = new javax.swing.JComboBox();
+        cbAddOrderTime = new javax.swing.JComboBox();
+        dateChooseStart = new com.toedter.calendar.JDateChooser();
+        datChooseEnd = new com.toedter.calendar.JDateChooser();
+        cbAddOrderNN = new javax.swing.JComboBox();
         jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         dlAddCus = new javax.swing.JDialog();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -294,13 +345,15 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        txtChildName = new javax.swing.JLabel();
+        txtAct = new javax.swing.JLabel();
+        txtTime = new javax.swing.JLabel();
+        txtStart = new javax.swing.JLabel();
+        txtEnd = new javax.swing.JLabel();
+        txtNanny = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        txtOrderBy = new javax.swing.JLabel();
         dlCfCus = new javax.swing.JDialog();
         jLabel53 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
@@ -508,45 +561,44 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel15.setText("From:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtAddOrChildID.setEditable(false);
+        txtAddOrChildID.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel16.setText("To:");
 
-        jLabel17.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel17.setText("Nanny:");
+        lbNN.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        lbNN.setText("Nanny:");
 
         jButton7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-money-30.png"))); // NOI18N
         jButton7.setText("Cashout");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtAddOrChildname.setEditable(false);
+        txtAddOrChildname.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel18.setText("jLabel18");
+        txtAddOrderGroup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtAddOrderGroup.setText("jLabel18");
 
-        jComboBox2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAddOrderAct.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jComboBox3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAddOrderTime.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jComboBox4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30.png"))); // NOI18N
-        jButton8.setText("Clear");
+        cbAddOrderNN.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         jButton9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-exit-sign-filled-30.png"))); // NOI18N
         jButton9.setText("Back");
-
-        jButton10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-search-20.png"))); // NOI18N
-        jButton10.setText("Check");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dlAddOrderLayout = new javax.swing.GroupLayout(dlAddOrder.getContentPane());
         dlAddOrder.getContentPane().setLayout(dlAddOrderLayout);
@@ -557,8 +609,6 @@ public class ChildAdmin extends javax.swing.JPanel {
                     .addGroup(dlAddOrderLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8)
                         .addGap(18, 18, 18)
                         .addComponent(jButton9))
                     .addGroup(dlAddOrderLayout.createSequentialGroup()
@@ -571,23 +621,21 @@ public class ChildAdmin extends javax.swing.JPanel {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17))
+                            .addComponent(lbNN))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(dlAddOrderLayout.createSequentialGroup()
-                                .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton10)))))
-                .addGap(55, 55, 55))
+                        .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAddOrChildID)
+                            .addComponent(txtAddOrChildname)
+                            .addComponent(txtAddOrderGroup)
+                            .addComponent(cbAddOrderAct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbAddOrderTime, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateChooseStart, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(datChooseEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbAddOrderNN, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(dlAddOrderLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel3)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         dlAddOrderLayout.setVerticalGroup(
             dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,40 +649,38 @@ public class ChildAdmin extends javax.swing.JPanel {
                             .addGroup(dlAddOrderLayout.createSequentialGroup()
                                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtAddOrChildID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtAddOrChildname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(jLabel18))
+                                    .addComponent(txtAddOrderGroup))
                                 .addGap(18, 18, 18)
                                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbAddOrderAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel14)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbAddOrderTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel15))
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateChooseStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16))
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datChooseEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10))
+                    .addComponent(lbNN)
+                    .addComponent(cbAddOrderNN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(dlAddOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
-                    .addComponent(jButton8)
                     .addComponent(jButton9))
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         jLabel34.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
@@ -1036,55 +1082,66 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel19.setText("Comfirm Order");
 
-        jLabel20.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel20.setText("Name:");
 
-        jLabel21.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel21.setText("Activity:");
 
-        jLabel22.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel22.setText("Time");
 
-        jLabel23.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel23.setText("Start:");
 
-        jLabel24.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel24.setText("End:");
 
-        jLabel25.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel25.setText("Nanny:");
 
-        jLabel26.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel26.setText("Price:");
 
         jButton11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-approval-30.png"))); // NOI18N
         jButton11.setText("Comfirm");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
         jButton12.setText("Back");
 
-        jLabel27.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel27.setText("jLabel27");
+        txtChildName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtChildName.setText("jLabel27");
 
-        jLabel28.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel28.setText("jLabel28");
+        txtAct.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtAct.setText("jLabel28");
 
-        jLabel29.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel29.setText("jLabel29");
+        txtTime.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtTime.setText("jLabel29");
 
-        jLabel30.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel30.setText("jLabel30");
+        txtStart.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtStart.setText("jLabel30");
 
-        jLabel31.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel31.setText("jLabel31");
+        txtEnd.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtEnd.setText("jLabel31");
 
-        jLabel32.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel32.setText("jLabel32");
+        txtNanny.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtNanny.setText("jLabel32");
 
-        jLabel33.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel33.setText("jLabel33");
+        txtPrice.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtPrice.setText("jLabel33");
+
+        jLabel57.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel57.setText("Orderby:");
+
+        txtOrderBy.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        txtOrderBy.setText("jLabel33");
 
         javax.swing.GroupLayout dlComfirmOrderLayout = new javax.swing.GroupLayout(dlComfirmOrder.getContentPane());
         dlComfirmOrder.getContentPane().setLayout(dlComfirmOrderLayout);
@@ -1094,30 +1151,35 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dlComfirmOrderLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel26))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel29)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel33)
-                            .addComponent(jLabel19)))
+                            .addGroup(dlComfirmOrderLayout.createSequentialGroup()
+                                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel20)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel23)
+                                    .addComponent(jLabel24)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel26)
+                                    .addComponent(jLabel57))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtChildName)
+                                    .addComponent(txtAct)
+                                    .addComponent(txtTime)
+                                    .addComponent(txtStart)
+                                    .addComponent(txtEnd)
+                                    .addComponent(txtNanny)
+                                    .addComponent(txtOrderBy)
+                                    .addComponent(txtPrice)))
+                            .addGroup(dlComfirmOrderLayout.createSequentialGroup()
+                                .addComponent(jButton11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton12))))
                     .addGroup(dlComfirmOrderLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton11)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton12)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel19)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         dlComfirmOrderLayout.setVerticalGroup(
             dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1127,36 +1189,41 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel27))
+                    .addComponent(txtChildName))
                 .addGap(18, 18, 18)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jLabel28))
+                    .addComponent(txtAct))
                 .addGap(18, 18, 18)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jLabel29))
+                    .addComponent(txtTime))
                 .addGap(18, 18, 18)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jLabel30))
+                    .addComponent(txtStart))
                 .addGap(18, 18, 18)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel31))
+                    .addComponent(txtEnd))
                 .addGap(18, 18, 18)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jLabel32))
+                    .addComponent(txtNanny))
                 .addGap(18, 18, 18)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jLabel33))
-                .addGap(18, 18, 18)
+                    .addComponent(txtPrice))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtOrderBy)
+                    .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel57)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton11)
                     .addComponent(jButton12))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         jLabel53.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -1545,7 +1612,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         if (jComboBox1.getSelectedIndex() == 0) {
             gender = true;
         }
-        if(chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)){
+        if (chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)) {
             JOptionPane.showMessageDialog(this, "Update successful!!");
         }
         dlUpdateChild.dispose();
@@ -1581,7 +1648,7 @@ public class ChildAdmin extends javax.swing.JPanel {
             dlAddCus.dispose();
             JOptionPane.showMessageDialog(this, "Customer was added!!");
             loadCus(jCheckBox1.isSelected());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Customer Email is Exist!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAddCusActionPerformed
@@ -1704,9 +1771,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateChildActionPerformed
 
     private void btnStatusChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusChildActionPerformed
-        // TODO add your handling code here:
-
-        // Lay dong hien tai dang chon
         int selectedRow = tbChild.getSelectedRow();
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
 
@@ -1717,16 +1781,26 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnStatusChildActionPerformed
 
     private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
-        //        JFrame fInsertChild = new JFrame();
-        //        fInsertChild.add(new InsertChild());
-        //
-        //        fInsertChild.pack();
-        //        fInsertChild.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //        fInsertChild.setVisible(true);
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         int currentRow = tbChild.getSelectedRow();
-        jDateChooser2.setDate(new Date());
-        jDateChooser3.setDate(new Date());
+        txtAddOrChildID.setText(tbModel.getValueAt(currentRow, 0).toString());
+        txtAddOrChildname.setText(tbModel.getValueAt(currentRow, 1).toString());
+        //lấy ngày hiện tại +1
+        Instant now = Instant.now(); //current date
+        Instant before = now.plus(Duration.ofDays(1));
+        Date dateAfter = Date.from(before);
+        dateChooseStart.setDate(new Date());
+        datChooseEnd.setDate(dateAfter);
+        cbAddOrderNN.setVisible(false);
+        lbNN.setVisible(false);
+        //tính tuổi
+        String strBirth = tbModel.getValueAt(currentRow, 2).toString();
+        int ages = gb.calYear(strBirth);
+        String strgroup = "New born";
+        if (ages > 0) {
+            strgroup = ages + " years old.";
+        }
+        txtAddOrderGroup.setText(strgroup);
         MMt.displaydialog(dlAddOrder);
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 
@@ -1792,7 +1866,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtNewChildBirth.setDate(new Date());
         txtNewChildMedication.setText("");
         txtNewChilIlle.setText("");
-        txtNewChildDoctor.setText("");        
+        txtNewChildDoctor.setText("");
         MMt.displaydialog(dlAddChild);
     }//GEN-LAST:event_btnNewChildActionPerformed
 
@@ -1813,7 +1887,57 @@ public class ChildAdmin extends javax.swing.JPanel {
         loadChild();
     }//GEN-LAST:event_btnActiveActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if (lbNN.isVisible()) {
+//            DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+//            int currentRow = tbCus.getSelectedRow();
+//            String birth =  tbModel.getValueAt(currentRow, 2).toString();
+            System.out.println("Demo đơn");
+            int childId = Integer.valueOf(txtAddOrChildID.getText());
+            String strbirth = chBean.strofBirth(childId);
+            txtChildName.setText(txtAddOrChildname.getText());
+            txtAct.setText(cbAddOrderAct.getSelectedItem().toString());
+            txtTime.setText(cbAddOrderTime.getSelectedItem().toString());
+            Date startD = dateChooseStart.getDate();
+            Date endD = datChooseEnd.getDate();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strstartD = formatter.format(startD);
+            String strendD = formatter.format(endD);
+            txtStart.setText(strstartD);
+            txtEnd.setText(strendD);
+            txtNanny.setText(cbAddOrderNN.getSelectedItem().toString());
+            txtOrderBy.setText(fMain.name());
+            float priceperday = ob.getGroupFee(strbirth)+ob.getActFee(txtAct.getText());
+            System.out.println(priceperday);
+            
+            
+            dlAddOrder.dispose();
+            MMt.displaydialog(dlComfirmOrder);
+        } else {
+            System.out.println("Tìm giảng viên");
+            String actName = cbAddOrderAct.getSelectedItem().toString();
+            int timeID = cbAddOrderTime.getSelectedIndex() + 1;
+            Date fromDate = dateChooseStart.getDate();
+            loadNanny(actName, timeID, fromDate);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        dlAddOrder.dispose();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        //thêm vào bảng order
+        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+        int currentRow = tbCus.getSelectedRow();
+        String birth = tbModel.getValueAt(currentRow, 2).toString();
+        if (ob.inserOrder(Float.valueOf(txtOrderBy.getText()), dateChooseStart.getDate(), fMain.name(), Integer.valueOf(txtAddOrChildID.getText()), datChooseEnd.getDate(), nb.nametoID(txtNanny.getText()), ob.getGroupID(birth), cbAddOrderTime.getSelectedIndex() + 1)) {
+            JOptionPane.showMessageDialog(this, "Saved!");
+            hiddenBtn();
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    NannyBean nb = new NannyBean();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntOk;
     private javax.swing.JButton bntOk1;
@@ -1833,6 +1957,11 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JButton btnStatusCus;
     private javax.swing.JButton btnUpdateChild;
     private javax.swing.JButton btnUpdateCus;
+    private javax.swing.JComboBox cbAddOrderAct;
+    private javax.swing.JComboBox cbAddOrderNN;
+    private javax.swing.JComboBox cbAddOrderTime;
+    private com.toedter.calendar.JDateChooser datChooseEnd;
+    private com.toedter.calendar.JDateChooser dateChooseStart;
     private javax.swing.JDialog dlAddChild;
     private javax.swing.JDialog dlAddCus;
     private javax.swing.JDialog dlAddOrder;
@@ -1842,7 +1971,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JDialog dlUpdateChild;
     private javax.swing.JDialog dlUpdateCus;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton15;
@@ -1852,16 +1980,10 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1870,8 +1992,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1881,14 +2001,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -1914,6 +2027,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1925,13 +2039,19 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lbNN;
     private javax.swing.JTable tbChild;
     private javax.swing.JTable tbCus;
+    private javax.swing.JLabel txtAct;
+    private javax.swing.JTextField txtAddOrChildID;
+    private javax.swing.JTextField txtAddOrChildname;
+    private javax.swing.JLabel txtAddOrderGroup;
+    private javax.swing.JLabel txtChildName;
     private javax.swing.JTextField txtCurent;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JLabel txtEnd;
+    private javax.swing.JLabel txtNanny;
     private javax.swing.JTextField txtNewChilIlle;
     private javax.swing.JTextField txtNewChild;
     private com.toedter.calendar.JDateChooser txtNewChildBirth;
@@ -1944,9 +2064,13 @@ public class ChildAdmin extends javax.swing.JPanel {
     private javax.swing.JTextField txtNewCusName;
     private javax.swing.JTextField txtNewCusWorkFone;
     private javax.swing.JTextField txtNewEmailParents;
+    private javax.swing.JLabel txtOrderBy;
     private javax.swing.JTextField txtPass;
+    private javax.swing.JLabel txtPrice;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearchCus;
+    private javax.swing.JLabel txtStart;
+    private javax.swing.JLabel txtTime;
     private javax.swing.JTextField txtUpdateCus;
     private javax.swing.JTextArea txtUpdateCusAddress;
     private javax.swing.JTextField txtUpdateCusName;

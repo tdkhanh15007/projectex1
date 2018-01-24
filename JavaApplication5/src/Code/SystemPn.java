@@ -30,8 +30,8 @@ public class SystemPn extends javax.swing.JPanel {
         tbGroups.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
         hiddenGroup();
         hiddenAct();
-        loadGroup();
         loadAct();
+        loadGroup();
     }
 
     public void hiddenAct() {
@@ -66,56 +66,16 @@ public class SystemPn extends javax.swing.JPanel {
 
     public void hiddenGroup() {
         jLabel4.setVisible(false);
-        txtUpdateG.setVisible(false);
-        jLabel1.setVisible(false);
-        cbNewGFrom.setVisible(false);
-        jLabel3.setVisible(false);
-        cbNewGTo.setVisible(false);
         jLabel2.setVisible(false);
         txtCharges.setVisible(false);
         btnSubmitG.setVisible(false);
     }
 
     public void btnToUpdateG() {
-        jLabel1.setVisible(false);
-        cbNewGFrom.setVisible(false);
-        jLabel3.setVisible(false);
-        cbNewGTo.setVisible(false);
         jLabel4.setVisible(true);
-        txtUpdateG.setVisible(true);
         jLabel2.setVisible(true);
         txtCharges.setVisible(true);
         btnSubmitG.setVisible(true);
-    }
-
-    public void btnToCreateG() {
-        jLabel4.setVisible(false);
-        txtUpdateG.setVisible(false);
-        jLabel1.setVisible(true);
-        cbNewGFrom.setVisible(true);
-        jLabel3.setVisible(true);
-        cbNewGTo.setVisible(true);
-        jLabel2.setVisible(true);
-        txtCharges.setVisible(true);
-        btnSubmitG.setVisible(true);
-    }
-
-    public void loadGroup() {
-        DefaultTableModel model = (DefaultTableModel) tbGroups.getModel();
-        model.setRowCount(0);
-        Vector<GroupsBean> item = gb.displayAll();
-        Vector v;
-        for (int i = 0; i < item.size(); i++) {
-            v = new Vector();
-            GroupsBean temp = item.get(i);
-            int id = temp.group_id;
-            String types = temp.group_type;
-            float gcharges = temp.charges;
-            v.add(id);
-            v.add(types);
-            v.add(gcharges);
-            model.addRow(v);
-        }
     }
 
     public void loadAct() {
@@ -136,6 +96,30 @@ public class SystemPn extends javax.swing.JPanel {
         }
     }
 
+    public void loadGroup() {
+        DefaultTableModel model = (DefaultTableModel) tbGroups.getModel();
+        model.setRowCount(0);
+        Vector<GroupsBean> item = gb.loadAll();
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            GroupsBean temp = item.get(i);
+            int id = temp.id;
+            int fromO = temp.fromOld;
+            String newStr = "";
+            if (fromO == 0) {
+                newStr = "New born";
+            } else {
+                newStr = fromO + " years old";
+            }
+            float charges = temp.charges;
+            v.add(id);
+            v.add(newStr);
+            v.add(charges);
+            model.addRow(v);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,16 +133,10 @@ public class SystemPn extends javax.swing.JPanel {
         panel1 = new java.awt.Panel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbGroups = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnSubmitG = new javax.swing.JButton();
         txtCharges = new javax.swing.JTextField();
-        btnNewGroup = new javax.swing.JButton();
-        cbNewGFrom = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        cbNewGTo = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        txtUpdateG = new javax.swing.JTextField();
         panel11 = new java.awt.Panel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbAct = new javax.swing.JTable();
@@ -207,9 +185,6 @@ public class SystemPn extends javax.swing.JPanel {
             tbGroups.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel1.setText("From:");
-
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setText("Charges:");
 
@@ -224,28 +199,8 @@ public class SystemPn extends javax.swing.JPanel {
 
         txtCharges.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        btnNewGroup.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        btnNewGroup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-add-new-30-gr.png"))); // NOI18N
-        btnNewGroup.setText("New Groups");
-        btnNewGroup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewGroupActionPerformed(evt);
-            }
-        });
-
-        cbNewGFrom.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cbNewGFrom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "New Borns", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" }));
-
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel3.setText("To:");
-
-        cbNewGTo.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cbNewGTo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14" }));
-
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel4.setText("Age:");
-
-        txtUpdateG.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel4.setText("Update");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -254,27 +209,18 @@ public class SystemPn extends javax.swing.JPanel {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNewGroup)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel4))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSubmitG)
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panel1Layout.createSequentialGroup()
-                                    .addComponent(cbNewGFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cbNewGTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtCharges, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                .addComponent(txtUpdateG)))))
-                .addContainerGap())
+                            .addComponent(txtCharges, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,25 +228,17 @@ public class SystemPn extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(btnNewGroup)
-                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUpdateG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(txtCharges, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cbNewGFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(cbNewGTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtCharges, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSubmitG))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(225, 225, 225))
+                        .addComponent(btnSubmitG)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane2.addTab("Groups", panel1);
@@ -445,38 +383,26 @@ public class SystemPn extends javax.swing.JPanel {
     private void tbGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGroupsMouseClicked
         DefaultTableModel tbModel = (DefaultTableModel) tbGroups.getModel();
         int currentRow = tbGroups.getSelectedRow();
-        txtUpdateG.setText(tbModel.getValueAt(currentRow, 1).toString());
+        jLabel4.setVisible(true);
         txtCharges.setText(tbModel.getValueAt(currentRow, 2).toString());
+        int id = (int) tbModel.getValueAt(currentRow, 0);
         btnToUpdateG();
     }//GEN-LAST:event_tbGroupsMouseClicked
 
-    private void btnNewGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGroupActionPerformed
-        btnToCreateG();
-    }//GEN-LAST:event_btnNewGroupActionPerformed
-
     private void btnSubmitGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitGActionPerformed
-        if (!txtUpdateG.isVisible()) {
-            String from = cbNewGFrom.getSelectedItem().toString();
-            String toAge = cbNewGTo.getSelectedItem().toString();
-            String str = from + " to " + toAge + " years";
+        try {
             float charges = Float.valueOf(txtCharges.getText());
-            if (gb.createGroup(str, charges)) {
-                hiddenGroup();
-                loadGroup();
-            } else {
-                JOptionPane.showMessageDialog(this, "Groups is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
-        } else {
+            System.out.println("Để update");
             DefaultTableModel tbModel = (DefaultTableModel) tbGroups.getModel();
             int currentRow = tbGroups.getSelectedRow();
-            int id = (int) tbModel.getValueAt(currentRow, 0);
-            float charges = Float.valueOf(txtCharges.getText());
-            if (gb.updateGroup(id, txtUpdateG.getText(), charges)) {
+            int id = Integer.valueOf(tbModel.getValueAt(currentRow, 0).toString());
+            if (gb.updateGroup(id, charges)) {
+                JOptionPane.showMessageDialog(this, "Update successful!!");
                 hiddenGroup();
                 loadGroup();
-            } else {
-                JOptionPane.showMessageDialog(this, "Groups is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Charges must be a number!!");
         }
     }//GEN-LAST:event_btnSubmitGActionPerformed
 
@@ -521,15 +447,10 @@ public class SystemPn extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNewGroup;
     private javax.swing.JButton btnSubmitA1;
     private javax.swing.JButton btnSubmitG;
-    private javax.swing.JComboBox cbNewGFrom;
-    private javax.swing.JComboBox cbNewGTo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -545,6 +466,5 @@ public class SystemPn extends javax.swing.JPanel {
     private javax.swing.JTextField txtCharges;
     private javax.swing.JTextField txtChargesA;
     private javax.swing.JTextField txtUpdateA;
-    private javax.swing.JTextField txtUpdateG;
     // End of variables declaration//GEN-END:variables
 }

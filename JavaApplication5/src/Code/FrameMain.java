@@ -33,6 +33,9 @@ import javax.swing.table.DefaultTableModel;
 public class FrameMain extends javax.swing.JFrame {
 
     public static String name, role;
+    public String name(){
+        return txtUser.getText();
+    }
 
     public FrameMain() {
         initComponents();
