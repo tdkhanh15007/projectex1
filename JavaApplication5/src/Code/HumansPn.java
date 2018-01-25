@@ -94,6 +94,7 @@ public class HumansPn extends javax.swing.JPanel {
             v.add(strStatus);
             model.addRow(v);
         }
+        jScrollPane2.setVisible(true);
     }
 
     public void seachNanny(String character) {
@@ -697,6 +698,7 @@ public class HumansPn extends javax.swing.JPanel {
         jTextField6.setText("");
         jTextArea1.setText("");
         jComboBox2.setSelectedIndex(0);
+        jScrollPane3.setVisible(true);
         displayNCr();
     }//GEN-LAST:event_jButton9ActionPerformed
 

@@ -5,6 +5,7 @@
  */
 package Code;
 
+import MyDatabase.NewClass;
 import controlpack.MainMethod;
 import controlpack.ReportsBean;
 import java.awt.Font;
@@ -208,7 +209,7 @@ public class ReportsPn extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel13)
@@ -449,6 +450,7 @@ public class ReportsPn extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        NewClass.print(jPanel1);
         jDialog1.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

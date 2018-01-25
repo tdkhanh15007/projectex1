@@ -5,6 +5,7 @@
  */
 package Code;
 
+import MyDatabase.NewClass;
 import controlpack.MainMethod;
 import controlpack.NannyBean;
 import java.text.SimpleDateFormat;
@@ -134,8 +135,8 @@ public class CashPn extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbSalaryReport = new javax.swing.JTable();
-        jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         dlCashoutRequest = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -272,40 +273,16 @@ public class CashPn extends javax.swing.JPanel {
             tbSalaryReport.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jButton12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-print-30.png"))); // NOI18N
-        jButton12.setText("Print");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jButton13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
-        jButton13.setText("Back");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(294, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jButton12)
-                .addGap(18, 18, 18)
-                .addComponent(jButton13)
-                .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(9, 9, 9)
@@ -332,11 +309,7 @@ public class CashPn extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
-                .addGap(32, 32, 32))
+                .addContainerGap(385, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -354,21 +327,48 @@ public class CashPn extends javax.swing.JPanel {
                     .addComponent(jButton7)
                     .addGap(18, 18, 18)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(94, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
+
+        jButton13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
+        jButton13.setText("Back");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-print-30.png"))); // NOI18N
+        jButton12.setText("Print");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dlSalaryReportLayout = new javax.swing.GroupLayout(dlSalaryReport.getContentPane());
         dlSalaryReport.getContentPane().setLayout(dlSalaryReportLayout);
         dlSalaryReportLayout.setHorizontalGroup(
             dlSalaryReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlSalaryReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton12)
+                .addGap(18, 18, 18)
+                .addComponent(jButton13)
+                .addGap(106, 106, 106))
         );
         dlSalaryReportLayout.setVerticalGroup(
             dlSalaryReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlSalaryReportLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(dlSalaryReportLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(18, 18, 18)
+                .addGroup(dlSalaryReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton13)
+                    .addComponent(jButton12))
+                .addGap(0, 37, Short.MAX_VALUE))
         );
 
         jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -830,7 +830,7 @@ public class CashPn extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalaryRpActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // print salary request form
+        NewClass.print(jPanel1);
         closeDL();
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -847,13 +847,14 @@ public class CashPn extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        closeDL();
-    }//GEN-LAST:event_jButton12ActionPerformed
-
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         closeDL();
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        NewClass.print(jPanel2);
+        closeDL();
+    }//GEN-LAST:event_jButton12ActionPerformed
     public void tbReport(Date date1, Date date2, String phone) {
         DefaultTableModel model = (DefaultTableModel) tbSalaryReport.getModel();
         model.setRowCount(0);

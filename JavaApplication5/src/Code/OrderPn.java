@@ -5,6 +5,7 @@
  */
 package Code;
 
+import MyDatabase.NewClass;
 import controlpack.MainMethod;
 import controlpack.OrderBean;
 import java.text.DateFormat;
@@ -27,7 +28,6 @@ public class OrderPn extends javax.swing.JPanel {
     MainMethod mmt = new MainMethod();
     FrameMain fm;
 
-    ;
     /**
      * Creates new form OrderPn
      */
@@ -377,10 +377,10 @@ public class OrderPn extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(306, 306, 306)
+                        .addGap(162, 162, 162)
                         .addComponent(jLabel18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
+                        .addGap(192, 192, 192)
                         .addComponent(jLabel9)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +443,7 @@ public class OrderPn extends javax.swing.JPanel {
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         dlReportDocLayout.setVerticalGroup(
@@ -749,7 +749,8 @@ public class OrderPn extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        closeDL();
+        NewClass.print(jPanel1);
+        closeDL();        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public void loadReport(Date date1, Date date2, boolean status) {

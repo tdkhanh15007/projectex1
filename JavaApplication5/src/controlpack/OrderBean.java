@@ -210,7 +210,6 @@ public class OrderBean {
         int day = daysBetween(sDate, eDate);
         float priceper = getPrice(id);
         float newpay = day * priceper;
-        System.out.println(newpay + "/" + priceper + "/");
         try {
             PreparedStatement ps = conn.prepareStatement("update Orders set enddate=?,payment=?,comments=? where order_id=?");
             ps.setDate(1, new java.sql.Date(eDate.getTime()));

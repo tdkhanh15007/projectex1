@@ -113,4 +113,18 @@ public class MyDatabase {
         }
         return false;
     }
+    
+    public boolean checkEmail(String email) {
+        if (email.contains("@") && email.contains(".")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkFone(String phone) {
+        if (phone.startsWith("0") && phone.length() > 9 && phone.length() < 12) {
+            return true;
+        }
+        return false;
+    }
 }

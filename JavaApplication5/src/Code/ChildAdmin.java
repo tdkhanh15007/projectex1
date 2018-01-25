@@ -272,7 +272,6 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         bntOk = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        bntReset = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -443,15 +442,6 @@ public class ChildAdmin extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setText("Fullname:");
 
-        bntReset.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        bntReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-reset-30 -p.png"))); // NOI18N
-        bntReset.setText("Reset");
-        bntReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntResetActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setText("Curent Medication:");
 
@@ -468,47 +458,43 @@ public class ChildAdmin extends javax.swing.JPanel {
         dlUpdateChildLayout.setHorizontalGroup(
             dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(bntOk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bntReset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(129, 129, 129))
-                    .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                            .addGap(175, 175, 175)
-                            .addComponent(jLabel1))
-                        .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel10))
-                            .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtPass)
-                                        .addComponent(txtDoctor)
-                                        .addComponent(txtEmail)))
-                                .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtCurent, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtfullname, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(dlUpdateChildLayout.createSequentialGroup()
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel8)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jComboBox1, 0, 139, Short.MAX_VALUE))))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(175, 175, 175)
+                        .addComponent(jLabel1))
+                    .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel10))
+                        .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCurent, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtfullname, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox1, 0, 139, Short.MAX_VALUE))))
+                            .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dlUpdateChildLayout.createSequentialGroup()
+                                        .addComponent(bntOk)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtPass)
+                                    .addComponent(txtDoctor)
+                                    .addComponent(txtEmail))))))
+                .addGap(44, 44, 44))
         );
         dlUpdateChildLayout.setVerticalGroup(
             dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,7 +534,6 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(dlUpdateChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntOk)
-                    .addComponent(bntReset)
                     .addComponent(jButton1))
                 .addGap(72, 72, 72))
         );
@@ -1647,23 +1632,25 @@ public class ChildAdmin extends javax.swing.JPanel {
         Date now = new Date();
         if (!jDateChooser1.getDate().after(now)) {
             try {
-                DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-                int currentRow = tbChild.getSelectedRow();
-                int child_id = (int) tbModel.getValueAt(currentRow, 0);
-                boolean gender = false;
-                if (jComboBox1.getSelectedIndex() == 0) {
-                    gender = true;
+                if (txtfullname.getText().equals(null) || txtfullname.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Update failed!!");
+                } else {
+                    DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+                    int currentRow = tbChild.getSelectedRow();
+                    int child_id = (int) tbModel.getValueAt(currentRow, 0);
+                    boolean gender = false;
+                    if (jComboBox1.getSelectedIndex() == 0) {
+                        gender = true;
+                    }
+                    if (chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)) {
+                        JOptionPane.showMessageDialog(this, "Update successful!!");
+                    }
+                    dlUpdateChild.dispose();
+                    loadChild();
                 }
-                if (chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)) {
-                    JOptionPane.showMessageDialog(this, "Update successful!!");
-                }
-                dlUpdateChild.dispose();
-                loadChild();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Update failed!!");
             }
-        } else if (txtfullname.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Update failed!!");
         } else {
             JOptionPane.showMessageDialog(this, "Update failed!!");
         }
@@ -1708,7 +1695,19 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
-        if (checkEmail(txtNewCusEmail.getText()) && checkFone(txtNewCusFone.getText()) && checkFone(txtNewCusWorkFone.getText())) {
+        if (txtNewCusEmail.getText().equals("") || txtNewCusEmail.getText().equals(null) || txtNewCusName.getText().equals("") || txtNewCusName.getText().equals(null) || txtNewCusFone.getText().equals("") || txtNewCusFone.getText().equals(null)) {
+            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
+        } else if (a.checkStart(txtNewCusEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "Email can not start with symbol!!");
+        } else if (a.checkSyb(txtNewCusName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name can not have symbol!!");
+        } else if (a.checkPat(txtNewCusFone.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone invalid !!");
+        } else if (!a.checkEmail(txtNewCusEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "Email invalid!!");
+        } else if (!a.checkFone(txtNewCusFone.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone invalid!!");
+        } else {
             try {
                 if (!cb.isExist(txtNewCusEmail.getText())) {
                     cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
@@ -1721,28 +1720,19 @@ public class ChildAdmin extends javax.swing.JPanel {
             } catch (Exception e) {
 
             }
-        } else if (a.checkStart(txtNewCusEmail.getText())) {
-            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
-        } else if (a.checkSyb(txtNewCusName.getText())) {
-            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
-        } else if (a.checkPat(txtNewCusFone.getText())) {
-            JOptionPane.showMessageDialog(this, "Phone must be number!!");
         }
+//        if (checkEmail(txtNewCusEmail.getText()) && checkFone(txtNewCusFone.getText()) && checkFone(txtNewCusWorkFone.getText())) {
+
+//        } else if (a.checkStart(txtNewCusEmail.getText())) {
+//            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
+//        } else if (a.checkSyb(txtNewCusName.getText())) {
+//            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
+//        } else if (a.checkPat(txtNewCusFone.getText())) {
+//            JOptionPane.showMessageDialog(this, "Phone must be number!!");
+//        }
 
     }//GEN-LAST:event_btnAddCusActionPerformed
-    public boolean checkEmail(String email) {
-        if (email.contains("@") && email.contains(".")) {
-            return true;
-        }
-        return false;
-    }
 
-    public boolean checkFone(String phone) {
-        if (phone.startsWith("0") && phone.length() > 9 && phone.length() < 12) {
-            return true;
-        }
-        return false;
-    }
 
     private void btnClearAddCussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAddCussActionPerformed
         txtNewCusAddr.setText("");
@@ -1772,10 +1762,25 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        cb.updateCus(txtUpdateCus.getText(), txtUpdateCusName.getText(), txtUpdateCusAddress.getText(), txtUpdateCusmobile.getText(), txtUpdateCusWorkP.getText());
+ 
+        if(txtUpdateCusName.getText().equals("")||txtUpdateCusName.getText().equals(null)){
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        }else if(!a.checkFone(txtUpdateCusmobile.getText())){
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        }else if(!a.checkFone(txtUpdateCusWorkP.getText())){
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        }else if(a.checkPat(txtUpdateCusmobile.getText())){
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        }else if(a.checkPat(txtUpdateCusWorkP.getText())){
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        }else if(a.checkSyb(txtUpdateCusName.getText())){
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        }else{
+             cb.updateCus(txtUpdateCus.getText(), txtUpdateCusName.getText(), txtUpdateCusAddress.getText(), txtUpdateCusmobile.getText(), txtUpdateCusWorkP.getText());
         dlUpdateCus.dispose();
         JOptionPane.showMessageDialog(this, "Update successful!!");
         loadCus(jCheckBox1.isSelected());
+        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void btnCfDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCfDelete1ActionPerformed
@@ -1793,31 +1798,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         dlCfChild.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void bntResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntResetActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        int currentRow = tbChild.getSelectedRow();
-        int child_id = (int) tbModel.getValueAt(currentRow, 0);
-        txtfullname.setText(tbModel.getValueAt(currentRow, 1).toString());
-        String strBirth = tbModel.getValueAt(currentRow, 2).toString();
-        String strGen = tbModel.getValueAt(currentRow, 3).toString();
-        if (strGen == "Male") {
-            jComboBox1.setSelectedIndex(0);
-        } else {
-            jComboBox1.setSelectedIndex(1);
-        }
-        txtCurent.setText(chBean.getcurrent_medications(child_id));
-        txtPass.setText(chBean.getpass_illess(child_id));
-        txtDoctor.setText(chBean.getdoctor(child_id));
-        txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-        try {
-            Date birthdate = df.parse(strBirth);
-            jDateChooser1.setDate(birthdate);
-        } catch (ParseException ex) {
-            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_bntResetActionPerformed
 
     private void bntReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReset1ActionPerformed
         txtNewChild.setText("");
@@ -2089,7 +2069,6 @@ public class ChildAdmin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntOk;
     private javax.swing.JButton bntOk1;
-    private javax.swing.JButton bntReset;
     private javax.swing.JButton bntReset1;
     private javax.swing.JButton btnActive;
     private javax.swing.JButton btnAddCus;
