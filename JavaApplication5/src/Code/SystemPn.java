@@ -5,6 +5,7 @@
  */
 package Code;
 
+import MyDatabase.MyDatabase;
 import controlpack.ActBean;
 import controlpack.GroupsBean;
 import java.awt.Font;
@@ -20,6 +21,7 @@ public class SystemPn extends javax.swing.JPanel {
 
     GroupsBean gb = new GroupsBean();
     ActBean acb = new ActBean();
+    MyDatabase a = new MyDatabase();
 
     /**
      * Creates new form SystemPn
@@ -395,43 +397,59 @@ public class SystemPn extends javax.swing.JPanel {
 
     private void btnSubmitGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitGActionPerformed
         try {
-            float charges = Float.valueOf(txtCharges.getText());
-            System.out.println("Để update");
-            DefaultTableModel tbModel = (DefaultTableModel) tbGroups.getModel();
-            int currentRow = tbGroups.getSelectedRow();
-            int id = Integer.valueOf(tbModel.getValueAt(currentRow, 0).toString());
-            if (gb.updateGroup(id, charges)) {
-                JOptionPane.showMessageDialog(this, "Update successful!!");
-                hiddenGroup();
-                loadGroup();
+            if (Integer.valueOf(txtCharges.getText()) < 0) {
+                JOptionPane.showMessageDialog(this, "Charges must be a number!!");
+            } else {
+                float charges = Float.valueOf(txtCharges.getText());
+                System.out.println("Để update");
+                DefaultTableModel tbModel = (DefaultTableModel) tbGroups.getModel();
+                int currentRow = tbGroups.getSelectedRow();
+                int id = Integer.valueOf(tbModel.getValueAt(currentRow, 0).toString());
+                if (gb.updateGroup(id, charges)) {
+                    JOptionPane.showMessageDialog(this, "Update successful!!");
+                    hiddenGroup();
+                    loadGroup();
+                }
             }
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Charges must be a number!!");
         }
     }//GEN-LAST:event_btnSubmitGActionPerformed
 
     private void btnSubmitA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitA1ActionPerformed
-        if (!jLabel7.isVisible()) {
-            float charges = Float.valueOf(txtChargesA.getText());
-            String str = txtUpdateA.getText();
-            if (acb.createGroup(str, charges)) {
-                hiddenAct();
-                loadAct();
-            } else {
-                JOptionPane.showMessageDialog(this, "Activity is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
+        if (Integer.valueOf(txtChargesA.getText()) < 0) {
+            JOptionPane.showMessageDialog(this, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (a.checkPat(txtUpdateA.getText())) {
+            JOptionPane.showMessageDialog(this, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            DefaultTableModel tbModel = (DefaultTableModel) tbAct.getModel();
-            int currentRow = tbAct.getSelectedRow();
-            int id = (int) tbModel.getValueAt(currentRow, 0);
-            float charges = Float.valueOf(txtChargesA.getText());
-            if (acb.updateGroup(id, txtUpdateA.getText(), charges)) {
-                hiddenAct();
-                loadAct();
-            } else {
-                JOptionPane.showMessageDialog(this, "Activity is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+            try {
+                if (!jLabel7.isVisible()) {
+                    float charges = Float.valueOf(txtChargesA.getText());
+                    String str = txtUpdateA.getText();
+                    if (acb.createGroup(str, charges)) {
+                        hiddenAct();
+                        loadAct();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Activity is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                } else {
+                    DefaultTableModel tbModel = (DefaultTableModel) tbAct.getModel();
+                    int currentRow = tbAct.getSelectedRow();
+                    int id = (int) tbModel.getValueAt(currentRow, 0);
+                    float charges = Float.valueOf(txtChargesA.getText());
+                    if (acb.updateGroup(id, txtUpdateA.getText(), charges)) {
+                        hiddenAct();
+                        loadAct();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Activity is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         }
+
     }//GEN-LAST:event_btnSubmitA1ActionPerformed
 
     private void tbActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActMouseClicked

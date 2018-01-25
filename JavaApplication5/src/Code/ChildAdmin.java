@@ -1662,6 +1662,8 @@ public class ChildAdmin extends javax.swing.JPanel {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Update failed!!");
             }
+        } else if (txtfullname.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Update failed!!");
         } else {
             JOptionPane.showMessageDialog(this, "Update failed!!");
         }
@@ -1723,7 +1725,7 @@ public class ChildAdmin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
         } else if (a.checkSyb(txtNewCusName.getText())) {
             JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
-        }else if(a.checkPat(txtNewCusFone.getText())){
+        } else if (a.checkPat(txtNewCusFone.getText())) {
             JOptionPane.showMessageDialog(this, "Phone must be number!!");
         }
 

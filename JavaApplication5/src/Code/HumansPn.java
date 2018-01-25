@@ -736,11 +736,21 @@ public class HumansPn extends javax.swing.JPanel {
         hiddenAll();
         loadUser();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+public boolean checkFone(String phone) {
+        if (phone.startsWith("0") && phone.length() > 9 && phone.length() < 12) {
+            return true;
+        }
+        return false;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (myData.checkPat(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, "Phone must be number!");
-        } else if (jTextField2.getText().equals("") || jTextField2.getText().equals(null)) {
+            JOptionPane.showMessageDialog(this, "Phone invalid!");
+        } else if(!checkFone(jTextField3.getText())){
+            JOptionPane.showMessageDialog(this, "Phone invalid!");
+        }
+        
+        
+        else if (jTextField2.getText().equals("") || jTextField2.getText().equals(null)) {
             JOptionPane.showMessageDialog(this, "Name can not be blank!");
         } else {
             if (jTextField1.isVisible()) {
