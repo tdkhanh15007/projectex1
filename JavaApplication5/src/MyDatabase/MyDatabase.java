@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,5 +71,13 @@ public class MyDatabase {
 //        }
 
         return rs.next();
-    }    
+    }   
+    
+    public boolean checkBirth(Date b) {
+        Date now = new Date();
+        if(b.compareTo(now)<0){
+            return true;
+        }
+        return false;
+    }
 }

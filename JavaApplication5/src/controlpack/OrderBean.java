@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -29,6 +30,7 @@ public class OrderBean {
     public int order_id;
     public String child_name;
     public String cus_name;
+    public String useremail;
     public String nanny_name;
     public String act_name;
     public String time_slot;
@@ -272,7 +274,7 @@ public class OrderBean {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int nannyid = rs.getInt("nanny_id");
-                if (!notFreeTime(nannyid, timeID) && !notFreeDay(nannyid, fromDay)) {
+                if (!notFreeTime(nannyid, timeID) || !notFreeDay(nannyid, fromDay)) {
                     OrderBean ob = new OrderBean();
                     ob.nanny_name = getNannyname(nannyid);
                     v.add(ob);
@@ -319,10 +321,8 @@ public class OrderBean {
             Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-    }    
-    
-    
-    
+    }
+
     public float getActFee(String activityname) {
         float price = 0;
         try {
@@ -353,7 +353,7 @@ public class OrderBean {
         }
         return price;
     }
-    
+
     public int getGroupID(String birth) {
         int price = 0;
         int year = gb.calYear(birth);
@@ -369,11 +369,10 @@ public class OrderBean {
         }
         return price;
     }
-    
 
     public boolean inserOrder(float price, Date startdate, String user, int childID, Date endDate, int nanny_id, int group_id, int hour_id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("inser into Orders(payment,startdate,user_email,child_id,enddate,status) values(?,?,?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("insert into Orders(payment,startdate,user_email,child_id,enddate,status) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setFloat(1, price);
             ps.setDate(2, new java.sql.Date(startdate.getTime()));
             ps.setString(3, user);
@@ -381,25 +380,75 @@ public class OrderBean {
             ps.setDate(5, new java.sql.Date(endDate.getTime()));
             ps.setBoolean(6, true);
             ps.executeUpdate();
-            PreparedStatement ps2 = conn.prepareStatement("select order_id from Orders where child_id=? and payment=? and startdate=?");
-            ps2.setInt(1, childID);
-            ps2.setFloat(2, price);
-            ps2.setDate(3, new java.sql.Date(startdate.getTime()));
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs2.next()) {
+            ResultSet rs = ps.getGeneratedKeys();
+            while (rs.next()) {
+                int id = rs.getInt(1);
                 PreparedStatement ps1 = conn.prepareStatement("insert into OrdersDetails(order_id,nanny_id,group_id,hour_id) values(?,?,?,?)");
-                ps1.setInt(1, rs2.getInt("order_id"));
+                ps1.setInt(1, id);
                 ps1.setInt(2, nanny_id);
                 ps1.setInt(3, group_id);
                 ps1.setInt(4, hour_id);
-                ps.executeUpdate();
+                ps1.executeUpdate();
                 return true;
             }
-//            PreparedStatement ps1 = conn.prepareStatement("inser into OrdersDetails(order_id,nanny_id,group_id,hour_id) values(?,?,?,?,?,?)")
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
+
+    public Vector<OrderBean> getReportlist(Date date1, Date date2, boolean status) {
+        Vector<OrderBean> v = new Vector<OrderBean>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select startdate,enddate,order_id from Orders where status = ?");
+            ps.setBoolean(1, status);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Date enddate = new Date(rs.getDate("enddate").getTime());
+                Date sdate = new Date(rs.getDate("startdate").getTime());
+                int id = rs.getInt("order_id");
+                if(date1.compareTo(sdate)<0&&date2.compareTo(enddate)>0){
+                    OrderBean ob = new OrderBean();
+                    ob.order_id = id;
+                    PreparedStatement ps1 = conn.prepareStatement("select user_email,child_id,comments from Orders where order_id=?");
+                    ps1.setInt(1, id);
+                    ResultSet rs1 = ps1.executeQuery();
+                    while(rs1.next()){
+                        ob.useremail = rs1.getString("user_email");
+                        ob.cus_name = getCus(rs1.getInt("child_id"));
+                        ob.cmts = rs1.getString("comments");
+                    }
+                    v.add(ob);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return v;
+    }
+
+    public String getCus(int child_id) {
+        String name = "";
+        try {
+            PreparedStatement ps = conn.prepareStatement("select cus_email from Chirldren where child_id=?");
+            ps.setInt(1, child_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String email = rs.getString("cus_email");
+                PreparedStatement ps1 = conn.prepareStatement("select cus_name from Customer where cus_email=?");
+                ps1.setString(1, email);
+                ResultSet rs1 = ps1.executeQuery();
+                while (rs1.next()) {
+                    name = rs1.getString("cus_name");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
+    
+    
 }

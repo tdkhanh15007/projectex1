@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,6 +123,7 @@ public class NannyBean {
         }
         return id;
     }
+
     public int nametoID(String phone) {
         int id = 0;
         try {
@@ -138,7 +141,6 @@ public class NannyBean {
 
     public boolean createNanny(String name, String addr, String phone, int act_id) {
         if (!checkExist(phone)) {
-            System.out.println(checkExist(phone));
             try {
                 PreparedStatement ps = conn.prepareStatement("insert into Nannies(name,address,phone,activity_id,status) values(?,?,?,?,?)");
                 ps.setString(1, name);
@@ -293,5 +295,84 @@ public class NannyBean {
             Logger.getLogger(NannyBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return addr;
+    }
+
+    public String phonetoName(String phone) {
+        String name = "";
+        try {
+            PreparedStatement ps = conn.prepareStatement("select name from Nannies where phone=?");
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                name = rs.getString("name");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NannyBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
+
+    public Vector<NannyBean> tbReport(Date date1, Date date2, String phone) {
+        Vector<NannyBean> v = new Vector<NannyBean>();
+        try {
+            int nannyid = phonetoID(phone);
+            PreparedStatement ps = conn.prepareStatement("select order_id from OrdersDetails where nanny_id=?");
+            ps.setInt(1, nannyid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                PreparedStatement ps1 = conn.prepareStatement("select startdate,enddate from Orders where order_id=?");
+                ps1.setInt(1, rs.getInt("order_id"));
+                ResultSet rs1 = ps1.executeQuery();
+                while (rs1.next()) {
+                    Date enddate = new Date(rs1.getDate("enddate").getTime());
+                    Date sdate = new Date(rs1.getDate("startdate").getTime());
+                    if (date1.compareTo(sdate) < 0 && date2.compareTo(enddate) > 0) {
+                        NannyBean nb = new NannyBean();
+                        nb.order_id = rs.getInt("order_id");
+                        PreparedStatement ps2 = conn.prepareStatement("select payment_id,amount from Payments where order_id=?");
+                        ps2.setInt(1, rs.getInt("order_id"));
+                        ResultSet rs2 = ps2.executeQuery();
+                        while(rs2.next()){
+                            nb.paid = rs2.getFloat("amount");
+                            nb.nanny_id = rs2.getInt("payment_id");
+                        }
+                        v.add(nb);
+                    }
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NannyBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v;
+    }
+    public String getCmt(int id){
+        String cmt = "";
+        try {
+            PreparedStatement ps = conn.prepareStatement("select comments from Orders where order_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                cmt = rs.getString("comments");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cmt;
+    }
+    
+    public float getPay(int id){
+        float cmt = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select payment from Orders where order_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                cmt = rs.getFloat("payment");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cmt;
     }
 }

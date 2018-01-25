@@ -34,6 +34,10 @@ public class SystemPn extends javax.swing.JPanel {
         loadGroup();
     }
 
+    SystemPn(FrameMain aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void hiddenAct() {
         jLabel7.setVisible(false);
         jLabel8.setVisible(false);

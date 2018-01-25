@@ -30,24 +30,12 @@ public class ReportsBean {
     public int order_id;
     public int nanny_id;
     public String nanny_name;
+    public String cusname;
     public Date orderDate;
     public String orderBy;
     public int price;
     public int payment;
-
-    public ReportsBean(int order_id, String nanny_name, Date orderDate, String orderBy, int price, int payment) {
-        this.order_id = order_id;
-        this.nanny_name = nanny_name;
-        this.orderDate = orderDate;
-        this.orderBy = orderBy;
-        this.price = price;
-        this.payment = payment;
-    }
-
-
-
-    public ReportsBean() {
-    }
+    OrderBean ob = new OrderBean();
 
     public Vector<ReportsBean> displayAll() {
         Vector<ReportsBean> v = new Vector<ReportsBean>();
@@ -69,13 +57,19 @@ public class ReportsBean {
                     while (rs2.next()) {
                         rb.order_id = rs2.getInt("order_id");
                         rb.price = rs2.getInt("payment");
-                        rb.orderBy= rs2.getString("user_email");
-                        PreparedStatement ps3 = conn.prepareStatement("select nanny_id,amount from Payments where order_id=?");
+                        rb.orderBy = rs2.getString("user_email");
+                        PreparedStatement ps4 = conn.prepareStatement("select nanny_id from OrdersDetails where order_id=?");
+                        ps4.setInt(1, rs2.getInt("order_id"));
+                        ResultSet rs4 = ps4.executeQuery();
+                        while (rs4.next()) {
+                            String nannyname = nannyidtoString(rs4.getInt("nanny_id"));
+                            System.out.println(nannyname);
+                            rb.nanny_name = nannyname;
+                        }
+                        PreparedStatement ps3 = conn.prepareStatement("select amount from Payments where order_id=?");
                         ps3.setInt(1, rb.order_id);
                         ResultSet rs3 = ps3.executeQuery();
                         while (rs3.next()) {
-                            String nannyname = nannyidtoString(rs3.getInt("nanny_id"));
-                            rb.nanny_name = nannyname;
                             rb.payment = rs3.getInt("amount");
                         }
                     }
@@ -97,7 +91,7 @@ public class ReportsBean {
             ResultSet rs1 = ps1.executeQuery();
             while (rs1.next()) {
                 Date orderDate = new Date(rs1.getDate("startdate").getTime());
-                if(orderDate.compareTo(fromDate)>0&&orderDate.compareTo(toDate)<0){
+                if (orderDate.compareTo(fromDate) > 0 && orderDate.compareTo(toDate) < 0) {
                     ReportsBean rb = new ReportsBean();
                     PreparedStatement ps2 = conn.prepareStatement("select order_id,payment,user_email from Orders where startdate = ?");
                     java.sql.Date sqlDate = new java.sql.Date(orderDate.getTime());
@@ -107,13 +101,19 @@ public class ReportsBean {
                     while (rs2.next()) {
                         rb.order_id = rs2.getInt("order_id");
                         rb.price = rs2.getInt("payment");
-                        rb.orderBy= rs2.getString("user_email");
-                        PreparedStatement ps3 = conn.prepareStatement("select nanny_id,amount from Payments where order_id=?");
+                        rb.orderBy = rs2.getString("user_email");
+
+                        PreparedStatement ps4 = conn.prepareStatement("select nanny_id from OrdersDetails where order_id=?");
+                        ps4.setInt(1, rs2.getInt("order_id"));
+                        ResultSet rs4 = ps4.executeQuery();
+                        while (rs4.next()) {
+                            String nannyname = nannyidtoString(rs4.getInt("nanny_id"));
+                            rb.nanny_name = nannyname;
+                        }
+                        PreparedStatement ps3 = conn.prepareStatement("select amount from Payments where order_id=?");
                         ps3.setInt(1, rb.order_id);
                         ResultSet rs3 = ps3.executeQuery();
                         while (rs3.next()) {
-                            String nannyname = nannyidtoString(rs3.getInt("nanny_id"));
-                            rb.nanny_name = nannyname;
                             rb.payment = rs3.getInt("amount");
                         }
                     }
@@ -154,4 +154,61 @@ public class ReportsBean {
         }
         return nanny_name;
     }
+
+    public Vector<ReportsBean> tbOrders(Date date1, Date date2) {
+        Vector<ReportsBean> v = new Vector<ReportsBean>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select startdate,enddate,order_id from Orders");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Date enddate = new Date(rs.getDate("enddate").getTime());
+                Date sdate = new Date(rs.getDate("startdate").getTime());
+                if (date1.compareTo(sdate) < 0 && date2.compareTo(enddate) > 0) {
+                    int orid = rs.getInt("order_id");
+                    ReportsBean rb = new ReportsBean();
+                    rb.order_id = orid;
+                    PreparedStatement ps1 = conn.prepareStatement("select child_id,payment from Orders where order_id=?");
+                    ps1.setInt(1, orid);
+                    ResultSet rs1 = ps1.executeQuery();
+                    while (rs1.next()) {
+                        rb.payment = rs1.getInt("payment");
+                        rb.cusname = ob.getCus(rs1.getInt("child_id"));
+                    }
+                    v.add(rb);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportsBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v;
+    }
+
+    public Vector<ReportsBean> tbPaids(Date date1, Date date2) {
+        Vector<ReportsBean> v = new Vector<ReportsBean>();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select startdate,enddate,order_id from Orders");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Date enddate = new Date(rs.getDate("enddate").getTime());
+                Date sdate = new Date(rs.getDate("startdate").getTime());
+                if (date1.compareTo(sdate) < 0 && date2.compareTo(enddate) > 0) {
+                    int orid = rs.getInt("order_id");
+                    PreparedStatement ps1 = conn.prepareStatement("select nanny_id,payment_id,amount from Payments where order_id=?");
+                    ps1.setInt(1, orid);
+                    ResultSet rs1 = ps1.executeQuery();
+                    while (rs1.next()) {
+                        ReportsBean rb = new ReportsBean();
+                        rb.order_id = rs1.getInt("payment_id");
+                        rb.payment = rs1.getInt("amount");
+                        rb.nanny_name = nannyidtoString(rs1.getInt("nanny_id"));
+                        v.add(rb);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportsBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v;
+    }
+
 }

@@ -5,6 +5,7 @@
  */
 package Code;
 
+import controlpack.MainMethod;
 import controlpack.ReportsBean;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
@@ -20,14 +21,16 @@ public class ReportsPn extends javax.swing.JPanel {
 
     DefaultTableModel model;
     ReportsBean rpB = new ReportsBean();
+    MainMethod mmt = new MainMethod();
+    FrameMain fm;
 
     /**
      * Creates new form ReportsPn
      */
-    public ReportsPn() {
+    public ReportsPn(FrameMain fM) {
         initComponents();
-        model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
+        fm = fM;
+        jDialog1.setResizable(false);
         loadAll();
         jTable1.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
     }
@@ -50,8 +53,8 @@ public class ReportsPn extends javax.swing.JPanel {
             String orderBy = temp.orderBy;
             int price = temp.price;
             int payment = temp.payment;
-            totalicome = totalicome+price;
-            totalpay = totalpay+payment;
+            totalicome = totalicome + price;
+            totalpay = totalpay + payment;
             v.add(orderid);
             v.add(strDate);
             v.add(orderBy);
@@ -63,7 +66,8 @@ public class ReportsPn extends javax.swing.JPanel {
         txtIncome.setText(String.valueOf(totalicome));
         txtOutcome.setText(String.valueOf(totalpay));
     }
-    public void loadLess(Date fromDate,Date toDate) {
+
+    public void loadLess(Date fromDate, Date toDate) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         Vector<ReportsBean> item = rpB.displayCondition(fromDate, toDate);
@@ -81,8 +85,8 @@ public class ReportsPn extends javax.swing.JPanel {
             String orderBy = temp.orderBy;
             int price = temp.price;
             int payment = temp.payment;
-            totalicome = totalicome+price;
-            totalpay = totalpay+payment;
+            totalicome = totalicome + price;
+            totalpay = totalpay + payment;
             v.add(orderid);
             v.add(strDate);
             v.add(orderBy);
@@ -111,7 +115,6 @@ public class ReportsPn extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -121,12 +124,14 @@ public class ReportsPn extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        cbfromdate = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        cbtoDate = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -152,9 +157,6 @@ public class ReportsPn extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setText("Orders:");
-
-        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        jLabel9.setText("Report Details");
 
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel10.setText("Payments:");
@@ -187,30 +189,28 @@ public class ReportsPn extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel11.setText("jLabel11");
 
-        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel12.setText("jLabel12");
 
-        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel13.setText("Total:");
 
-        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel14.setText("Total:");
+
+        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel18.setText("Little Angels Childcare");
+
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel9.setText("Revenue and Expenditure");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(jLabel9)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -239,16 +239,27 @@ public class ReportsPn extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel7)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel9))
+                            .addComponent(jLabel18))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addGap(30, 30, 30)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
@@ -278,6 +289,11 @@ public class ReportsPn extends javax.swing.JPanel {
         jButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-print-30.png"))); // NOI18N
         jButton3.setText("Print");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
@@ -377,6 +393,11 @@ public class ReportsPn extends javax.swing.JPanel {
         jButton1.setForeground(new java.awt.Color(255, 51, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-edit-graph-report-30.png"))); // NOI18N
         jButton1.setText("Reports Details");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -399,11 +420,11 @@ public class ReportsPn extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbfromdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbtoDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton2))
                             .addComponent(jButton1))
@@ -416,10 +437,10 @@ public class ReportsPn extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbtoDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbfromdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -435,17 +456,76 @@ public class ReportsPn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        loadLess(jDateChooser1.getDate(), jDateChooser2.getDate());
+        loadLess(cbfromdate.getDate(), cbtoDate.getDate());
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Date date1 = cbfromdate.getDate();
+        Date date2 = cbtoDate.getDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strstartD = formatter.format(date1);
+        String strendD = formatter.format(date2);
+        System.out.println(strstartD+" "+strendD);
+        System.out.println(date1+" "+date2);
+        jLabel6.setText(strstartD);
+        jLabel7.setText(strendD);
+        tbOrder(date1, date2);
+        tbPaid(date1, date2);
+        mmt.displaydialog(jDialog1);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jDialog1.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public void tbOrder(Date date1, Date date2) {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        Vector<ReportsBean> item = rpB.tbOrders(date1, date2);
+        Vector v;
+        int total = 0;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            ReportsBean temp = item.get(i);
+            int id = temp.order_id;
+            String name = temp.cusname;
+            int price = temp.payment;
+            total = total + price;
+            v.add(id);
+            v.add(name);
+            v.add(price);
+            model.addRow(v);
+        }
+        jLabel11.setText(String.valueOf(total));
+    }
+    
+    public void tbPaid(Date date1, Date date2) {
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        model.setRowCount(0);
+        Vector<ReportsBean> item = rpB.tbPaids(date1, date2);
+        Vector v;
+        int total = 0;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            ReportsBean temp = item.get(i);
+            int id = temp.order_id;
+            String name = temp.nanny_name;
+            int price = temp.payment;
+            total = total + price;
+            v.add(id);
+            v.add(name);
+            v.add(price);
+            model.addRow(v);
+        }
+        jLabel12.setText(String.valueOf(total));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser cbfromdate;
+    private com.toedter.calendar.JDateChooser cbtoDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -453,6 +533,7 @@ public class ReportsPn extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

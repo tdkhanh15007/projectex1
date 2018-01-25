@@ -5,6 +5,7 @@
  */
 package Code;
 
+import MyDatabase.MyDatabase;
 import controlpack.ActBean;
 import controlpack.ChildrenBean;
 import controlpack.CustomerBean;
@@ -38,6 +39,8 @@ import javax.swing.table.TableRowSorter;
 public class ChildAdmin extends javax.swing.JPanel {
 
     DefaultTableModel dm;
+    int child_id = 0;
+    MyDatabase a = new MyDatabase();
     /**
      * Creates new form ChildAdmin
      */
@@ -234,7 +237,17 @@ public class ChildAdmin extends javax.swing.JPanel {
         Date dateAfter = Date.from(before);
         dateChooseStart.setDate(new Date());
         datChooseEnd.setDate(dateAfter);
+    }
 
+    public void closeDL() {
+        dlUpdateChild.dispose();
+        dlAddOrder.dispose();
+        dlAddCus.dispose();
+        dlUpdateCus.dispose();
+        dlAddChild.dispose();
+        dlComfirmOrder.dispose();
+        dlCfCus.dispose();
+        dlCfChild.dispose();
     }
 
     /**
@@ -586,8 +599,30 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtAddOrderGroup.setText("jLabel18");
 
         cbAddOrderAct.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cbAddOrderAct.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAddOrderActItemStateChanged(evt);
+            }
+        });
 
         cbAddOrderTime.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cbAddOrderTime.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAddOrderTimeItemStateChanged(evt);
+            }
+        });
+
+        dateChooseStart.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooseStartPropertyChange(evt);
+            }
+        });
+
+        datChooseEnd.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                datChooseEndPropertyChange(evt);
+            }
+        });
 
         cbAddOrderNN.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
@@ -1115,6 +1150,11 @@ public class ChildAdmin extends javax.swing.JPanel {
         jButton12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
         jButton12.setText("Back");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         txtChildName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         txtChildName.setText("jLabel27");
@@ -1217,8 +1257,7 @@ public class ChildAdmin extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtOrderBy)
-                    .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel57)))
+                    .addComponent(jLabel57))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(dlComfirmOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton11)
@@ -1605,33 +1644,50 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bntOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOkActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        int currentRow = tbChild.getSelectedRow();
-        int child_id = (int) tbModel.getValueAt(currentRow, 0);
-        boolean gender = false;
-        if (jComboBox1.getSelectedIndex() == 0) {
-            gender = true;
+        Date now = new Date();
+        if (!jDateChooser1.getDate().after(now)) {
+            try {
+                DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
+                int currentRow = tbChild.getSelectedRow();
+                int child_id = (int) tbModel.getValueAt(currentRow, 0);
+                boolean gender = false;
+                if (jComboBox1.getSelectedIndex() == 0) {
+                    gender = true;
+                }
+                if (chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)) {
+                    JOptionPane.showMessageDialog(this, "Update successful!!");
+                }
+                dlUpdateChild.dispose();
+                loadChild();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Update failed!!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Update failed!!");
         }
-        if (chBean.updateChild(child_id, txtfullname.getText(), jDateChooser1.getDate(), txtCurent.getText(), txtPass.getText(), txtDoctor.getText(), gender)) {
-            JOptionPane.showMessageDialog(this, "Update successful!!");
-        }
-        dlUpdateChild.dispose();
-        loadChild();
+
+
     }//GEN-LAST:event_bntOkActionPerformed
 
     private void bntOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOk1ActionPerformed
         boolean gender = false;
-        if (txtNewChildGender.getSelectedIndex() == 0) {
-            gender = true;
-        }
-        if (!chBean.isExist(txtNewEmailParents.getText(), txtNewChild.getText())) {
-            chBean.addChild(txtNewChild.getText(), txtNewChildBirth.getDate(), txtNewChildMedication.getText(), txtNewChilIlle.getText(), txtNewChildDoctor.getText(), gender, txtNewEmailParents.getText());
-            loadChild();
-            dlAddChild.dispose();
-            JOptionPane.showMessageDialog(this, "Child was added!!");
+        Date now = new Date();
+        if (!txtNewChildBirth.getDate().after(now)) {
+            if (txtNewChildGender.getSelectedIndex() == 0) {
+                gender = true;
+            }
+            if (!chBean.isExist(txtNewEmailParents.getText(), txtNewChild.getText())) {
+                chBean.addChild(txtNewChild.getText(), txtNewChildBirth.getDate(), txtNewChildMedication.getText(), txtNewChilIlle.getText(), txtNewChildDoctor.getText(), gender, txtNewEmailParents.getText());
+                loadChild();
+                dlAddChild.dispose();
+                JOptionPane.showMessageDialog(this, "Child was added!!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Can born in the future!!");
         }
+
     }//GEN-LAST:event_bntOk1ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -1643,15 +1699,36 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
-        if (!cb.isExist(txtNewCusEmail.getText())) {
-            cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
-            dlAddCus.dispose();
-            JOptionPane.showMessageDialog(this, "Customer was added!!");
-            loadCus(jCheckBox1.isSelected());
+        if (checkEmail(txtNewCusEmail.getText())&&checkFone(txtNewCusFone.getText())&&checkFone(txtNewCusWorkFone.getText())) {
+            try {
+                if (!cb.isExist(txtNewCusEmail.getText())) {
+                    cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
+                    dlAddCus.dispose();
+                    JOptionPane.showMessageDialog(this, "Customer was added!!");
+                    loadCus(jCheckBox1.isSelected());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Customer Email is Exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception e) {
+
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Customer Email is Exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
         }
+
     }//GEN-LAST:event_btnAddCusActionPerformed
+    public boolean checkEmail(String email) {
+        if (email.contains("@") && email.contains(".")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkFone(String phone){
+        if(phone.startsWith("0")&&phone.length()>9&&phone.length()<12){
+            return true;
+        }
+        return false;
+    }
 
     private void btnClearAddCussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAddCussActionPerformed
         txtNewCusAddr.setText("");
@@ -1742,6 +1819,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_tbChildMouseClicked
 
     private void btnUpdateChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateChildActionPerformed
+        closeDL();
         // Lay dong hien tai dang chon trong bang
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         int currentRow = tbChild.getSelectedRow();
@@ -1771,6 +1849,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateChildActionPerformed
 
     private void btnStatusChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusChildActionPerformed
+        closeDL();
         int selectedRow = tbChild.getSelectedRow();
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
 
@@ -1781,8 +1860,10 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnStatusChildActionPerformed
 
     private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+        closeDL();
         DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
         int currentRow = tbChild.getSelectedRow();
+        child_id = (int) tbModel.getValueAt(currentRow, 0);
         txtAddOrChildID.setText(tbModel.getValueAt(currentRow, 0).toString());
         txtAddOrChildname.setText(tbModel.getValueAt(currentRow, 1).toString());
         //lấy ngày hiện tại +1
@@ -1796,6 +1877,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         //tính tuổi
         String strBirth = tbModel.getValueAt(currentRow, 2).toString();
         int ages = gb.calYear(strBirth);
+        cAges = gb.calYear(strBirth);
         String strgroup = "New born";
         if (ages > 0) {
             strgroup = ages + " years old.";
@@ -1803,7 +1885,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtAddOrderGroup.setText(strgroup);
         MMt.displaydialog(dlAddOrder);
     }//GEN-LAST:event_btnCreateOrderActionPerformed
-
+    int cAges = 0;
     private void btnSearchChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchChildActionPerformed
         if (!txtSearch.getText().equals("") || !txtSearch.getText().equals(null)) {
             searchChild(txtSearch.getText());
@@ -1826,12 +1908,14 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_tbCusMouseClicked
 
     private void btnNewCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCusActionPerformed
+        closeDL();
         MMt.displaydialog(dlAddCus);
         loadCus(jCheckBox1.isSelected());
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNewCusActionPerformed
 
     private void btnUpdateCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCusActionPerformed
+        closeDL();
         DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
         int currentRow = tbCus.getSelectedRow();
         txtUpdateCus.setText(tbModel.getValueAt(currentRow, 0).toString());
@@ -1843,6 +1927,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateCusActionPerformed
 
     private void btnStatusCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusCusActionPerformed
+        closeDL();
         MMt.displaydialog(dlCfCus);
         DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
         int currentRow = tbCus.getSelectedRow();
@@ -1857,13 +1942,13 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchCusActionPerformed
 
     private void btnNewChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewChildActionPerformed
+        closeDL();
         DefaultTableModel tbModel = (DefaultTableModel) tbCus.getModel();
         int currentRow = tbCus.getSelectedRow();
         String parentsEmail = tbModel.getValueAt(currentRow, 0).toString();
         txtNewChildBirth.setDate(new Date());
         txtNewEmailParents.setText(parentsEmail);
         txtNewChild.setText("");
-        txtNewChildBirth.setDate(new Date());
         txtNewChildMedication.setText("");
         txtNewChilIlle.setText("");
         txtNewChildDoctor.setText("");
@@ -1888,37 +1973,50 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActiveActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (lbNN.isVisible()) {
+        try {
+            if (lbNN.isVisible()) {
 //            DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
 //            int currentRow = tbCus.getSelectedRow();
 //            String birth =  tbModel.getValueAt(currentRow, 2).toString();
-            System.out.println("Demo đơn");
-            int childId = Integer.valueOf(txtAddOrChildID.getText());
-            String strbirth = chBean.strofBirth(childId);
-            txtChildName.setText(txtAddOrChildname.getText());
-            txtAct.setText(cbAddOrderAct.getSelectedItem().toString());
-            txtTime.setText(cbAddOrderTime.getSelectedItem().toString());
-            Date startD = dateChooseStart.getDate();
-            Date endD = datChooseEnd.getDate();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            String strstartD = formatter.format(startD);
-            String strendD = formatter.format(endD);
-            txtStart.setText(strstartD);
-            txtEnd.setText(strendD);
-            txtNanny.setText(cbAddOrderNN.getSelectedItem().toString());
-            txtOrderBy.setText(fMain.name());
-            float priceperday = ob.getGroupFee(strbirth)+ob.getActFee(txtAct.getText());
-            System.out.println(priceperday);
-            
-            
-            dlAddOrder.dispose();
-            MMt.displaydialog(dlComfirmOrder);
-        } else {
-            System.out.println("Tìm giảng viên");
-            String actName = cbAddOrderAct.getSelectedItem().toString();
-            int timeID = cbAddOrderTime.getSelectedIndex() + 1;
-            Date fromDate = dateChooseStart.getDate();
-            loadNanny(actName, timeID, fromDate);
+                int childId = Integer.valueOf(txtAddOrChildID.getText());
+                String strbirth = chBean.strofBirth(childId);
+                txtChildName.setText(txtAddOrChildname.getText());
+                txtAct.setText(cbAddOrderAct.getSelectedItem().toString());
+                String actname = txtAct.getText();
+                txtTime.setText(cbAddOrderTime.getSelectedItem().toString());
+                Date startD = dateChooseStart.getDate();
+                Date endD = datChooseEnd.getDate();
+                if (!startD.after(endD)) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    String strstartD = formatter.format(startD);
+                    String strendD = formatter.format(endD);
+                    txtStart.setText(strstartD);
+                    txtEnd.setText(strendD);
+                    txtNanny.setText(cbAddOrderNN.getSelectedItem().toString());
+                    txtOrderBy.setText(fMain.name());
+                    int percent = 1;
+                    if (cbAddOrderTime.getSelectedIndex() == 5) {
+                        percent = 4;
+                    }
+                    float payment = ob.getGroupFee(strbirth) + ob.getActFee(actname) * ob.daysBetween(startD, endD) * percent;
+
+                    txtPrice.setText(String.valueOf(payment));
+
+                    dlAddOrder.dispose();
+                    MMt.displaydialog(dlComfirmOrder);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Start date must before End date");
+                }
+
+            } else {
+                String actName = cbAddOrderAct.getSelectedItem().toString();
+                int timeID = cbAddOrderTime.getSelectedIndex() + 1;
+                Date fromDate = dateChooseStart.getDate();
+                cbAddOrderNN.removeAllItems();
+                loadNanny(actName, timeID, fromDate);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1927,15 +2025,55 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        //thêm vào bảng order
-        DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
-        int currentRow = tbCus.getSelectedRow();
-        String birth = tbModel.getValueAt(currentRow, 2).toString();
-        if (ob.inserOrder(Float.valueOf(txtOrderBy.getText()), dateChooseStart.getDate(), fMain.name(), Integer.valueOf(txtAddOrChildID.getText()), datChooseEnd.getDate(), nb.nametoID(txtNanny.getText()), ob.getGroupID(birth), cbAddOrderTime.getSelectedIndex() + 1)) {
-            JOptionPane.showMessageDialog(this, "Saved!");
-            hiddenBtn();
+        try {
+            //thêm vào bảng order
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            String sDate = txtStart.getText();
+            String eDate = txtEnd.getText();
+            Date date1 = formatter.parse(sDate);
+            Date date2 = formatter.parse(eDate);
+            String birth = chBean.strofBirth(child_id);
+            if (ob.inserOrder(
+                    Float.valueOf(txtPrice.getText()),
+                    date1, fMain.name(),
+                    child_id,
+                    date2,
+                    nb.nametoID(txtNanny.getText()),
+                    ob.getGroupID(birth),
+                    cbAddOrderTime.getSelectedIndex() + 1)) {
+                JOptionPane.showMessageDialog(this, "Saved!");
+                closeDL();
+                hiddenBtn();
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        closeDL();
+        MMt.displaydialog(dlAddOrder);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void dateChooseStartPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooseStartPropertyChange
+        lbNN.setVisible(false);
+        cbAddOrderNN.setVisible(false);
+    }//GEN-LAST:event_dateChooseStartPropertyChange
+
+    private void datChooseEndPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datChooseEndPropertyChange
+        lbNN.setVisible(false);
+        cbAddOrderNN.setVisible(false);
+    }//GEN-LAST:event_datChooseEndPropertyChange
+
+    private void cbAddOrderActItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAddOrderActItemStateChanged
+        lbNN.setVisible(false);
+        cbAddOrderNN.setVisible(false);
+    }//GEN-LAST:event_cbAddOrderActItemStateChanged
+
+    private void cbAddOrderTimeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAddOrderTimeItemStateChanged
+        lbNN.setVisible(false);
+        cbAddOrderNN.setVisible(false);
+    }//GEN-LAST:event_cbAddOrderTimeItemStateChanged
 
     NannyBean nb = new NannyBean();
     // Variables declaration - do not modify//GEN-BEGIN:variables

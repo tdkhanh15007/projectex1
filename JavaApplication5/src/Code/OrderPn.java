@@ -25,15 +25,23 @@ public class OrderPn extends javax.swing.JPanel {
 
     OrderBean ob = new OrderBean();
     MainMethod mmt = new MainMethod();
+    FrameMain fm;
 
     ;
     /**
      * Creates new form OrderPn
      */
-    public OrderPn() {
+    public OrderPn(FrameMain fM) {
         initComponents();
-        jDateChooser1.setDate(new Date());
+        fm = fM;
+        dlReportDoc.setResizable(false);
         hiddenAll();
+    }
+
+    public void closeDL() {
+        dlConfirm.dispose();
+        dlMakeReport.dispose();
+        dlReportDoc.dispose();
     }
 
     public void loadOrder(String cusname) {
@@ -78,6 +86,8 @@ public class OrderPn extends javax.swing.JPanel {
     }
 
     public void hiddenAll() {
+        jScrollPane1.setVisible(false);
+        jScrollPane2.setVisible(false);
         tbOrder.setVisible(false);
         jLabel1.setVisible(false);
         txtOrderDate.setVisible(false);
@@ -119,15 +129,15 @@ public class OrderPn extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         dlMakeReport = new javax.swing.JDialog();
         jLabel7 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        cbfromdate = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        cbtoDate = new com.toedter.calendar.JDateChooser();
+        act = new javax.swing.JRadioButton();
+        ict = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        ReportDoc = new javax.swing.JDialog();
+        dlReportDoc = new javax.swing.JDialog();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -141,7 +151,7 @@ public class OrderPn extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbReport = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbOrder = new javax.swing.JTable();
@@ -214,19 +224,30 @@ public class OrderPn extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setText("To:");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jRadioButton1.setText("Active Order");
+        buttonGroup1.add(act);
+        act.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        act.setSelected(true);
+        act.setText("Active Order");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jRadioButton2.setText("Inactive Order");
+        buttonGroup1.add(ict);
+        ict.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        ict.setText("Inactive Order");
 
         jButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton3.setText("Submit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dlMakeReportLayout = new javax.swing.GroupLayout(dlMakeReport.getContentPane());
         dlMakeReport.getContentPane().setLayout(dlMakeReportLayout);
@@ -244,12 +265,12 @@ public class OrderPn extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jButton4))
                     .addGroup(dlMakeReportLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(act)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2))
+                        .addComponent(ict))
                     .addGroup(dlMakeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cbfromdate, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                        .addComponent(cbtoDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         dlMakeReportLayout.setVerticalGroup(
@@ -257,16 +278,16 @@ public class OrderPn extends javax.swing.JPanel {
             .addGroup(dlMakeReportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dlMakeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbfromdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(dlMakeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbtoDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(dlMakeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(act)
+                    .addComponent(ict))
                 .addGap(18, 18, 18)
                 .addGroup(dlMakeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -277,10 +298,20 @@ public class OrderPn extends javax.swing.JPanel {
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-print-30.png"))); // NOI18N
         jButton5.setText("Print");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/icons8-undo-30.png"))); // NOI18N
         jButton6.setText("Back");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel9.setText("Report Form");
@@ -309,7 +340,7 @@ public class OrderPn extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel17.setText("jLabel17");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -328,12 +359,12 @@ public class OrderPn extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane3.setViewportView(tbReport);
+        if (tbReport.getColumnModel().getColumnCount() > 0) {
+            tbReport.getColumnModel().getColumn(0).setResizable(false);
+            tbReport.getColumnModel().getColumn(1).setResizable(false);
+            tbReport.getColumnModel().getColumn(2).setResizable(false);
+            tbReport.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
@@ -346,12 +377,12 @@ public class OrderPn extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
+                        .addGap(306, 306, 306)
                         .addComponent(jLabel18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(357, 357, 357)
                         .addComponent(jLabel9)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -403,24 +434,24 @@ public class OrderPn extends javax.swing.JPanel {
                     .addContainerGap()))
         );
 
-        javax.swing.GroupLayout ReportDocLayout = new javax.swing.GroupLayout(ReportDoc.getContentPane());
-        ReportDoc.getContentPane().setLayout(ReportDocLayout);
-        ReportDocLayout.setHorizontalGroup(
-            ReportDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReportDocLayout.createSequentialGroup()
+        javax.swing.GroupLayout dlReportDocLayout = new javax.swing.GroupLayout(dlReportDoc.getContentPane());
+        dlReportDoc.getContentPane().setLayout(dlReportDocLayout);
+        dlReportDocLayout.setHorizontalGroup(
+            dlReportDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlReportDocLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(541, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        ReportDocLayout.setVerticalGroup(
-            ReportDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReportDocLayout.createSequentialGroup()
+        dlReportDocLayout.setVerticalGroup(
+            dlReportDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlReportDocLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(ReportDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dlReportDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
                 .addContainerGap())
@@ -607,8 +638,10 @@ public class OrderPn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        
         if (!jTextField1.getText().equals("") || !jTextField1.getText().equals(null)) {
             if (ob.checkbeforeSearch(jTextField1.getText())) {
+                jScrollPane1.setVisible(true);
                 tbOrder.setVisible(true);
                 loadOrder(jTextField1.getText());
             } else {
@@ -619,6 +652,7 @@ public class OrderPn extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tbOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderMouseClicked
+        jScrollPane2.setVisible(true);
         display();
         DefaultTableModel tbModel = (DefaultTableModel) tbOrder.getModel();
         int currentRow = tbOrder.getSelectedRow();
@@ -627,10 +661,9 @@ public class OrderPn extends javax.swing.JPanel {
     }//GEN-LAST:event_tbOrderMouseClicked
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
-        if(!txtComments.getText().equals("")||!txtComments.getText().equals(null)){
+        if (!txtComments.getText().equals("") || !txtComments.getText().equals(null)) {
             mmt.displaydialog(dlConfirm);
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Please write the reason to close Order!");
         }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
@@ -659,12 +692,11 @@ public class OrderPn extends javax.swing.JPanel {
             Date sDate = df.parse(strDate);
             Date eDate = jDateChooser1.getDate();
             String cmt = txtComments.getText();
-            if(ob.updateOr(id, sDate, eDate, cmt)){
+            if (ob.updateOr(id, sDate, eDate, cmt)) {
                 JOptionPane.showMessageDialog(this, "Order was updated!!");
                 hiddenAll();
                 loadOrder(jTextField1.getText());
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Update failed");
             }
         } catch (ParseException ex) {
@@ -673,19 +705,80 @@ public class OrderPn extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnUpdate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate2ActionPerformed
-        // TODO add your handling code here:
+        closeDL();
+        mmt.displaydialog(dlMakeReport);
     }//GEN-LAST:event_btnUpdate2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        closeDL();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int checkgen = (act.isSelected() ? 1 : 0);
+        boolean orderstatus = false;
+        if (checkgen == 1) {
+            orderstatus = true;
+        }
+        jLabel14.setText(fm.name());
+        if (orderstatus) {
+            jLabel15.setText("Active Order");
+        } else {
+            jLabel15.setText("InActive Order");
+        }
+        Date date1 = cbfromdate.getDate();
+        Date date2 = cbtoDate.getDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strstartD = formatter.format(date1);
+        String strendD = formatter.format(date2);
+        jLabel16.setText(strstartD);
+        jLabel17.setText(strendD);
+        closeDL();
+        loadReport(date1, date2, orderstatus);
+        mmt.displaydialog(dlReportDoc);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        closeDL();
+        mmt.displaydialog(dlMakeReport);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        closeDL();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void loadReport(Date date1, Date date2, boolean status) {
+        DefaultTableModel model = (DefaultTableModel) tbReport.getModel();
+        model.setRowCount(0);
+        Vector<OrderBean> item = ob.getReportlist(date1, date2, status);
+        Vector v;
+        for (int i = 0; i < item.size(); i++) {
+            v = new Vector();
+            OrderBean temp = item.get(i);
+            int id = temp.order_id;
+            String cus = temp.cus_name;
+            String user = temp.useremail;
+            String cmt = temp.cmts;
+            v.add(id);
+            v.add(cus);
+            v.add(user);
+            v.add(cmt);
+            model.addRow(v);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog ReportDoc;
+    private javax.swing.JRadioButton act;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate1;
     private javax.swing.JButton btnUpdate2;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser cbfromdate;
+    private com.toedter.calendar.JDateChooser cbtoDate;
     private javax.swing.JDialog dlConfirm;
     private javax.swing.JDialog dlMakeReport;
+    private javax.swing.JDialog dlReportDoc;
+    private javax.swing.JRadioButton ict;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -693,8 +786,6 @@ public class OrderPn extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -714,14 +805,12 @@ public class OrderPn extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbOrder;
+    private javax.swing.JTable tbReport;
     private javax.swing.JTextArea txtComments;
     private javax.swing.JLabel txtOrderDate;
     private javax.swing.JTextField txtPrice;

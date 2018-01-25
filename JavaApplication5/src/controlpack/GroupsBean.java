@@ -72,11 +72,13 @@ public class GroupsBean {
         int month = localDate.getMonthValue();
         int year = cal.get(Calendar.YEAR);
         int day = cal.get(Calendar.DATE);
-
         String str[] = birth.split("/");
         int dayb = Integer.parseInt(str[0]);
         int monthb = Integer.parseInt(str[1]);
         int yearb = Integer.parseInt(str[2]);
+        if(monthb==0){
+            monthb = 1;
+        }
         LocalDate start = LocalDate.of(yearb, monthb, dayb);
         LocalDate end = LocalDate.of(year,month,day);
         long yearsold = ChronoUnit.YEARS.between(start, end);

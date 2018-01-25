@@ -39,6 +39,10 @@ public class HumansPn extends javax.swing.JPanel {
         tbNanny.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
     }
 
+    HumansPn(FrameMain aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void loadUser() {
         DefaultTableModel model = (DefaultTableModel) tbUser.getModel();
         model.setRowCount(0);
@@ -129,6 +133,8 @@ public class HumansPn extends javax.swing.JPanel {
     }
 
     public void hiddenNUp() {
+        jScrollPane2.setVisible(false);
+        jScrollPane3.setVisible(false);
         jLabel7.setVisible(false);
         jTextField5.setVisible(false);
         jLabel9.setVisible(false);
@@ -784,12 +790,14 @@ public class HumansPn extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        jScrollPane2.setVisible(true);
         if (!txtSearch.getText().equals("") || !txtSearch.getText().equals(null)) {
             seachNanny(txtSearch.getText());
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tbNannyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNannyMouseClicked
+        jScrollPane3.setVisible(true);
         DefaultTableModel tbModel = (DefaultTableModel) tbNanny.getModel();
         int currentRow = tbNanny.getSelectedRow();
         jTextField5.setText(tbModel.getValueAt(currentRow, 1).toString());

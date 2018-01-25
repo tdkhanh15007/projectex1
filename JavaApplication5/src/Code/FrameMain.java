@@ -33,8 +33,12 @@ import javax.swing.table.DefaultTableModel;
 public class FrameMain extends javax.swing.JFrame {
 
     public static String name, role;
+    
     public String name(){
         return txtUser.getText();
+    }
+    public String roleU(){
+        return role;
     }
 
     public FrameMain() {
@@ -42,8 +46,8 @@ public class FrameMain extends javax.swing.JFrame {
         clock();
         ChildAdmin ca = new ChildAdmin(this);
         if (role == "false") {
-            bntCash.setVisible(false);
             bntReport.setVisible(false);
+            bntCash1.setVisible(false);
             bntHumans.setVisible(false);
         }
         labelImage.setHorizontalAlignment((int) CENTER_ALIGNMENT);
@@ -343,7 +347,7 @@ public class FrameMain extends javax.swing.JFrame {
 
     private void txtOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderActionPerformed
         pnMain.removeAll();
-        OrderPn rp = new OrderPn();
+        OrderPn rp = new OrderPn(this);
         rp.setSize(pnMain.getWidth(), pnMain.getHeight());
         pnMain.add(rp);
         pnMain.updateUI();
@@ -351,7 +355,7 @@ public class FrameMain extends javax.swing.JFrame {
 
     private void bntReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReportActionPerformed
         pnMain.removeAll();
-        ReportsPn rp = new ReportsPn();
+        ReportsPn rp = new ReportsPn(this);
         rp.setSize(pnMain.getWidth(), pnMain.getHeight());
         pnMain.add(rp);
         pnMain.updateUI();
@@ -367,7 +371,7 @@ public class FrameMain extends javax.swing.JFrame {
 
     private void bntCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCashActionPerformed
         pnMain.removeAll();
-        CashPn rp = new CashPn();
+        CashPn rp = new CashPn(this);
         rp.setSize(pnMain.getWidth(), pnMain.getHeight());
         pnMain.add(rp);
         pnMain.updateUI();
