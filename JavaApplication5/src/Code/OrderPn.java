@@ -638,7 +638,7 @@ public class OrderPn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        
+
         if (!jTextField1.getText().equals("") || !jTextField1.getText().equals(null)) {
             if (ob.checkbeforeSearch(jTextField1.getText())) {
                 jScrollPane1.setVisible(true);
@@ -691,14 +691,20 @@ public class OrderPn extends javax.swing.JPanel {
         try {
             Date sDate = df.parse(strDate);
             Date eDate = jDateChooser1.getDate();
-            String cmt = txtComments.getText();
-            if (ob.updateOr(id, sDate, eDate, cmt)) {
-                JOptionPane.showMessageDialog(this, "Order was updated!!");
-                hiddenAll();
-                loadOrder(jTextField1.getText());
-            } else {
+            Date now = new Date();
+            if (eDate.after(now)) {
+                String cmt = txtComments.getText();
+                if (ob.updateOr(id, sDate, eDate, cmt)) {
+                    JOptionPane.showMessageDialog(this, "Order was updated!!");
+                    hiddenAll();
+                    loadOrder(jTextField1.getText());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Update failed");
+                }
+            }else{
                 JOptionPane.showMessageDialog(this, "Update failed");
             }
+
         } catch (ParseException ex) {
             Logger.getLogger(OrderPn.class.getName()).log(Level.SEVERE, null, ex);
         }

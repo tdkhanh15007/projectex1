@@ -1684,12 +1684,19 @@ public class ChildAdmin extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
             }
+        } else if (checkNull(txtNewChild.getText())) {
+            JOptionPane.showMessageDialog(this, "Fill name of child!!");
         } else {
-            JOptionPane.showMessageDialog(this, "Can born in the future!!");
+            JOptionPane.showMessageDialog(this, "Can not born in the future!!");
         }
 
     }//GEN-LAST:event_bntOk1ActionPerformed
-
+    public boolean checkNull(String name) {
+        if (name.isEmpty() || name.equals("")) {
+            return true;
+        }
+        return false;
+    }
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         dlAddChild.dispose();
     }//GEN-LAST:event_jButton18ActionPerformed
@@ -1699,7 +1706,7 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
-        if (checkEmail(txtNewCusEmail.getText())&&checkFone(txtNewCusFone.getText())&&checkFone(txtNewCusWorkFone.getText())) {
+        if (checkEmail(txtNewCusEmail.getText()) && checkFone(txtNewCusFone.getText()) && checkFone(txtNewCusWorkFone.getText())) {
             try {
                 if (!cb.isExist(txtNewCusEmail.getText())) {
                     cb.addCus(txtNewCusEmail.getText(), txtNewCusName.getText(), txtNewCusAddr.getText(), txtNewCusFone.getText(), txtNewCusWorkFone.getText());
@@ -1712,8 +1719,12 @@ public class ChildAdmin extends javax.swing.JPanel {
             } catch (Exception e) {
 
             }
-        } else {
+        } else if (a.checkStart(txtNewCusEmail.getText())) {
             JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
+        } else if (a.checkSyb(txtNewCusName.getText())) {
+            JOptionPane.showMessageDialog(this, "Can not Create Customer!!");
+        }else if(a.checkPat(txtNewCusFone.getText())){
+            JOptionPane.showMessageDialog(this, "Phone must be number!!");
         }
 
     }//GEN-LAST:event_btnAddCusActionPerformed
@@ -1723,8 +1734,9 @@ public class ChildAdmin extends javax.swing.JPanel {
         }
         return false;
     }
-    public boolean checkFone(String phone){
-        if(phone.startsWith("0")&&phone.length()>9&&phone.length()<12){
+
+    public boolean checkFone(String phone) {
+        if (phone.startsWith("0") && phone.length() > 9 && phone.length() < 12) {
             return true;
         }
         return false;
@@ -1994,14 +2006,8 @@ public class ChildAdmin extends javax.swing.JPanel {
                     txtEnd.setText(strendD);
                     txtNanny.setText(cbAddOrderNN.getSelectedItem().toString());
                     txtOrderBy.setText(fMain.name());
-                    int percent = 1;
-                    if (cbAddOrderTime.getSelectedIndex() == 5) {
-                        percent = 4;
-                    }
-                    float payment = ob.getGroupFee(strbirth) + ob.getActFee(actname) * ob.daysBetween(startD, endD) * percent;
-
+                    float payment = ob.getGroupFee(strbirth) + ob.getActFee(actname) * ob.daysBetween(startD, endD);
                     txtPrice.setText(String.valueOf(payment));
-
                     dlAddOrder.dispose();
                     MMt.displaydialog(dlComfirmOrder);
                 } else {
@@ -2044,6 +2050,8 @@ public class ChildAdmin extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Saved!");
                 closeDL();
                 hiddenBtn();
+            } else {
+                JOptionPane.showMessageDialog(this, "Child was already register at selected times!");
             }
         } catch (ParseException ex) {
             Logger.getLogger(ChildAdmin.class.getName()).log(Level.SEVERE, null, ex);

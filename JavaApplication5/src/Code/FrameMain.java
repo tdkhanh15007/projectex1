@@ -363,7 +363,7 @@ public class FrameMain extends javax.swing.JFrame {
 
     private void bntHumansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHumansActionPerformed
         pnMain.removeAll();
-        HumansPn rp = new HumansPn();
+        HumansPn rp = new HumansPn(this);
         rp.setSize(pnMain.getWidth(), pnMain.getHeight());
         pnMain.add(rp);
         pnMain.updateUI();

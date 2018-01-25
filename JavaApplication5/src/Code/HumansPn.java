@@ -5,6 +5,7 @@
  */
 package Code;
 
+import MyDatabase.MyDatabase;
 import controlpack.ActBean;
 import controlpack.MainMethod;
 import controlpack.NannyBean;
@@ -24,11 +25,14 @@ public class HumansPn extends javax.swing.JPanel {
     UserBean us = new UserBean();
     NannyBean nb = new NannyBean();
     ActBean acb = new ActBean();
+    MyDatabase myData = new MyDatabase();
+    FrameMain fm;
 
     /**
      * Creates new form HumansPn
      */
-    public HumansPn() {
+    public HumansPn(FrameMain fM) {
+        fm = fM;
         initComponents();
         hiddenAll();
         hiddenNUp();
@@ -37,10 +41,6 @@ public class HumansPn extends javax.swing.JPanel {
         loadAct();
         tbUser.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
         tbNanny.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-    }
-
-    HumansPn(FrameMain aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void loadUser() {
@@ -293,7 +293,7 @@ public class HumansPn extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Email", "Name", "Phone", "Role"
+                "User", "Name", "Phone", "Role"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -319,7 +319,7 @@ public class HumansPn extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel1.setText("Email:");
+        jLabel1.setText("User:");
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 102));
@@ -716,6 +716,10 @@ public class HumansPn extends javax.swing.JPanel {
         jTextField3.setText(phone);
         jTextField2.setText(name);
         displaytoUp();
+        if (tbModel.getValueAt(currentRow, 0).toString().equals(fm.name())) {
+            jComboBox1.setVisible(false);
+            jLabel4.setVisible(false);
+        }
         jButton3.setVisible(false);
     }//GEN-LAST:event_tbUserMouseClicked
 
@@ -734,50 +738,64 @@ public class HumansPn extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.isVisible()) {
-            String pass1 = jPasswordField1.getText();
-            String pass2 = jPasswordField2.getText();
-            if (us.repeatPass(pass1, pass2)) {
-                String pass = us.covertoMD5(pass1);
+        if (myData.checkPat(jTextField3.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone must be number!");
+        } else if (jTextField2.getText().equals("") || jTextField2.getText().equals(null)) {
+            JOptionPane.showMessageDialog(this, "Name can not be blank!");
+        } else {
+            if (jTextField1.isVisible()) {
+                if (jTextField1.getText().equals("") || jTextField1.getText().equals(null)) {
+                    JOptionPane.showMessageDialog(this, "User can not be blank!");
+                } else {
+                    String pass1 = jPasswordField1.getText();
+                    String pass2 = jPasswordField2.getText();
+                    if (us.repeatPass(pass1, pass2)) {
+                        String pass = us.covertoMD5(pass1);
+                        boolean role = true;
+                        if (jComboBox1.getSelectedIndex() == 0) {
+                            role = false;
+                        }
+                        if (!us.createUser(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), pass, role)) {
+                            JOptionPane.showMessageDialog(this, "User is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            loadUser();
+                            hiddenAll();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Password and Comfirm Password does not match!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+
+            } else {
+                DefaultTableModel tbModel = (DefaultTableModel) tbUser.getModel();
+                int currentRow = tbUser.getSelectedRow();
+                String email = tbModel.getValueAt(currentRow, 0).toString();
+                String phone = jTextField3.getText();
+                String name = jTextField2.getText();
                 boolean role = true;
                 if (jComboBox1.getSelectedIndex() == 0) {
                     role = false;
                 }
-                if (!us.createUser(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), pass, role)) {
-                    JOptionPane.showMessageDialog(this, "User Email is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    loadUser();
-                    hiddenAll();
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Password and Comfirm Password does not match!!", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
-        } else {
-            DefaultTableModel tbModel = (DefaultTableModel) tbUser.getModel();
-            int currentRow = tbUser.getSelectedRow();
-            String email = tbModel.getValueAt(currentRow, 0).toString();
-            String phone = jTextField3.getText();
-            String name = jTextField2.getText();
-            boolean role = true;
-            if (jComboBox1.getSelectedIndex() == 0) {
-                role = false;
-            }
-            if (jPasswordField1.getText().equals("") && jPasswordField2.getText().equals("")) {
-                String pass = us.md5Pass(tbModel.getValueAt(currentRow, 0).toString());
-                us.updateUser(name, phone, role, pass, email);
-                hiddenAll();
-                loadUser();
-            } else {
-                if (us.repeatPass(jPasswordField1.getText(), jPasswordField2.getText())) {
-                    String pass = us.covertoMD5(jPasswordField1.getText());
+                if (jPasswordField1.getText().equals("") && jPasswordField2.getText().equals("")) {
+                    String pass = us.md5Pass(tbModel.getValueAt(currentRow, 0).toString());
                     us.updateUser(name, phone, role, pass, email);
                     hiddenAll();
                     loadUser();
+                } else if (jTextField1.getText().equals("") || jTextField1.getText().equals(null)) {
+                    JOptionPane.showMessageDialog(this, "User can not be blank!");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Password and Comfirm Password does not match!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    if (us.repeatPass(jPasswordField1.getText(), jPasswordField2.getText())) {
+                        String pass = us.covertoMD5(jPasswordField1.getText());
+                        us.updateUser(name, phone, role, pass, email);
+                        hiddenAll();
+                        loadUser();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Password and Comfirm Password does not match!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -842,10 +860,10 @@ public class HumansPn extends javax.swing.JPanel {
             int currentRow = tbNanny.getSelectedRow();
             int actID = acb.nametoID(tbModel.getValueAt(currentRow, 3).toString());
             int nnID = nb.phonetoID(tbModel.getValueAt(currentRow, 2).toString());
-            if(nb.updateNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID, nnID)){
+            if (nb.updateNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID, nnID)) {
                 hiddenNUp();
                 loadNanny();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Phonenumber in used!", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -893,4 +911,3 @@ public class HumansPn extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
-

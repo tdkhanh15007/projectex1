@@ -15,20 +15,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author A
  */
 public class MyDatabase {
-    
+
     private static Connection _connection;
-    
-    public Connection getConnection(){
-        Connection conn =  null;
+
+    public Connection getConnection() {
+        Connection conn = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=LittleAngels", "sa", "sa");
+            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=LittleAngels", "sa", "sa");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MyDatabase.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -36,34 +38,36 @@ public class MyDatabase {
         }
         return conn;
     }
-    
+
     private static void connect() throws ClassNotFoundException, SQLException {
-        
+
         String username = "sa";
         String password = "sa";
         String sqlURL = "jdbc:sqlserver://localhost:1433;databaseName=LittleAngels";
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         _connection = DriverManager.getConnection(sqlURL, username, password);
-        
+
     }
-    
+
     private static boolean isConnected() throws SQLException {
         return _connection != null && !_connection.isClosed();
     }
-    
+
     public static boolean checkLogin(String userMail, String password) throws SQLException, ClassNotFoundException {
-        
+
         // Kiem tra ket noi
-        if (!isConnected()) connect();
-        
+        if (!isConnected()) {
+            connect();
+        }
+
         // Lam viec voi CSDL
         String sqlQuery = "SELECT * FROM [Users] where user_email = ? and password = ?";
         PreparedStatement ps;
-        ResultSet rs;        
+        ResultSet rs;
         ps = _connection.prepareStatement(sqlQuery);
         ps.setString(1, userMail);
         ps.setString(2, password);
-        rs = ps.executeQuery();  
+        rs = ps.executeQuery();
 //        while(rs.next()){
 //            UserBean us = new UserBean();
 //            us.setUser(rs.getString("user_email"));
@@ -71,11 +75,40 @@ public class MyDatabase {
 //        }
 
         return rs.next();
-    }   
-    
-    public boolean checkBirth(Date b) {
-        Date now = new Date();
-        if(b.compareTo(now)<0){
+    }
+
+    public boolean checkSyb(String s) {
+        boolean check = false;
+        char syb[] = {'-', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '='};
+        char a[] = s.toCharArray();
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < syb.length; j++) {
+                if (a[i] == syb[j]) {
+                    check = true;
+                }
+            }
+        }
+        return check;
+    }
+
+    public boolean checkStart(String s) {
+        boolean check = false;
+        char syb[] = {'-', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '='};
+        char a[] = s.toCharArray();
+        for (int i = 0; i < syb.length; i++) {
+            if (a[0] == syb[i]) {
+                check = true;
+                break;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean checkPat(String s) {
+        Pattern p = Pattern.compile("[^0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(s);
+        if (m.find()) {
             return true;
         }
         return false;
