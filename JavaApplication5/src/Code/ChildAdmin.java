@@ -1634,6 +1634,8 @@ public class ChildAdmin extends javax.swing.JPanel {
             try {
                 if (txtfullname.getText().equals(null) || txtfullname.getText().equals("")) {
                     JOptionPane.showMessageDialog(this, "Update failed!!");
+                } else if (a.checkHaveNum(txtfullname.getText())) {
+                    JOptionPane.showMessageDialog(this, "Name can not contains number!!");
                 } else {
                     DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
                     int currentRow = tbChild.getSelectedRow();
@@ -1665,16 +1667,18 @@ public class ChildAdmin extends javax.swing.JPanel {
             if (txtNewChildGender.getSelectedIndex() == 0) {
                 gender = true;
             }
-            if (!chBean.isExist(txtNewEmailParents.getText(), txtNewChild.getText())) {
+            if (chBean.isExist(txtNewEmailParents.getText(), txtNewChild.getText())) {
+                JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else if (checkNull(txtNewChild.getText())) {
+                JOptionPane.showMessageDialog(this, "Fill name of child!!");
+            } else if (a.checkHaveNum(txtNewChild.getText())) {
+                JOptionPane.showMessageDialog(this, "Name can not contains number!!");
+            } else {
                 chBean.addChild(txtNewChild.getText(), txtNewChildBirth.getDate(), txtNewChildMedication.getText(), txtNewChilIlle.getText(), txtNewChildDoctor.getText(), gender, txtNewEmailParents.getText());
                 loadChild();
                 dlAddChild.dispose();
                 JOptionPane.showMessageDialog(this, "Child was added!!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Children already created!", "Warning", JOptionPane.WARNING_MESSAGE);
             }
-        } else if (checkNull(txtNewChild.getText())) {
-            JOptionPane.showMessageDialog(this, "Fill name of child!!");
         } else {
             JOptionPane.showMessageDialog(this, "Can not born in the future!!");
         }
@@ -1703,10 +1707,16 @@ public class ChildAdmin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Name can not have symbol!!");
         } else if (a.checkPat(txtNewCusFone.getText())) {
             JOptionPane.showMessageDialog(this, "Phone invalid !!");
+        } else if (a.checkPat(txtNewCusWorkFone.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone invalid !!");
         } else if (!a.checkEmail(txtNewCusEmail.getText())) {
             JOptionPane.showMessageDialog(this, "Email invalid!!");
         } else if (!a.checkFone(txtNewCusFone.getText())) {
             JOptionPane.showMessageDialog(this, "Phone invalid!!");
+        } else if (!a.checkFone(txtNewCusWorkFone.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone invalid!!");
+        } else if (a.checkHaveNum(txtNewCusName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name can not contain number!!");
         } else {
             try {
                 if (!cb.isExist(txtNewCusEmail.getText())) {
@@ -1762,24 +1772,25 @@ public class ChildAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
- 
-        if(txtUpdateCusName.getText().equals("")||txtUpdateCusName.getText().equals(null)){
+        if (txtUpdateCusName.getText().equals("") || txtUpdateCusName.getText().equals(null)) {
             JOptionPane.showMessageDialog(this, "Update failed!!");
-        }else if(!a.checkFone(txtUpdateCusmobile.getText())){
+        } else if (!a.checkFone(txtUpdateCusmobile.getText())) {
             JOptionPane.showMessageDialog(this, "Update failed!!");
-        }else if(!a.checkFone(txtUpdateCusWorkP.getText())){
+        } else if (!a.checkFone(txtUpdateCusWorkP.getText())) {
             JOptionPane.showMessageDialog(this, "Update failed!!");
-        }else if(a.checkPat(txtUpdateCusmobile.getText())){
+        } else if (a.checkPat(txtUpdateCusmobile.getText())) {
             JOptionPane.showMessageDialog(this, "Update failed!!");
-        }else if(a.checkPat(txtUpdateCusWorkP.getText())){
+        } else if (a.checkPat(txtUpdateCusWorkP.getText())) {
             JOptionPane.showMessageDialog(this, "Update failed!!");
-        }else if(a.checkSyb(txtUpdateCusName.getText())){
+        } else if (a.checkSyb(txtUpdateCusName.getText())) {
             JOptionPane.showMessageDialog(this, "Update failed!!");
-        }else{
-             cb.updateCus(txtUpdateCus.getText(), txtUpdateCusName.getText(), txtUpdateCusAddress.getText(), txtUpdateCusmobile.getText(), txtUpdateCusWorkP.getText());
-        dlUpdateCus.dispose();
-        JOptionPane.showMessageDialog(this, "Update successful!!");
-        loadCus(jCheckBox1.isSelected());
+        } else if (a.checkHaveNum(txtUpdateCusName.getText())) {
+            JOptionPane.showMessageDialog(this, "Update failed!!");
+        } else {
+            cb.updateCus(txtUpdateCus.getText(), txtUpdateCusName.getText(), txtUpdateCusAddress.getText(), txtUpdateCusmobile.getText(), txtUpdateCusWorkP.getText());
+            dlUpdateCus.dispose();
+            JOptionPane.showMessageDialog(this, "Update successful!!");
+            loadCus(jCheckBox1.isSelected());
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 

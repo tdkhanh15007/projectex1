@@ -127,4 +127,16 @@ public class MyDatabase {
         }
         return false;
     }
+    
+    public boolean checkHaveNum(String str){
+        char[] nums = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        char[] toChar = new char[str.length()];
+        for (int i = 0; i < str.length(); i++) {
+            toChar[i] = str.charAt(i);
+            for (int j = 0; j < nums.length; j++) {
+                if (toChar[i] == nums[j]) { return true; }
+            }
+        }
+        return false;
+    }
 }
