@@ -738,7 +738,7 @@ public class HumansPn extends javax.swing.JPanel {
         hiddenAll();
         loadUser();
     }//GEN-LAST:event_jButton2ActionPerformed
-public boolean checkFone(String phone) {
+    public boolean checkFone(String phone) {
         if (phone.startsWith("0") && phone.length() > 9 && phone.length() < 12) {
             return true;
         }
@@ -747,12 +747,9 @@ public boolean checkFone(String phone) {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (myData.checkPat(jTextField3.getText())) {
             JOptionPane.showMessageDialog(this, "Phone invalid!");
-        } else if(!checkFone(jTextField3.getText())){
+        } else if (!checkFone(jTextField3.getText())) {
             JOptionPane.showMessageDialog(this, "Phone invalid!");
-        }
-        
-        
-        else if (jTextField2.getText().equals("") || jTextField2.getText().equals(null)) {
+        } else if (jTextField2.getText().equals("") || jTextField2.getText().equals(null)) {
             JOptionPane.showMessageDialog(this, "Name can not be blank!");
         } else {
             if (jTextField1.isVisible()) {
@@ -859,26 +856,36 @@ public boolean checkFone(String phone) {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (jButton8.isVisible()) {
-            int actID = acb.nametoID(jComboBox2.getSelectedItem().toString());
-            if (nb.createNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID)) {
-                hiddenNUp();
-                loadNanny();
-            } else {
-                JOptionPane.showMessageDialog(this, "Nanny is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
+        if (myData.checkHaveNum(jTextField5.getText())) {
+            JOptionPane.showMessageDialog(this, "Name can not contain number!!");
+        } else if (!myData.checkFone(jTextField6.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone invalid!!");
+        } else if (myData.checkPat(jTextField6.getText())) {
+            JOptionPane.showMessageDialog(this, "Phone invalid !!");
         } else {
-            DefaultTableModel tbModel = (DefaultTableModel) tbNanny.getModel();
-            int currentRow = tbNanny.getSelectedRow();
-            int actID = acb.nametoID(tbModel.getValueAt(currentRow, 3).toString());
-            int nnID = nb.phonetoID(tbModel.getValueAt(currentRow, 2).toString());
-            if (nb.updateNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID, nnID)) {
-                hiddenNUp();
-                loadNanny();
+            if (jButton8.isVisible()) {
+
+                int actID = acb.nametoID(jComboBox2.getSelectedItem().toString());
+                if (nb.createNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID)) {
+                    hiddenNUp();
+                    loadNanny();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nanny is exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Phonenumber in used!", "Warning", JOptionPane.WARNING_MESSAGE);
+                DefaultTableModel tbModel = (DefaultTableModel) tbNanny.getModel();
+                int currentRow = tbNanny.getSelectedRow();
+                int actID = acb.nametoID(tbModel.getValueAt(currentRow, 3).toString());
+                int nnID = nb.phonetoID(tbModel.getValueAt(currentRow, 2).toString());
+                if (nb.updateNanny(jTextField5.getText(), jTextArea1.getText(), jTextField6.getText(), actID, nnID)) {
+                    hiddenNUp();
+                    loadNanny();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Phonenumber in used!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
 
