@@ -56,16 +56,17 @@ public class OrderBean {
                 }
             }
             PreparedStatement ps = conn.prepareStatement("select cus_email from Customer where cus_name=?");
+            System.out.println(cusname);
             ps.setString(1, cusname);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
                 String cus_email = rs.getString("cus_email");
                 PreparedStatement ps1 = conn.prepareStatement("select child_id,fullname from Chirldren where cus_email=?");
                 ps1.setString(1, cus_email);
                 ResultSet rs1 = ps1.executeQuery();
                 while (rs1.next()) {
                     String childname = rs1.getString("fullname");
+                    System.out.println(childname);
                     int childID = rs1.getInt("child_id");
                     PreparedStatement ps2 = conn.prepareStatement("select order_id from Orders where child_id=? and status='true'");
                     ps2.setInt(1, childID);
@@ -100,6 +101,7 @@ public class OrderBean {
             PreparedStatement ps = conn.prepareStatement("select cus_email from Customer where cus_name=?");
             ps.setString(1, cusname);
             ResultSet rs = ps.executeQuery();
+            System.out.println(cusname);
             while (rs.next()) {
                 String cus_email = rs.getString("cus_email");
                 PreparedStatement ps1 = conn.prepareStatement("select child_id,fullname from Chirldren where cus_email=?");

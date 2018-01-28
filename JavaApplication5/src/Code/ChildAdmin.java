@@ -1833,7 +1833,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         txtPass.setText(chBean.getpass_illess(child_id));
         txtDoctor.setText(chBean.getdoctor(child_id));
         txtEmail.setText(tbModel.getValueAt(currentRow, 4).toString());
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date birthdate = df.parse(strBirth);
             jDateChooser1.setDate(birthdate);
@@ -1860,12 +1860,7 @@ public class ChildAdmin extends javax.swing.JPanel {
         child_id = (int) tbModel.getValueAt(currentRow, 0);
         txtAddOrChildID.setText(tbModel.getValueAt(currentRow, 0).toString());
         txtAddOrChildname.setText(tbModel.getValueAt(currentRow, 1).toString());
-        //lấy ngày hiện tại +1
-        Instant now = Instant.now(); //current date
-        Instant before = now.plus(Duration.ofDays(1));
-        Date dateAfter = Date.from(before);
-        dateChooseStart.setDate(new Date());
-        datChooseEnd.setDate(dateAfter);
+        //lấy ngày hiện tại +1        
         cbAddOrderNN.setVisible(false);
         lbNN.setVisible(false);
         //tính tuổi
@@ -1972,6 +1967,8 @@ public class ChildAdmin extends javax.swing.JPanel {
 //            DefaultTableModel tbModel = (DefaultTableModel) tbChild.getModel();
 //            int currentRow = tbCus.getSelectedRow();
 //            String birth =  tbModel.getValueAt(currentRow, 2).toString();
+                System.out.println(dateChooseStart.getDate());
+                System.out.println(datChooseEnd.getDate());
                 int childId = Integer.valueOf(txtAddOrChildID.getText());
                 String strbirth = chBean.strofBirth(childId);
                 txtChildName.setText(txtAddOrChildname.getText());
@@ -1997,6 +1994,8 @@ public class ChildAdmin extends javax.swing.JPanel {
                 }
 
             } else {
+                System.out.println(dateChooseStart.getDate());
+                System.out.println(datChooseEnd.getDate());
                 String actName = cbAddOrderAct.getSelectedItem().toString();
                 int timeID = cbAddOrderTime.getSelectedIndex() + 1;
                 Date fromDate = dateChooseStart.getDate();
@@ -2015,11 +2014,13 @@ public class ChildAdmin extends javax.swing.JPanel {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
             //thêm vào bảng order
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String sDate = txtStart.getText();
             String eDate = txtEnd.getText();
             Date date1 = formatter.parse(sDate);
             Date date2 = formatter.parse(eDate);
+            System.out.println(date1);
+            System.out.println(date2);
             String birth = chBean.strofBirth(child_id);
             if (ob.inserOrder(
                     Float.valueOf(txtPrice.getText()),

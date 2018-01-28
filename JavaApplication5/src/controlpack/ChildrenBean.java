@@ -260,7 +260,7 @@ public class ChildrenBean {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Date birth = new java.util.Date(rs.getDate("birth").getTime());
-                SimpleDateFormat form = new SimpleDateFormat("dd/mm/yyyy");
+                SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
                 str = form.format(birth);
             }
         } catch (SQLException ex) {

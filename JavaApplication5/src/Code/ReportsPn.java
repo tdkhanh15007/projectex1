@@ -34,7 +34,7 @@ public class ReportsPn extends javax.swing.JPanel {
         fm = fM;
         jDialog1.setResizable(false);
         loadAll();
-        jTable1.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+        jTable1.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 14));        
     }
 
     public void loadAll() {

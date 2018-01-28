@@ -638,7 +638,6 @@ public class OrderPn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
         if (!jTextField1.getText().equals("") || !jTextField1.getText().equals(null)) {
             if (ob.checkbeforeSearch(jTextField1.getText())) {
                 jScrollPane1.setVisible(true);
@@ -687,7 +686,7 @@ public class OrderPn extends javax.swing.JPanel {
         int currentRow = tbOrder.getSelectedRow();
         int id = (int) tbModel.getValueAt(currentRow, 0);
         String strDate = txtOrderDate.getText();
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date sDate = df.parse(strDate);
             Date eDate = jDateChooser1.getDate();
@@ -701,7 +700,7 @@ public class OrderPn extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(this, "Update failed");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Update failed");
             }
 
@@ -750,7 +749,7 @@ public class OrderPn extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         NewClass.print(jPanel1);
-        closeDL();        
+        closeDL();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public void loadReport(Date date1, Date date2, boolean status) {
